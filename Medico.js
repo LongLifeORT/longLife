@@ -30,23 +30,21 @@ medico: {
 		this.especialidad = especialidad;
 		this.numeroProfesional = numeroProfesional;
 		this.contraseña = contraseña;
-	},
+		
+			},
 
 	doctores: [
-		{
-			nombre: "Fulano",
-			apellido: "DeFulano",
-			especialidad: "Mago de Oz",
-			numIdentificador: "007",
-			contraseña: "asdfgh"
-		},
-		{
-			nombre: "Fulano2",
-			apellido: "DeFulano2",
-			especialidad: "Mago de Oz",
-			numIdentificador: "0072",
-			contraseña: "asdfgh"
-		}
+	  
+		new Medico("Gerardo", "Torres", "Cardiologo", 123,123456),
+		new Medico("Gabino", "Baldomero", "Geriatra",124 ,123456),
+		new Medico("Modesto", "Abel", "Neumología",   125, 123456),
+		new Medico("Ignacio", "Cogoyo", "Neumología", 126,123456),
+		new Medico("Silvio", "Bautista", "Pediatría", 127,123456),
+		new Medico("Ramiro", "Nicola", "Pediatría", 128,123456),
+		new Medico("Adalberto", "Glauco", "Psiquiatría", 129,123456),
+		new Medico(	"Amado", "Cipriano", "Toxicología", 130,123456),
+		new Medico("Adolfo", "Wilfredo", "Oftalmología", 131,123456),
+		new Medico("Rosario", "Reyes", "Cardiologo", 132,123456),			
 	],
 		
 	init: function(){
