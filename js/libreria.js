@@ -155,7 +155,7 @@ function crearTabla(){
 */
 function busquedaEnArrayObjetos(array, prop, valor){
 	for(var i = 0; i < array.length; i++){
-		if(array[i][prop] = valor){
+		if(array[i][prop] == valor){
 			return i;
 		}
 	}
