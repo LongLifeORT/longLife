@@ -15,13 +15,13 @@ function ocultarMenus(){
 }
 
 
-//agrego menu de login
+// agregar boton de login
 
 function agregarBotonLogin(){
 	var container = $('.sidebar');
 	container.prepend('<ul class="nav nav-sidebar menuLogin">'
 		+ '<li class="active text-center">'
-		+ '<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".login-form" id="login-ingresar" style="width: 80%">'
+		+ '<button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target=".login-form" id="login-ingresar" style="width: 80%">'
 		+ 	'Ingresar'
 		+ '</button></li></ul>');
 }
