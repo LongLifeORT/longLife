@@ -2,10 +2,13 @@
 Login
 */
 
+// variable global que contiene el usuario objeto a maniputar
+
+var usuarioIngresado;
 
 //oculto menús que no interesan
 
-function inicializarMenuLogin(){
+function ocultarMenus(){
 	$(".menuInfo").hide();
 	$(".menuCliente").hide();
 	$(".menuDoctor").hide();
@@ -17,14 +20,17 @@ function inicializarMenuLogin(){
 function agregarBotonLogin(){
 	var container = $('.sidebar');
 	container.prepend('<ul class="nav nav-sidebar menuLogin">'
-		+ '<li class="active text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".login-form" id="loginIngresar">Ingresar</a></li></ul>');
+		+ '<li class="active text-center">'
+		+ '<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".login-form" id="login-ingresar" style="width: 80%">'
+		+ 	'Ingresar'
+		+ '</button></li></ul>');
 }
 
 // agrego botón de logout
 
 function agregarBotonSalida(){
 	var contenedor = $('#navbar ul');
-	contenedor.append('<li><a href="#">Salir</a></li>');
+	contenedor.append('<li><a href="#" id="logout">Salir</a></li>');
 }
 
 // generar form login
@@ -45,7 +51,7 @@ function agregarFormLogin(){
 		+				'</div>'
 		+				'<div class="form-group">'
 		+					'<label for="txt-clave">Clave:</label>'
-		+					'<input type="text" class="form-control" id="txt-clave" name="txt-clave">'
+		+					'<input type="password" class="form-control" id="txt-clave" name="txt-clave">'
 		+				'</div>'
 		+				'<span id="error-login"></span>'
 		+			'</form>'
@@ -69,56 +75,69 @@ function ingresarUsuario(){
 	var contenedorError = $("#error-login");
 	var loginExito = false;
 	var medico = false;
+	var userLog;
 
-	//var validado = validarVacio($("#error-login"),$("#btn-ingresar"),usuario,clave);
-
-	//medico.doctores[]
-	//paciente.pacientes[]
 	for(var i = 0; i < doctores.length; i++){
 		if(doctores[i].numeroProfesional === Number(usuario.val())){
 			if(doctores[i].clave === Number(clave.val())){
-				//objeto global de usuario logueado
-				usuarioLogueado = doctores[i];
 				loginExito = true;
 				medico = true;
+				userLog = doctores[i];
 			}
 		}
 	}
 	for(var i = 0; i < pacientes.length; i++){
 		if(pacientes[i].numeroPaciente === Number(usuario.val())){
 			if(pacientes[i].numeroPaciente === Number(clave.val())){
-				//objeto global de usuario logueado
-				usuarioLogueado = pacientes[i];
 				loginExito = true;
 				medico = false;
+				userLog = pacientes[i];
 			}
 		}	
 	}
 	if(!loginExito || !validarVacio(usuario.val(), clave.val())){
-		//contenedorError.show();
 		contenedorError.html("Usuario y/o contraseña incorrectos");
 	}
 
 
 	if(loginExito && medico){
 		$(".menuDoctor").show();
-		console.log("Exito medico");
-		$("#login-form").modal('hide');
-		//this.attr("data-dismiss", "modal");
 	}else if(loginExito && !medico){
 		$(".menuCliente").show();
-		console.log("Exito paciente");
-		$("#login-form").modal('hide');
 	}
+
+	if(loginExito){
+		usuarioIngresado = userLog;
+		$("#login-form").modal('hide');
+		ocultarBotonLogin();
+	}
+	console.log(usuarioIngresado);
+}
+
+// ocultar boton de login
+
+function ocultarBotonLogin(){
+	$("#login-ingresar").hide();
+}
+
+// salir de sesión
+
+function salirSesion(){
+	// hacer un reload de la página
+	//window.location.reload(false); 
+	// o limpiar los datos
+	usuarioIngresado = null;
+	$("#login-ingresar").show();
+	ocultarMenus();
 }
 
 //test
 
 $().ready(function(){
-	inicializarMenuLogin();
+	ocultarMenus();
 	agregarBotonLogin(),
 	agregarBotonSalida();
 	agregarFormLogin();
 	$("#btn-ingresar").on('click', ingresarUsuario)
-
+	$("#logout").on('click', salirSesion);
 })
