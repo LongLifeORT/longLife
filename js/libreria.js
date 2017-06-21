@@ -23,8 +23,8 @@ function main() {
 	pagarConsultaMenu.on("click" , mostrarPagarConsulta);
 	preguntasMenu.on("click" , mostrarPreguntas);
 
- //mostrar tabla de consultas
- mostrarTabla();
+	 //mostrar tabla de consultas
+	 mostrarTabla();
 
 
 
