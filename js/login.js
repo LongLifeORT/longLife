@@ -71,13 +71,33 @@ function agregarFormLogin(){
 function ingresarUsuario(){
 	console.log("hola");
 	var usuario = $("#txt-usuario");
-	var clave = $("#txt-clave");
+	var txtClave = $("#txt-clave");
 	var contenedorError = $("#error-login");
 	var loginExito = false;
-	var medico = false;
+	var esMedico = false;
 	var userLog;
 
-	for(var i = 0; i < doctores.length; i++){
+	var paciente = busquedaEnArrayObjetos(pacientes, "numeroPaciente", Number(usuario.val()));
+	var medico = busquedaEnArrayObjetos(doctores, "numeroProfesional", Number(usuario.val()));
+	if(paciente > -1){
+		if(pacientes[paciente].clave === Number(txtClave.val())){
+			loginExito = true;
+			esMedico = false;
+			userLog = pacientes[paciente];
+		}
+	}
+	console.log(medico);
+	if(medico > -1){
+		console.log(doctores[medico].clave === Number(txtClave.val()))
+		if(doctores[medico].clave === Number(txtClave.val())){
+			console.log("entro")
+			loginExito = true;
+			esMedico = true;
+			userLog = doctores[medico];
+		}
+	}
+
+	/*for(var i = 0; i < doctores.length; i++){
 		if(doctores[i].numeroProfesional === Number(usuario.val())){
 			if(doctores[i].clave === Number(clave.val())){
 				loginExito = true;
@@ -94,8 +114,8 @@ function ingresarUsuario(){
 				userLog = pacientes[i];
 			}
 		}	
-	}
-	if(!loginExito || !validarVacio(usuario.val(), clave.val())){
+	}*/
+	if(!loginExito || !validarVacio(usuario.val(), txtClave.val())){
 		contenedorError.html("Usuario y/o contraseña incorrectos");
 	}
 
