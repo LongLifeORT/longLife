@@ -1,0 +1,191 @@
+﻿
+		function Usuario(nombre, apellido, cedula,usuario,contraseña)
+			{
+						this.nombre                =    	nombre;
+						this.apellido              =     	apellido;
+						this.nombreCompleto        =   		nombre + " " + apellido;
+						this.cedula                =     	cedula;
+						this.id                    =    	nombre +""+ cedula;
+						this.usuario               =     	usuario || this.nombreCompleto;
+						this.contraseña            =     	contraseña || cedula;
+						
+							this.modificarNombre = function(nuevoNombre){
+									this.nombre = nuevoNombre;
+							};
+							this.modificarApellido = function(nuevoApellido){
+									this.apellido= nuevoApellido;
+							};
+							this.modificarCedula = function(nuevaCedula){
+									this.cedula= nuevaCedula;
+							};
+							this.modificarUsuario = function(nuevoUsuario){
+									this.usuario = nuevoUsuario;
+							};
+							this.modificarContraseña = function(nuevaContraseña){
+									this.contraseña= nuevaContraseña;
+							};
+						
+
+		};
+		//prueba de crear un usario
+		var Alvaro = new Usuario("Alvaro", "Mesa", "42464125");
+		//veo que variables tiene de nombre y apellido
+		console.log(Alvaro.nombre , Alvaro.apellido);
+		//le modifico el nombre
+		Alvaro.modificarNombre("Rodrigo");
+		console.log(Alvaro.nombre , Alvaro.apellido);
+		//table muestra propiedades y valores del objeto
+		console.table(Alvaro);
+
+
+		//heredamos propiedades y metodo de usuario
+        Medico.prototype = new Usuario;
+
+		function Medico( especialidad, numeroProfesional)
+				{
+						  
+							 this.especialidad          =     especialidad;
+							this.numeroProfesional     =    numeroProfesional;
+		};
+		
+		
+		//probamos un medico
+		var Romero = new Medico("cirujano","123456");
+		console.table(Romero);
+		Romero.modificarNombre("Romero");
+		Romero.modificarNombre("Martinez");
+		console.table(Romero);
+		
+		Cliente.prototype = new Usuario;
+
+        function Cliente(numeroPaciente, foto)
+                {
+				this.numeroPaciente		=	numeroPaciente;
+				this.foto				=	foto || "No hay";
+				this.modificarFoto		=	function(nuevaFoto){
+						this.foto		=	nuevaFoto;
+				}
+        };
+		//probamos un cliente
+		var Bruno = new Cliente("123456");
+		console.table(Bruno);
+		Bruno.modificarNombre("Bruno");
+		Bruno.modificarNombre("Fleischer");
+		console.table(Bruno);
+		
+
+
+
+
+
+                  <td>1,001</td>
+                  <td>Luis Damiano</td>
+                  <td>Gerardo Torres</td>
+                  <td>Cardiologo</td>
+                  <td>Abierta</td>
+                </tr>
+                <tr>
+                  <td>1,002</td>
+                  <td>Luis Damiano</td>
+                  <td>Gerardo Mercer</td>
+                  <td>Geriatra</td>
+                  <td>Cerrada</td>
+                </tr>
+                <tr>
+                  <td>1,003</td>
+                  <td>Gabino Ignacio</td>
+                  <td>Modesto Abel</td>
+                  <td>Reumatología</td>
+                  <td>Cerrada</td>
+                </tr>
+                <tr>
+                  <td>1,003</td>
+                  <td>Samuel Fausto</td>
+                  <td>Raymundo Pablo</td>
+                  <td>Neumología</td>
+                  <td>Abierta</td>
+                </tr>
+                <tr>
+                  <td>1,004</td>
+                  <td>Samuel Fausto</td>
+                  <td>Eliseo Ezequiel</td>
+                  <td>Pediatría</td>
+                  <td>Abierta</td>
+                </tr>
+                <tr>
+                  <td>1,005</td>
+                  <td>Rafael David</td>
+                  <td>Raymundo Pablo</td>
+                  <td>Neumología</td>
+                  <td>Abierta</td>
+                </tr>
+                <tr>
+                  <td>1,006</td>
+                  <td>Rafael David</td>
+                  <td>Raymundo Pablo</td>
+                  <td>Neumología</td>
+                  <td>Cerrada</td>
+                </tr>
+                <tr>
+                  <td>1,007</td>
+                  <td>Rico Vito</td>
+                  <td>Santos Renato</td>
+                  <td>Psiquiatría</td>
+                  <td>Cerrada</td>
+                </tr>
+                <tr>
+                  <td>1,008</td>
+                  <td>Rico Vito</td>
+                  <td>Diego Gil</td>
+                  <td>Toxicología</td>
+                  <td>Cerrada</td>
+                </tr>
+                <tr>
+                  <td>1,009</td>
+                  <td>Donato Guiomar</td>
+                  <td>Santos Renato</td>
+                  <td>Psiquiatría</td>
+                  <td>Abierta</td>
+                </tr>
+                <tr>
+                  <td>1,010</td>
+                  <td>Donato Guiomar</td>
+                  <td>Eliseo Ezequiel</td>
+                  <td>Oftalmología</td>
+                  <td>Abierta</td>
+                </tr>
+                <tr>
+                  <td>1,011</td>
+                  <td>Horacio Asdrubal</td>
+                  <td>Eliseo Ezequiel</td>
+                  <td>Oftalmología</td>
+                  <td>Abierta</td>
+                </tr>
+                <tr>
+                  <td>1,012</td>
+                  <td>Horacio Asdrubal</td>
+                  <td>Eliseo Ezequiel</td>
+                  <td>Oftalmología</td>
+                  <td>Cerrada</td>
+                </tr>
+                <tr>
+                  <td>1,013</td>
+                  <td>Jorge Maximino</td>
+                  <td>Diego Gil</td>
+                  <td>Toxicología</td>
+                  <td>Abierta</td>
+                </tr>
+                <tr>
+                  <td>1,014</td>
+                  <td>Jorge Maximino</td>
+                  <td>Diego Gil</td>
+                  <td>Toxicología</td>
+                  <td>Abierta</td>
+                </tr>
+                <tr>
+                  <td>1,015</td>
+                  <td>Jorge Maximino</td>
+                  <td>Sosimo Santos</td>
+                  <td>Oftalmología</td>
+                  <td>Abierta</td>
+                </tr>
