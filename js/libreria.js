@@ -7,26 +7,21 @@ $(document).ready(main);
 
 function main() {
 
-	var crearConsultaInfo = $(".crearConsultaInfo");
+
 	var crearConsultaMenu = $(".crearConsultaMenu");
-	var buscarConsultaInfo = $(".buscarConsultaInfo");
+
 	var buscarConsultaMenu = $(".buscarConsultaMenu");
-	var pagarConsultaInfo = $(".pagarConsultaInfo");
+
 	var pagarConsultaMenu = $(".pagarConsultaMenu");
-	var preguntasInfo = $(".preguntasInfo");
+
 	var preguntasMenu = $(".preguntasMenu");
 
-	crearConsultaInfo.hide();
-	buscarConsultaInfo.hide();
-	pagarConsultaInfo.hide();
-	preguntasInfo.hide();
-
-
+	
+	hideInfos();
 	crearConsultaMenu.on("click" , mostrarCrearConsulta);
 	buscarConsultaMenu.on("click" , mostrarBuscarConsulta);
 	pagarConsultaMenu.on("click" , mostrarPagarConsulta);
 	preguntasMenu.on("click" , mostrarPreguntas);
-
 
  //mostrar tabla de consultas
  mostrarTabla();
@@ -42,39 +37,62 @@ function main() {
 
 //oculta todo los info para mostrar solo uno luego.
 function hideInfos(){
+	var crearConsultaInfo = $(".crearConsultaInfo");
+	var buscarConsultaInfo = $(".buscarConsultaInfo");
+	var pagarConsultaInfo = $(".pagarConsultaInfo");
+	var preguntasInfo = $(".preguntasInfo");
+
+
 	var infos = $(".infos");
 	infos.hide();
+
 }
+//oculta todo los info para mostrar solo uno luego.
+function hideMenues(){
+	var menues = $(".menues");
+	menues.slideToggle();
+
+
+
+}
+
 
 
 
 // muestra la interface de crear consulta
 function mostrarCrearConsulta() {
-	hideInfos()
+	hideInfos();
 
 	var crearConsultaInfo = $(".crearConsultaInfo");
 	crearConsultaInfo.toggle();
 
+	crearConsultaInfo.on("click" , hideMenues);
+
 }
 //muestra la interface de buscar consulta
 function mostrarBuscarConsulta() {
-	hideInfos()
+	hideInfos();
+
 	var buscarConsultaInfo = $(".buscarConsultaInfo");
 	buscarConsultaInfo.toggle();
-
+	buscarConsultaInfo.on("click" , hideMenues);
 }
 // muestra la interface de pagar consulta
 function mostrarPagarConsulta() {
-	hideInfos()
+	hideInfos();
+
 	var pagarConsultaInfo = $(".pagarConsultaInfo");
 	pagarConsultaInfo.toggle();
+	pagarConsultaInfo.on("click" , hideMenues);
 
 }
 //muestra la interface de preguntas frecuentes
 function mostrarPreguntas() {
-	hideInfos()
+	hideInfos();
+
 	var preguntasInfo = $(".preguntasInfo");
 	preguntasInfo.toggle();
+	preguntasInfo.on("click" , hideMenues);
 
 }
 
@@ -88,18 +106,7 @@ function mostrarPreguntas() {
 
 
 
- function tomarImagen(){
-	  var nuevaImagen = $("#subir").val().split("\\").pop();
-	  alert(nuevaImagen);
-}	
 
-function loginInicial(){
-  $("#loginRegistro").html('<a href="#" id="login">Loguearse</a> | <a href="#" id="registro">Nuevo Registro</a>');
-  $("#login").click(login);
-  $("#registro").click(registro);
-  $("#btnLogin").click(hola);
-
-}
 
 //function mostrar tabla
 function mostrarTabla(){
