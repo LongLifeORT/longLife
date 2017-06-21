@@ -137,6 +137,41 @@ function crearTabla(){
 
 }
 
+/**
+ retorna indice donde esta el objeto en array indexado
+
+ array array
+ prop string
+ valor any
+
+ return int
+*/
+function busquedaEnArrayObjetos(array, prop, valor){
+	for(var i = 0; i < array.length; i++){
+		if(array[i][prop] = valor){
+			return i;
+		}
+	}
+	return -1;
+}
 
 
+// reportes y consultas
+
+/**
+ Genera consulta a partir del paciente y del medico
+*/
+function Consultas(pacienteIndex, medicoIndex){
+	var numeroIncremental = listaConsultas.length;
+	var letraNombreIdentificador = medico[medicoIndex].nombre.splice(0,1);
+	var letrasApellidoIdentificador = medico[medicoIndex].apellido.splice(0,3);
+	this.identificador = letraNombreIdentificador 
+		+ letrasApellidoIdentificador 
+		+ numeroIncremental;
+	this.consultaPaga = false;
+	this.descripcion = "";
+	this.finalizada = false;
+	this.paciente = pacienteIndex;
+	this.medico = medicoIndex;
+}
 
