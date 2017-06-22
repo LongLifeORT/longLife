@@ -18,19 +18,19 @@ function ocultarMenus(){
 // agregar boton de login
 
 function agregarBotonLogin(){
-	var container = $('.sidebar');
-	container.prepend('<ul class="nav nav-sidebar menuLogin">'
-		+ '<li class="active text-center">'
-		+ '<button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target=".login-form" id="login-ingresar" style="width: 80%">'
+	var contenedor = $('#navbar ul');
+	contenedor.append(''
+		+ '<li class="text-center">'
+		+ '<button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target=".login-form" id="login-ingresar">'
 		+ 	'Ingresar'
-		+ '</button></li></ul>');
+		+ '</button></li>');
 }
 
 // agrego botón de logout
 
 function agregarBotonSalida(){
 	var contenedor = $('#navbar ul');
-	contenedor.append('<li><a href="#" id="logout">Salir</a></li>');
+	contenedor.append('<li><a href="#" style="display:none" id="logout">Salir</a></li>');
 }
 
 // generar form login
@@ -44,7 +44,7 @@ function agregarFormLogin(){
 		+			'<h4 class="modal-title">Modal title</h4>'
 		+		'</div>'
 		+		'<div class="modal-body">'
-		+			'<form>'
+		+			'<form id="my-login">'
 		+				'<div class="form-group">'
 		+					'<label for="txt-usuario">Usuario:</label>'
 		+					'<input type="text" class="form-control" id="txt-usuario" name="txt-usuario">'
@@ -69,7 +69,6 @@ function agregarFormLogin(){
 // accion de form login
 
 function ingresarUsuario(){
-	console.log("hola");
 	var usuario = $("#txt-usuario");
 	var clave = $("#txt-clave");
 	var contenedorError = $("#error-login");
@@ -88,7 +87,7 @@ function ingresarUsuario(){
 	}
 	for(var i = 0; i < pacientes.length; i++){
 		if(pacientes[i].numeroPaciente === Number(usuario.val())){
-			if(pacientes[i].numeroPaciente === Number(clave.val())){
+			if(pacientes[i].clave === Number(clave.val())){
 				loginExito = true;
 				medico = false;
 				userLog = pacientes[i];
@@ -109,15 +108,25 @@ function ingresarUsuario(){
 	if(loginExito){
 		usuarioIngresado = userLog;
 		$("#login-form").modal('hide');
-		ocultarBotonLogin();
+		mostrarOcultarBotonLoginLogout();
+
 	}
 	console.log(usuarioIngresado);
 }
 
-// ocultar boton de login
+// ocultar boton de login/mostrar boton salida
 
-function ocultarBotonLogin(){
-	$("#login-ingresar").hide();
+function mostrarOcultarBotonLoginLogout(){
+	var login = $("#login-ingresar");
+	var logout = $("#logout");
+	if(login.is(':hidden')){
+		login.show();
+		logout.hide();
+	}else{
+		login.hide();
+		logout.show();
+	}
+	
 }
 
 // salir de sesión
@@ -127,8 +136,8 @@ function salirSesion(){
 	//window.location.reload(false); 
 	// o limpiar los datos
 	usuarioIngresado = null;
-	$("#login-ingresar").show();
 	ocultarMenus();
+	mostrarOcultarBotonLoginLogout();
 }
 
 //test
@@ -138,6 +147,11 @@ $().ready(function(){
 	agregarBotonLogin(),
 	agregarBotonSalida();
 	agregarFormLogin();
-	$("#btn-ingresar").on('click', ingresarUsuario)
+	$("#btn-ingresar").on('click', function(){
+		//Validamos que exista usuario y relizamos el login
+		ingresarUsuario();
+		//Limpiamos los inputs
+		$("#my-login")[0].reset();
+	});
 	$("#logout").on('click', salirSesion);
 })
