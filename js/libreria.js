@@ -6,28 +6,40 @@ $(document).ready(main);
 
 
 function main() {
-	var crearConsultaMenu = $(".crearConsultaMenu");
+	var crearConsultaMenu  = $(".crearConsultaMenu");
+	var crearConsulta   = $(".menuCliente :first-child").eq(1);
+
 	var buscarConsultaMenu = $(".buscarConsultaMenu");
-	var pagarConsultaMenu = $(".pagarConsultaMenu");
-	var preguntasMenu = $(".preguntasMenu");
+	var misConsultas       = $(".menuCliente :first-child").eq(2);
+
+	var modificarPerfilMenu  = $(".pagarConsultaMenu");
+	var ConfigurarPerfil   = $(".menuCliente :first-child").eq(3);
+	
+	//ocultamos la informacion de los formularios
 	hideInfos();
 	
+
+	//menues para crear consulta
 	crearConsultaMenu.on("click" , mostrarCrearConsulta);
+	crearConsulta.on("click" , mostrarCrearConsulta);
+
+
+	//menues para buscar consulta 
+	misConsultas.on("click" , mostrarBuscarConsulta);
 	buscarConsultaMenu.on("click" , mostrarBuscarConsulta);
-	pagarConsultaMenu.on("click" , mostrarPagarConsulta);
+
+	//menues para modificar el perfil
+	ConfigurarPerfil.on("click" , mostrarModificarPerfil);
+	//sidebar para modificar perfil
+	modificarPerfilMenu.on("click" , mostrarModificarPerfil);
+	//botonera en tablero para modificar perfil
 
 
 	//mostrar tabla de consultas
- 	mostrarTablaTodasConsultas();
 	var configurarPerfil = $("#configurarPerfil");
-
-
+	//
 	var volverAMenu = $(".volverAMenu");
 	volverAMenu.on("click" , showMenu);
-
-
-
-	//$("#modificarPerfil").on('click', agregarFormPerfil)
 
 
 
@@ -43,13 +55,11 @@ function main() {
 function hideInfos(){
 	var infos = $(".infos");
 	infos.hide();
-
 }
 //oculta todo los  divs menu para mostrar;
 function hideMenues(){
 	var menues = $(".menues");
 	menues.fadeOut("200");
-
 }
 function showMenu(){
 	var menues = $(".menues");
@@ -66,8 +76,7 @@ function mostrarCrearConsulta() {
 	var crearConsultaInfo = $(".crearConsultaInfo");
 	crearConsultaInfo.toggle();
 
-	//funtion para crear el formulario en el archivo Paciente.js
-	formCrearConsulta();
+
 
 }
 //muestra la interface de buscar consulta
@@ -78,23 +87,18 @@ function mostrarBuscarConsulta() {
 	var buscarConsultaInfo = $(".buscarConsultaInfo");
 	buscarConsultaInfo.toggle();
 
-	//function para buscar el formulario  en el archivo Paciente.js
-	formBuscarConsulta();
-
-
 }
-// muestra la interface de pagar consulta
-function mostrarPagarConsulta() {
+// muestra la interface de modificar perfil
+function mostrarModificarPerfil() {
 	hideInfos();
 	hideMenues();
 
-	var pagarConsultaInfo = $(".pagarConsultaInfo");
-	pagarConsultaInfo.toggle();
-
-	//function para pagar consulta
-	formPagarConsulta();
+	var modificarPerfilInfo = $(".modificarPerfilInfo");
+	modificarPerfilInfo.toggle();
 
 }
+
+
 
 
 //function mostrar tabla
