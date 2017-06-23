@@ -128,7 +128,7 @@ function busquedaEnArrayObjetos(array, prop, valor){
 	return -1;
 }
 
-<<<<<<< HEAD
+
 
 var Counter = {
 	value: 0,
@@ -144,7 +144,7 @@ var Counter = {
 		this.value = 0;
 	}
 }
-=======
+
 /**
  Esta función despliega una bienvenida al usuario
  de la página
@@ -211,4 +211,4 @@ function ingresarUsuario(){
 	}
 	bienvenida(usuarioIngresado);
 }
->>>>>>> 8b074a8b422bceaba36875e774847936c9a522be
+
