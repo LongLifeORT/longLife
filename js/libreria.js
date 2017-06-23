@@ -18,7 +18,7 @@ function main() {
 
 
 	//mostrar tabla de consultas
- 	//mostrarTabla();
+ 	mostrarTabla();
 	var configurarPerfil = $("#configurarPerfil");
 
 
@@ -98,7 +98,7 @@ function mostrarPagarConsulta() {
 
 
 //function mostrar tabla
-function mostrarTabla(){
+function mostrarTablaTodasConsultas(){
 var consultasGeneradas = $("#consultasGeneradas");
 // la tabla se crea en Paciente.js
 var tabla = crearTabla();

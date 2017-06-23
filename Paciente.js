@@ -2,6 +2,7 @@
 function Paciente(nombre, apellido,numeroPaciente,clave, foto){
 	this.nombre = nombre;
 	this.apellido = apellido;
+	this.nombreCompleto = nombre +" "+ apellido;
 	this.numeroPaciente	= numeroPaciente;
 	this.clave = clave;
 	this.foto = foto || "default.jpg";
@@ -49,7 +50,7 @@ console.table(pacientes);
 
 function Consulta(pacienteIndex, medicoIndex){
 	var numeroIncremental = Counter.conteo();
-	console.table(doctores[medicoIndex].nombre);
+	
 	var letraNombreIdentificador =  doctores[medicoIndex].nombre.slice(0,1);
 	var letrasApellidoIdentificador = doctores[medicoIndex].apellido.slice(0,3);
 	
@@ -62,7 +63,7 @@ function Consulta(pacienteIndex, medicoIndex){
 	this.finalizada = false;
 	this.paciente = pacientes[pacienteIndex];
 	this.medico = doctores[medicoIndex];
-	this.especialidad = doctores[medicoIndex]["especialdad"];
+	this.especialidad = doctores[medicoIndex].especialidad;
 
 	this.modificarDescripcion = function(nuevaDescripcion){
 		this.descripcion = nuevaDescripcion;
@@ -110,31 +111,24 @@ var consultas = [
 /**
  Genera consulta a partir del paciente y del medico
 */
+function crearTablaTodasConsultas(){
+	var listadoConsultas = consultas;
 
-
-
-
-
-function crearTabla(){
-	var id = 1000;
-	var usuarios = pacientes;
-	var medicos =  doctores;
-	var especialidades = ["Abierta","Finalizada","Abierta","Abierta","Finalizada","Abierta","Abierta"];
-
-	var estado = ["Abierta","Finalizada","Abierta","Abierta","Finalizada","Abierta","Abierta"];
 
 	 var table = "<div class= \"table-responsive\">"
 	 table +=  "<table class=\"table table-striped table-hover\">"
 	 table +=     "<thead>";
-	 table += " <tr> <th>ID</th> <th>Usuario</th>   <th>Medico</th> <th>Especialidad</th> <th>Estado</th> </tr> ";
+	 table += " <tr> <th>ID</th> <th>Usuario</th>   <th>Medico</th> <th>Especialidad</th></tr> ";
      table +=    "</thead>"     
      table += " <tbody>";             
                   
-              for(var i = 0 ; i< usuarios.length; i++){
+              for(var i = 0 ; i< listadoConsultas.length; i++){
               	table +=  "<tr>";
 
-              	table += "<td>" + id  + "</td>" + "<td>" + usuarios[i]  + "</td>" + "<td>" + medicos[i]  + "</td>" +"<td>" + especialidades[i]  + "</td>" +"<td>" + estado[i]  + "</td>";
-              	id++;
+
+              	table += "<td>" + listadoConsultas[i].identificador + "</td>" + "<td>" + listadoConsultas[i].paciente.nombreCompleto  + "</td>" 
+              	+ "<td>" + listadoConsultas[i].medico.nombreCompleto  + "</td>"
+              	+ "<td>" + listadoConsultas[i].especialidad   + "</td>";
               	table += "</tr>";	
               }  
     table +=  "</tbody></table></div>"       
