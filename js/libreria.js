@@ -145,3 +145,52 @@ function bienvenida(_usuario){
 		+ '</h3>';
 	contenedor.prepend(elementoBienvenida);
 }
+
+
+// logica principal de login : accion de form login
+
+function ingresarUsuario(){
+	var usuario = $("#txt-usuario");
+	var clave = $("#txt-clave");
+	var contenedorError = $("#error-login");
+	var loginExito = false;
+	var medico = false;
+	var userLog;
+
+	for(var i = 0; i < doctores.length; i++){
+		if(doctores[i].numeroProfesional === Number(usuario.val())){
+			if(doctores[i].clave === Number(clave.val())){
+				loginExito = true;
+				medico = true;
+				userLog = doctores[i];
+			}
+		}
+	}
+	for(var i = 0; i < pacientes.length; i++){
+		if(pacientes[i].numeroPaciente === Number(usuario.val())){
+			if(pacientes[i].clave === Number(clave.val())){
+				loginExito = true;
+				medico = false;
+				userLog = pacientes[i];
+			}
+		}	
+	}
+	if(!loginExito || !validarVacio(usuario.val(), clave.val())){
+		contenedorError.html("Usuario y/o contraseña incorrectos");
+	}
+
+
+	if(loginExito && medico){
+		$(".menuDoctor").show();
+	}else if(loginExito && !medico){
+		$(".menuCliente").show();
+	}
+
+	if(loginExito){
+		usuarioIngresado = userLog;
+		$("#login-form").modal('hide');
+		mostrarOcultarBotonLoginLogout();
+
+	}
+	bienvenida(usuarioIngresado);
+}
