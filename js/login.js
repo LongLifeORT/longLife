@@ -92,6 +92,7 @@ function salirSesion(){
 	usuarioIngresado = null;
 	ocultarMenus();
 	mostrarOcultarBotonLoginLogout();
+	borradoBienvenida();
 }
 
 //test
@@ -108,4 +109,7 @@ $().ready(function(){
 		$("#my-login")[0].reset();
 	});
 	$("#logout").on('click', salirSesion);
+	if(usuarioIngresado.especialidad !== undefined){
+		inicializarInterfazMedico();
+	}
 })

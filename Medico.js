@@ -22,8 +22,78 @@ var doctores = [
 
 
 /**
- arrConsultas array
- indexMedico int
+ interfaz de médico
+ */
+
+function inicializarInterfazMedico(){
+	dibujarTableroMedico();
+	$("#sel-consultas-medico").on('change', function(){
+		dibujarTablaDeConsulta(this.value);
+	})
+}
+
+function dibujarSelectMedico(){
+	var contenedor = $(".botonera");
+	var nuevoContenido = '<select id="sel-consultas-medico">'
+	for(var i = 0; i < consultas.length; i++){
+		if(consultas[i].medico === usuarioIngresado.nombre){
+			nuevoContenido += '<option value="'
+				+ i
+				+ '">'
+				+ consultas[i].paciente
+				+ '</option>';
+		}
+	}
+	nuevoContenido += '</select>';
+	contenedor.html(nuevoContenido);
+}
+
+/**
+ dibujar tabla de la consulta
+ _consulta = objeto
+*/
+
+function dibujarTablaDeConsulta(_consultaIndex){
+	var contenedor = $(".botonera");
+	var consulta = consultas[_consultaIndex];
+	var divPadre = '<div class="container text-center">';
+	var tabla = '<table id="tabla-consulta-medico">'
+		+ '<thead>'
+		+	'<tr>'
+		+		'<th>Nombre</th>'
+		+		'<th>Apellido</th>'
+		+		'<th>Peso</th>'
+		+		'<th>Altura</th>'
+		+	'</tr>'
+		+ '</thead>'
+		+ '<tbody>'
+		+	'<tr>'
+		+		'<td>' + pacientes[consulta.paciente].nombre + '</td>'
+		+		'<td>' + pacientes[consulta.paciente].apellido + '</td>'
+		+		'<td>' + pacientes[consulta.paciente].peso + '</td>'
+		+		'<td>' + pacientes[consulta.paciente].altura + '</td>'
+		+	'</tr>'
+		+ '</tbody>'
+		+	'<tr>'
+		+		'<td colspan="1">'
+		+			'<input type="button" id="btn-agregar-peso" value="Agregar nuevo peso">'
+		+		'</td>'
+		+		'<td colspan="1">'
+		+			'<input type="button" id="btn-agregar-altura" value="Agregar nueva altura">'
+		+		'</td>'
+		+		'<td colspan="2">'
+		+			'<input type="button" id="btn-finalizar-consulta" value="Finzalizar consulta">'
+		+		'</td>'
+		+	'</tr>'
+		+'</table>';
+		contenedor.html(divPadre + tabla + '</div>');
+}
+
+
+/**
+ busca consultas
+ arrConsultas = array
+ indexMedico = int
  return array
 */
 function buscarConsultas(arrConsultas, indexMedico){
@@ -38,9 +108,9 @@ function buscarConsultas(arrConsultas, indexMedico){
 
 /**
  modificarPesoAltura
- peso int
- altura float
- pacienteIndex int
+ peso = int
+ altura = float
+ pacienteIndex = int
 
  return undefined
 */
@@ -50,7 +120,7 @@ function modificarPesoAltura(peso, altura, pacienteIndex){
 }
 
 /**
- pacienteIndex int
+ pacienteIndex = int
  
  returns bool
 */

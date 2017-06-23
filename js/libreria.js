@@ -140,10 +140,15 @@ function bienvenida(_usuario){
 	// if(_usuario.genero === 'm') { terminacion = "o" }
 	// else{ terminacion = "a" }
 	var contenedor = $('#contenedor-lateral');
-	var elementoBienvenida = '<h3 class="text-primary">Bienvenida/o '
+	var elementoBienvenida = '<h3 id="bienvenida" class="text-primary">Bienvenida/o '
 		+ nombre
 		+ '</h3>';
 	contenedor.prepend(elementoBienvenida);
+}
+
+function borradoBienvenida(){
+	var contenedor = $('#bienvenida');
+	contenedor.html("");
 }
 
 
