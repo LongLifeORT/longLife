@@ -18,7 +18,7 @@ function main() {
 
 
 	//mostrar tabla de consultas
- 	mostrarTabla();
+ 	//mostrarTabla();
 	var configurarPerfil = $("#configurarPerfil");
 
 
@@ -27,7 +27,7 @@ function main() {
 
 
 
-	$("#modificarPerfil").on('click', agregarFormPerfil)
+	//$("#modificarPerfil").on('click', agregarFormPerfil)
 
 
 
@@ -126,4 +126,20 @@ function busquedaEnArrayObjetos(array, prop, valor){
 		}
 	}
 	return -1;
+}
+
+
+var Counter = {
+	value: 0,
+	increment: function(){
+		this.value++;
+	},
+	// Esta es la función que se llama en el constructor de las consultas, de manera que el objeto consulta tenga un par propiedad:valor, donde valor es un entero
+	conteo: function(){
+		this.increment();
+		return this.value;
+	},
+	reset: function(){
+		this.value = 0;
+	}
 }

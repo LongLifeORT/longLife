@@ -43,20 +43,27 @@ var pacientes = [
 	new Paciente("Diego", "Santos",19,123456),
 	new Paciente("Leonardo", "Amor",20,123456),
 ];
+console.table(pacientes);
 
 
-function Consulta(pacienteIndex, medicoIndex,finalizada,consultaPaga){
-	var numeroIncremental = listaConsultas.length;
-	var letraNombreIdentificador = medico[medicoIndex].nombre.splice(0,1);
-	var letrasApellidoIdentificador = medico[medicoIndex].apellido.splice(0,3);
+
+function Consulta(pacienteIndex, medicoIndex){
+	var numeroIncremental = Counter.conteo();
+	console.table(doctores[medicoIndex].nombre);
+	var letraNombreIdentificador =  doctores[medicoIndex].nombre.slice(0,1);
+	var letrasApellidoIdentificador = doctores[medicoIndex].apellido.slice(0,3);
+	
 	this.identificador = letraNombreIdentificador 
 		+ letrasApellidoIdentificador 
 		+ numeroIncremental;
-	this.consultaPaga = consultaPaga;
+	console.log(this.identificador);
+	this.consultaPaga = false;
 	this.descripcion = "";
-	this.finalizada = finalizada;
-	this.paciente = pacienteIndex;
-	this.medico = medicoIndex;
+	this.finalizada = false;
+	this.paciente = pacientes[pacienteIndex];
+	this.medico = doctores[medicoIndex];
+	this.especialidad = doctores[medicoIndex]["especialdad"];
+
 	this.modificarDescripcion = function(nuevaDescripcion){
 		this.descripcion = nuevaDescripcion;
 
@@ -73,18 +80,24 @@ function Consulta(pacienteIndex, medicoIndex,finalizada,consultaPaga){
 
 
 var consultas = [
-	new Consulta(pacientes[0],doctores[1]),
-	new Consulta(pacientes[1],doctores[2]),
-	new Consulta(pacientes[2],doctores[3]),
-	new Consulta(pacientes[3],doctores[4]),
-	new Consulta(pacientes[4],doctores[0]),
-	new Consulta(pacientes[2],doctores[1]),
-	new Consulta(pacientes[3],doctores[2]),
-	new Consulta(pacientes[1],doctores[3]),
-	new Consulta(pacientes[2],doctores[4]),
-	new Consulta(pacientes[3],doctores[0]),
-	new Consulta(pacientes[4],doctores[1]),
-	new Consulta(pacientes[0],doctores[2])
+// indice de paciente, indice de medico, estado de la consulta, estado del pago
+	new Consulta(0,0),
+	new Consulta(1,1),
+	new Consulta(2,2),
+	new Consulta(3,4),
+	new Consulta(4,8),
+	new Consulta(5,5),
+	new Consulta(6,7),
+	new Consulta(7,7),
+	new Consulta(8,5),
+	new Consulta(9,6),
+	new Consulta(1,2),
+	new Consulta(2,4),
+	new Consulta(7,7),
+	new Consulta(4,3),
+	new Consulta(3,6),
+	new Consulta(1,2),
+	new Consulta(2,4)
 
 ];
 
@@ -106,7 +119,8 @@ function crearTabla(){
 	var id = 1000;
 	var usuarios = pacientes;
 	var medicos =  doctores;
-	var especialidades = ["Cardiologo","Geriatra", "Reumatología","Neumología","Pediatría","Neumología","Psiquiatría"];
+	var especialidades = ["Abierta","Finalizada","Abierta","Abierta","Finalizada","Abierta","Abierta"];
+
 	var estado = ["Abierta","Finalizada","Abierta","Abierta","Finalizada","Abierta","Abierta"];
 
 	 var table = "<div class= \"table-responsive\">"
