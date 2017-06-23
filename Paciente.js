@@ -48,7 +48,7 @@ console.table(pacientes);
 
 
 
-function Consulta(pacienteIndex, medicoIndex){
+function Consulta(pacienteIndex, medicoIndex,descripcion){
 	var numeroIncremental = Counter.conteo();
 	
 	var letraNombreIdentificador =  doctores[medicoIndex].nombre.slice(0,1);
@@ -59,7 +59,7 @@ function Consulta(pacienteIndex, medicoIndex){
 		+ numeroIncremental;
 	console.log(this.identificador);
 	this.consultaPaga = false;
-	this.descripcion = "";
+	this.descripcion =  descripcion  || "";
 	this.finalizada = false;
 	this.paciente = pacientes[pacienteIndex];
 	this.medico = doctores[medicoIndex];
