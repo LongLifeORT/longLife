@@ -2,6 +2,7 @@
 function Paciente(nombre, apellido,numeroPaciente,clave, foto){
 	this.nombre = nombre;
 	this.apellido = apellido;
+	this.nombreCompleto = nombre +" "+ apellido;
 	this.numeroPaciente	= numeroPaciente;
 	this.clave = clave;
 	this.foto = foto || "default.jpg";
@@ -43,20 +44,27 @@ var pacientes = [
 	new Paciente("Diego", "Santos",19,123456),
 	new Paciente("Leonardo", "Amor",20,123456),
 ];
+console.table(pacientes);
 
 
-function Consulta(pacienteIndex, medicoIndex,finalizada,consultaPaga){
-	var numeroIncremental = listaConsultas.length;
-	var letraNombreIdentificador = medico[medicoIndex].nombre.splice(0,1);
-	var letrasApellidoIdentificador = medico[medicoIndex].apellido.splice(0,3);
+
+function Consulta(pacienteIndex, medicoIndex){
+	var numeroIncremental = Counter.conteo();
+	
+	var letraNombreIdentificador =  doctores[medicoIndex].nombre.slice(0,1);
+	var letrasApellidoIdentificador = doctores[medicoIndex].apellido.slice(0,3);
+	
 	this.identificador = letraNombreIdentificador 
 		+ letrasApellidoIdentificador 
 		+ numeroIncremental;
-	this.consultaPaga = consultaPaga;
+	console.log(this.identificador);
+	this.consultaPaga = false;
 	this.descripcion = "";
-	this.finalizada = finalizada;
-	this.paciente = pacienteIndex;
-	this.medico = medicoIndex;
+	this.finalizada = false;
+	this.paciente = pacientes[pacienteIndex];
+	this.medico = doctores[medicoIndex];
+	this.especialidad = doctores[medicoIndex].especialidad;
+
 	this.modificarDescripcion = function(nuevaDescripcion){
 		this.descripcion = nuevaDescripcion;
 
@@ -73,18 +81,24 @@ function Consulta(pacienteIndex, medicoIndex,finalizada,consultaPaga){
 
 
 var consultas = [
-	new Consulta(pacientes[0],doctores[1]),
-	new Consulta(pacientes[1],doctores[2]),
-	new Consulta(pacientes[2],doctores[3]),
-	new Consulta(pacientes[3],doctores[4]),
-	new Consulta(pacientes[4],doctores[0]),
-	new Consulta(pacientes[2],doctores[1]),
-	new Consulta(pacientes[3],doctores[2]),
-	new Consulta(pacientes[1],doctores[3]),
-	new Consulta(pacientes[2],doctores[4]),
-	new Consulta(pacientes[3],doctores[0]),
-	new Consulta(pacientes[4],doctores[1]),
-	new Consulta(pacientes[0],doctores[2])
+// indice de paciente, indice de medico, estado de la consulta, estado del pago
+	new Consulta(0,0),
+	new Consulta(1,1),
+	new Consulta(2,2),
+	new Consulta(3,4),
+	new Consulta(4,8),
+	new Consulta(5,5),
+	new Consulta(6,7),
+	new Consulta(7,7),
+	new Consulta(8,5),
+	new Consulta(9,6),
+	new Consulta(1,2),
+	new Consulta(2,4),
+	new Consulta(7,7),
+	new Consulta(4,3),
+	new Consulta(3,6),
+	new Consulta(1,2),
+	new Consulta(2,4)
 
 ];
 
@@ -97,30 +111,24 @@ var consultas = [
 /**
  Genera consulta a partir del paciente y del medico
 */
+function crearTablaTodasConsultas(){
+	var listadoConsultas = consultas;
 
-
-
-
-
-function crearTabla(){
-	var id = 1000;
-	var usuarios = pacientes;
-	var medicos =  doctores;
-	var especialidades = ["Cardiologo","Geriatra", "Reumatología","Neumología","Pediatría","Neumología","Psiquiatría"];
-	var estado = ["Abierta","Finalizada","Abierta","Abierta","Finalizada","Abierta","Abierta"];
 
 	 var table = "<div class= \"table-responsive\">"
 	 table +=  "<table class=\"table table-striped table-hover\">"
 	 table +=     "<thead>";
-	 table += " <tr> <th>ID</th> <th>Usuario</th>   <th>Medico</th> <th>Especialidad</th> <th>Estado</th> </tr> ";
+	 table += " <tr> <th>ID</th> <th>Usuario</th>   <th>Medico</th> <th>Especialidad</th></tr> ";
      table +=    "</thead>"     
      table += " <tbody>";             
                   
-              for(var i = 0 ; i< usuarios.length; i++){
+              for(var i = 0 ; i< listadoConsultas.length; i++){
               	table +=  "<tr>";
 
-              	table += "<td>" + id  + "</td>" + "<td>" + usuarios[i]  + "</td>" + "<td>" + medicos[i]  + "</td>" +"<td>" + especialidades[i]  + "</td>" +"<td>" + estado[i]  + "</td>";
-              	id++;
+
+              	table += "<td>" + listadoConsultas[i].identificador + "</td>" + "<td>" + listadoConsultas[i].paciente.nombreCompleto  + "</td>" 
+              	+ "<td>" + listadoConsultas[i].medico.nombreCompleto  + "</td>"
+              	+ "<td>" + listadoConsultas[i].especialidad   + "</td>";
               	table += "</tr>";	
               }  
     table +=  "</tbody></table></div>"       

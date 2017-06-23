@@ -1,6 +1,7 @@
 function Medico(nombre, apellido, especialidad, numeroProfesional,clave){
 	this.nombre = nombre;
 	this.apellido = apellido;
+	this.nombreCompleto = nombre + " " + apellido;
 	this.especialidad = especialidad;
 	this.numeroProfesional = numeroProfesional;
 	this.clave = clave;
