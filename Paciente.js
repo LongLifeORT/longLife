@@ -61,8 +61,8 @@ function Consulta(pacienteIndex, medicoIndex){
 	this.consultaPaga = false;
 	this.descripcion = "";
 	this.finalizada = false;
-	this.paciente = pacientes[pacienteIndex];
-	this.medico = doctores[medicoIndex];
+	this.paciente = pacienteIndex;
+	this.medico = medicoIndex;
 	this.especialidad = doctores[medicoIndex].especialidad;
 
 	this.modificarDescripcion = function(nuevaDescripcion){

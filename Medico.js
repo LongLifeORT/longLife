@@ -27,7 +27,7 @@ var doctores = [
  */
 
 function inicializarInterfazMedico(){
-	dibujarTableroMedico();
+	dibujarSelectMedico();
 	$("#sel-consultas-medico").on('change', function(){
 		dibujarTablaDeConsulta(this.value);
 	})
@@ -37,11 +37,12 @@ function dibujarSelectMedico(){
 	var contenedor = $(".botonera");
 	var nuevoContenido = '<select id="sel-consultas-medico">'
 	for(var i = 0; i < consultas.length; i++){
-		if(consultas[i].medico === usuarioIngresado.nombre){
+		console.log()
+		if(doctores[consultas[i].medico].nombre === usuarioIngresado.nombre){
 			nuevoContenido += '<option value="'
 				+ i
 				+ '">'
-				+ consultas[i].paciente
+				+ pacientes[consultas[i].paciente].nombre
 				+ '</option>';
 		}
 	}

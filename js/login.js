@@ -107,9 +107,9 @@ $().ready(function(){
 		ingresarUsuario();
 		//Limpiamos los inputs
 		$("#my-login")[0].reset();
+		if(usuarioIngresado.especialidad !== undefined){
+			inicializarInterfazMedico();
+		}
 	});
 	$("#logout").on('click', salirSesion);
-	if(usuarioIngresado.especialidad !== undefined){
-		inicializarInterfazMedico();
-	}
 })
