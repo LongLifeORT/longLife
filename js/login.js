@@ -112,6 +112,7 @@ function ingresarUsuario(){
 
 	}
 	console.log(usuarioIngresado);
+	bienvenida(usuarioIngresado);
 }
 
 // ocultar boton de login/mostrar boton salida

@@ -127,3 +127,21 @@ function busquedaEnArrayObjetos(array, prop, valor){
 	}
 	return -1;
 }
+
+/**
+ Esta función despliega una bienvenida al usuario
+ de la página
+*/
+
+function bienvenida(_usuario){
+	var nombre = _usuario.nombre;
+	//si agregamos genero
+	// var terminacion = "";
+	// if(_usuario.genero === 'm') { terminacion = "o" }
+	// else{ terminacion = "a" }
+	var contenedor = $('#contenedor-lateral');
+	var elementoBienvenida = '<h3 class="text-primary">Bienvenida/o '
+		+ nombre
+		+ '</h3>';
+	contenedor.prepend(elementoBienvenida);
+}
