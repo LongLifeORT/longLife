@@ -89,13 +89,19 @@ function mostrarModificarPerfil() {
 
 
 
-//function mostrar tabla
+//function mostrar tabla con todas las consultas
 function mostrarTablaTodasConsultas(){
 var consultasGeneradas = $("#consultasGeneradas");
 // la tabla se crea en Paciente.js
-var tabla = crearTablaTodasConsultas();
+var tabla = crearTablaTodasConsultas(consultas);
 consultasGeneradas.html(tabla)
-
+}
+//function mostrar tabla
+function mostrarTablaUsuarioConsultas(){
+var consultasGeneradas = $("#consultasGeneradas");
+// la tabla se crea en Paciente.js
+var tabla = crearTablaTodasConsultas(consultasUsuario);
+consultasGeneradas.html(tabla)
 }
 
 

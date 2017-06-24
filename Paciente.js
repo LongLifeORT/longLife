@@ -171,28 +171,29 @@ function crearNuevaConsulta(){
 	var valorMedico = $("#crear1B").val();
 	var valorDescripcion = $("#crear1C").val();
 	var resultado =	$("#resultadoCrear");
-		var formularioCompleto = validarVacio(valorEspecialidad,valorMedico);
-		if(formularioCompleto){
-			var paciente = usuarioIngresado;
-			console.log(paciente);
-
-			//buscamos el index del paciente dentro del array comparando la propiedad nombre completo 
-			var pacienteIndex = busquedaEnArrayObjetos(pacientes,"nombreCompleto",paciente.nombreCompleto);
-			console.log(pacienteIndex);
-
-			//buscamos que medico es dentro del array de doctores  mediate la propiedad nombre completo.
-			var medicoIndex = busquedaEnArrayObjetos(doctores,"nombreCompleto",valorMedico);
-			console.log(medicoIndex);
 		
-			//creamos una nueva consulta con el valor del paciente, el medico y una descripcion si la tiene.
-			consultas.push(new Consulta(pacienteIndex,medicoIndex,valorDescripcion));
-			//muestra se actualizo las consultas
-			mostrarTablaTodasConsultas();
+		if(valorEspecialidad !== "empty" && valorMedico !== "empty"  ){
 
-			//luego de crear la consulta, vaciamos los inputs
-			$('#crear1A, #crear1B, #crear1C ').val([])
-			//Le damos un mensaje al usuario de que su consulta fue creada
-			$(' #btnCrear ').val("Consulta creada "+ valorMedico + " lo atendera en unos momentos, gracias por su elecion");
+				var paciente = usuarioIngresado;
+				console.log(paciente);
+
+				//buscamos el index del paciente dentro del array comparando la propiedad nombre completo 
+				var pacienteIndex = busquedaEnArrayObjetos(pacientes,"nombreCompleto",paciente.nombreCompleto);
+				console.log(pacienteIndex);
+
+				//buscamos que medico es dentro del array de doctores  mediate la propiedad nombre completo.
+				var medicoIndex = busquedaEnArrayObjetos(doctores,"nombreCompleto",valorMedico);
+				console.log(medicoIndex);
+			
+				//creamos una nueva consulta con el valor del paciente, el medico y una descripcion si la tiene.
+				consultas.push(new Consulta(pacienteIndex,medicoIndex,valorDescripcion));
+				//muestra se actualizo las consultas
+				mostrarTablaTodasConsultas();
+
+				//luego de crear la consulta, vaciamos los inputs
+				$('#crear1A, #crear1B, #crear1C ').val([])
+				//Le damos un mensaje al usuario de que su consulta fue creada
+				$(' #btnCrear ').val("Consulta creada "+ valorMedico + " lo atendera en unos momentos, gracias por su elecion");
 
 		}else{
 			//si no se eligio especialidad ni medico, se pide al usuario complete el formulario
@@ -203,10 +204,10 @@ function crearNuevaConsulta(){
 }
 
 
-// tabla que contiene todas las consultas generadas
+// tabla que contiene las consultas a mostrar
 /* Voy a modificar para que muestre todas las consultas generadas por el usuario */
-function crearTablaTodasConsultas(){
-	var listadoConsultas = consultas;
+function crearTablaTodasConsultas(arrConsultas){
+	var listadoConsultas = arrConsultas || consultas ;
 	 var table = "<div class= \"table-responsive\">"
 	 table +=  "<table class=\"table table-striped table-hover\">"
 	 table +=     "<thead>";
@@ -225,6 +226,13 @@ function crearTablaTodasConsultas(){
     return table;       
 
 }
+
+
+
+
+
+
+
 
 
 
@@ -274,13 +282,14 @@ function buscarMedicos(){
 			var opciones = '<option selected="selected" value="empty">Sel. Medico</option>';
 
 
-
+				//recorremos los medicos por nombre completo
 				for(var i = 0; i < doctores.length; i++){
+					//si el medico tiene la especialidad seleccionada, se lo ingresa en la lista de medicos disponibles.
 					if(doctores[i]["especialidad"] == especialidadSelected){
 						listadoMedicos.push(doctores[i]["nombreCompleto"]);
 					}
 				}
-
+				// se presentan las opciones con los medicos disponibles
 				for(var j = 0; j < listadoMedicos.length; j++){
 					opciones += '<option value=' + '\"' + listadoMedicos[j] + '\"' + '>' + listadoMedicos[j] + '</option>';
 
@@ -326,14 +335,6 @@ function formCrearConsulta(arrlistado){
 				+	'<br >'
             	+   '<input type="button"  class="form-control" value="Ingresar" id="btnCrear">'
             	+	'</form>';
-            	+	'<div id="resultadoCrear">Resultado aqui </div>' 
-
-
-
-    
-
-
-
     var crearConsulta = $("#crearConsulta");
     crearConsulta.html(form);
 
