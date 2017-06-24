@@ -6,27 +6,40 @@ $(document).ready(main);
 
 
 function main() {
-
-
-	var crearConsultaMenu = $(".crearConsultaMenu");
+	var crearConsultaMenu  = $(".crearConsultaMenu");
+	var crearConsulta   = $(".menuCliente :first-child").eq(1);
 
 	var buscarConsultaMenu = $(".buscarConsultaMenu");
+	var misConsultas       = $(".menuCliente :first-child").eq(2);
 
-	var pagarConsultaMenu = $(".pagarConsultaMenu");
-
-	var preguntasMenu = $(".preguntasMenu");
-
+	var modificarPerfilMenu  = $(".pagarConsultaMenu");
+	var ConfigurarPerfil   = $(".menuCliente :first-child").eq(3);
 	
+	//ocultamos la informacion de los formularios
 	hideInfos();
+	
+
+	//menues para crear consulta
 	crearConsultaMenu.on("click" , mostrarCrearConsulta);
+	crearConsulta.on("click" , mostrarCrearConsulta);
+
+
+	//menues para buscar consulta 
+	misConsultas.on("click" , mostrarBuscarConsulta);
 	buscarConsultaMenu.on("click" , mostrarBuscarConsulta);
-	pagarConsultaMenu.on("click" , mostrarPagarConsulta);
-	preguntasMenu.on("click" , mostrarPreguntas);
 
-	 //mostrar tabla de consultas
-	 mostrarTabla();
+	//menues para modificar el perfil
+	ConfigurarPerfil.on("click" , mostrarModificarPerfil);
+	//sidebar para modificar perfil
+	modificarPerfilMenu.on("click" , mostrarModificarPerfil);
+	//botonera en tablero para modificar perfil
 
 
+	//mostrar tabla de consultas
+	var configurarPerfil = $("#configurarPerfil");
+	//
+	var volverAMenu = $(".volverAMenu");
+	volverAMenu.on("click" , showMenu);
 
 
 
@@ -35,114 +48,71 @@ function main() {
 //ends main
 
 
-//oculta todo los info para mostrar solo uno luego.
+
+
+
+//oculta todo los divs info para mostrar;
 function hideInfos(){
-	var crearConsultaInfo = $(".crearConsultaInfo");
-	var buscarConsultaInfo = $(".buscarConsultaInfo");
-	var pagarConsultaInfo = $(".pagarConsultaInfo");
-	var preguntasInfo = $(".preguntasInfo");
-
-
 	var infos = $(".infos");
 	infos.hide();
-
 }
-//oculta todo los info para mostrar solo uno luego.
+//oculta todo los  divs menu para mostrar;
 function hideMenues(){
 	var menues = $(".menues");
-	menues.slideToggle();
-
-
-
+	menues.fadeOut("200");
 }
-
+function showMenu(){
+	var menues = $(".menues");
+	menues.fadeIn("200");
+	hideInfos();
+}
 
 
 
 // muestra la interface de crear consulta
 function mostrarCrearConsulta() {
 	hideInfos();
-
+	hideMenues();
 	var crearConsultaInfo = $(".crearConsultaInfo");
 	crearConsultaInfo.toggle();
 
-	crearConsultaInfo.on("click" , hideMenues);
+
 
 }
 //muestra la interface de buscar consulta
 function mostrarBuscarConsulta() {
 	hideInfos();
+	hideMenues();
 
 	var buscarConsultaInfo = $(".buscarConsultaInfo");
 	buscarConsultaInfo.toggle();
-	buscarConsultaInfo.on("click" , hideMenues);
+
 }
-// muestra la interface de pagar consulta
-function mostrarPagarConsulta() {
+// muestra la interface de modificar perfil
+function mostrarModificarPerfil() {
 	hideInfos();
+	hideMenues();
 
-	var pagarConsultaInfo = $(".pagarConsultaInfo");
-	pagarConsultaInfo.toggle();
-	pagarConsultaInfo.on("click" , hideMenues);
-
-}
-//muestra la interface de preguntas frecuentes
-function mostrarPreguntas() {
-	hideInfos();
-
-	var preguntasInfo = $(".preguntasInfo");
-	preguntasInfo.toggle();
-	preguntasInfo.on("click" , hideMenues);
+	var modificarPerfilInfo = $(".modificarPerfilInfo");
+	modificarPerfilInfo.toggle();
 
 }
-
-
-
-
-
-
-
-
-
 
 
 
 
 //function mostrar tabla
-function mostrarTabla(){
+function mostrarTablaTodasConsultas(){
 var consultasGeneradas = $("#consultasGeneradas");
-var tabla = crearTabla();
+// la tabla se crea en Paciente.js
+var tabla = crearTablaTodasConsultas();
 consultasGeneradas.html(tabla)
 
 }
 
-function crearTabla(){
-	var id = 1000;
-	var usuarios = ["Luis Damiano","Gerardo Pablo", " Rafael Gabino" ,"Samuel Pablo", " RafaelRaymundo"," Rico Pablo"," Gerardo Samuel"];
-	var medicos = ["Gerardo Torres","Modesto Torres", "Ignacio Abel" , "Fausto Pablo"," Rafael Renato" , "Rico Santos" , " Rafael Torres" ];
-	var especialidades = ["Cardiologo","Geriatra", "Reumatología","Neumología","Pediatría","Neumología","Psiquiatría"];
-	var estado = ["Abierta","Finalizada","Abierta","Abierta","Finalizada","Abierta","Abierta"];
 
-	 var table = "<div class= \"table-responsive\">"
-	 table +=  "<table class=\"table table-striped table-hover\">"
-	 table +=     "<thead>";
-	 table += " <tr> <th>ID</th> <th>Usuario</th>   <th>Medico</th> <th>Especialidad</th> <th>Estado</th> </tr> ";
-     table +=    "</thead>"     
-     table += " <tbody>";             
-                  
-              for(var i = 0 ; i< usuarios.length; i++){
-              	table +=  "<tr>";
 
-              	table += "<td>" + id  + "</td>" + "<td>" + usuarios[i]  + "</td>" + "<td>" + medicos[i]  + "</td>" +"<td>" + especialidades[i]  + "</td>" +"<td>" + estado[i]  + "</td>";
-              	id++;
-              	table += "</tr>";	
-              }  
-    table +=  "</tbody></table></div>"       
-      	        
-           
-    return table;       
 
-}
 
 /**
  retorna indice donde esta el objeto en array indexado
@@ -163,22 +133,91 @@ function busquedaEnArrayObjetos(array, prop, valor){
 }
 
 
-// reportes y consultas
+
+var Counter = {
+	value: 0,
+	increment: function(){
+		this.value++;
+	},
+	// Esta es la función que se llama en el constructor de las consultas, de manera que el objeto consulta tenga un par propiedad:valor, donde valor es un entero
+	conteo: function(){
+		this.increment();
+		return this.value;
+	},
+	reset: function(){
+		this.value = 0;
+	}
+}
 
 /**
- Genera consulta a partir del paciente y del medico
+ Esta función despliega una bienvenida al usuario
+ de la página
 */
-function Consultas(pacienteIndex, medicoIndex){
-	var numeroIncremental = listaConsultas.length;
-	var letraNombreIdentificador = medico[medicoIndex].nombre.splice(0,1);
-	var letrasApellidoIdentificador = medico[medicoIndex].apellido.splice(0,3);
-	this.identificador = letraNombreIdentificador 
-		+ letrasApellidoIdentificador 
-		+ numeroIncremental;
-	this.consultaPaga = false;
-	this.descripcion = "";
-	this.finalizada = false;
-	this.paciente = pacienteIndex;
-	this.medico = medicoIndex;
+
+function bienvenida(_usuario){
+	var nombre = _usuario.nombre;
+	//si agregamos genero
+	// var terminacion = "";
+	// if(_usuario.genero === 'm') { terminacion = "o" }
+	// else{ terminacion = "a" }
+	var contenedor = $('#contenedor-lateral');
+	var elementoBienvenida = '<h3 id="bienvenida" class="text-primary">Bienvenida/o '
+		+ nombre
+		+ '</h3>';
+	contenedor.prepend(elementoBienvenida);
+}
+
+function borradoBienvenida(){
+	var contenedor = $('#bienvenida');
+	contenedor.html("");
+}
+
+
+// logica principal de login : accion de form login
+
+function ingresarUsuario(){
+	var usuario = $("#txt-usuario");
+	var clave = $("#txt-clave");
+	var contenedorError = $("#error-login");
+	var loginExito = false;
+	var medico = false;
+	var userLog;
+
+	for(var i = 0; i < doctores.length; i++){
+		if(doctores[i].numeroProfesional === Number(usuario.val())){
+			if(doctores[i].clave === Number(clave.val())){
+				loginExito = true;
+				medico = true;
+				userLog = doctores[i];
+			}
+		}
+	}
+	for(var i = 0; i < pacientes.length; i++){
+		if(pacientes[i].numeroPaciente === Number(usuario.val())){
+			if(pacientes[i].clave === Number(clave.val())){
+				loginExito = true;
+				medico = false;
+				userLog = pacientes[i];
+			}
+		}	
+	}
+	if(!loginExito || !validarVacio(usuario.val(), clave.val())){
+		contenedorError.html("Usuario y/o contraseña incorrectos");
+	}
+
+
+	if(loginExito && medico){
+		$(".menuDoctor").show();
+	}else if(loginExito && !medico){
+		$(".menuCliente").show();
+	}
+
+	if(loginExito){
+		usuarioIngresado = userLog;
+		$("#login-form").modal('hide');
+		mostrarOcultarBotonLoginLogout();
+
+	}
+	bienvenida(usuarioIngresado);
 }
 

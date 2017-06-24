@@ -18,19 +18,19 @@ function ocultarMenus(){
 // agregar boton de login
 
 function agregarBotonLogin(){
-	var container = $('.sidebar');
-	container.prepend('<ul class="nav nav-sidebar menuLogin">'
-		+ '<li class="active text-center">'
-		+ '<button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target=".login-form" id="login-ingresar" style="width: 80%">'
+	var contenedor = $('#navbar ul');
+	contenedor.append(''
+		+ '<li class="text-center">'
+		+ '<button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target=".login-form" id="login-ingresar">'
 		+ 	'Ingresar'
-		+ '</button></li></ul>');
+		+ '</button></li>');
 }
 
 // agrego botón de logout
 
 function agregarBotonSalida(){
 	var contenedor = $('#navbar ul');
-	contenedor.append('<li><a href="#" id="logout">Salir</a></li>');
+	contenedor.append('<li><a href="#" style="display:none" id="logout">Salir</a></li>');
 }
 
 // generar form login
@@ -44,7 +44,7 @@ function agregarFormLogin(){
 		+			'<h4 class="modal-title">Modal title</h4>'
 		+		'</div>'
 		+		'<div class="modal-body">'
-		+			'<form>'
+		+			'<form id="my-login">'
 		+				'<div class="form-group">'
 		+					'<label for="txt-usuario">Usuario:</label>'
 		+					'<input type="text" class="form-control" id="txt-usuario" name="txt-usuario">'
@@ -66,6 +66,7 @@ function agregarFormLogin(){
 	$("nav").after(form);
 }
 
+<<<<<<< HEAD
 // accion de form login
 
 function ingresarUsuario(){
@@ -118,26 +119,23 @@ function ingresarUsuario(){
 	if(!loginExito || !validarVacio(usuario.val(), txtClave.val())){
 		contenedorError.html("Usuario y/o contraseña incorrectos");
 	}
+=======
+>>>>>>> d1f12d63bd767d024a5c6636894970c63f781334
 
 
-	if(loginExito && medico){
-		$(".menuDoctor").show();
-	}else if(loginExito && !medico){
-		$(".menuCliente").show();
+// ocultar boton de login/mostrar boton salida
+
+function mostrarOcultarBotonLoginLogout(){
+	var login = $("#login-ingresar");
+	var logout = $("#logout");
+	if(login.is(':hidden')){
+		login.show();
+		logout.hide();
+	}else{
+		login.hide();
+		logout.show();
 	}
-
-	if(loginExito){
-		usuarioIngresado = userLog;
-		$("#login-form").modal('hide');
-		ocultarBotonLogin();
-	}
-	console.log(usuarioIngresado);
-}
-
-// ocultar boton de login
-
-function ocultarBotonLogin(){
-	$("#login-ingresar").hide();
+	
 }
 
 // salir de sesión
@@ -147,8 +145,9 @@ function salirSesion(){
 	//window.location.reload(false); 
 	// o limpiar los datos
 	usuarioIngresado = null;
-	$("#login-ingresar").show();
 	ocultarMenus();
+	mostrarOcultarBotonLoginLogout();
+	borradoBienvenida();
 }
 
 //test
@@ -158,6 +157,14 @@ $().ready(function(){
 	agregarBotonLogin(),
 	agregarBotonSalida();
 	agregarFormLogin();
-	$("#btn-ingresar").on('click', ingresarUsuario)
+	$("#btn-ingresar").on('click', function(){
+		//Validamos que exista usuario y relizamos el login
+		ingresarUsuario();
+		//Limpiamos los inputs
+		$("#my-login")[0].reset();
+		if(usuarioIngresado.especialidad !== undefined){
+			inicializarInterfazMedico();
+		}
+	});
 	$("#logout").on('click', salirSesion);
 })
