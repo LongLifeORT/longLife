@@ -190,10 +190,34 @@ function listadoEspecialidades(arrDoctores){
 	return listado;
 
 }
+
 function buscarMedicos(){
-alert("busquemos medicos");
+	alert("busquemos medicos");
+	//luego de que el paciente elige una especialidad
+	var especialidadSelected = $("#crear1A").val();
+	//vamos a mostrar los medicos disponibles
+	var MedicosDisponibles = $("#crear1B");
+	alert(especialidadSelected);
+	// para eso creamos un array con los medicos de esa especialidad
+	var listadoMedicos = [];
+	//que los presentaremos en opciones del input select.
+	var opciones = '<option selected="selected" value="empty">Sel. Medico</option>';
 
 
+
+		for(var i = 0; i < doctores.length; i++){
+			if(doctores[i]["especialidad"] == especialidadSelected){
+				listadoMedicos.push(doctores[i]["nombreCompleto"]);
+			}
+		}
+
+		for(var j = 0; j < listadoMedicos.length; j++){
+			opciones += '<option value=' + '\"' + listadoMedicos[j] + '\"' + '>' + listadoMedicos[j] + '</option>';
+
+		}
+
+
+	MedicosDisponibles.html(opciones);
 
 };
 
