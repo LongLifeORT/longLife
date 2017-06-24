@@ -1,6 +1,4 @@
-$("document").ready(function(){
-
-
+function inicializarInterfazPaciente(){
 
 	//creamos una tabla con todas las consultas
 	crearTablaTodasConsultas();
@@ -15,10 +13,6 @@ $("document").ready(function(){
 	formModificarPerfil();
 
 
-
-
-
-
 //eventos de los formularios
 	var especialidadCrear = $("#crear1A");
 	especialidadCrear.on("blur", buscarMedicos);
@@ -27,11 +21,9 @@ $("document").ready(function(){
 
 
 
+}
 
-
-
-
-});
+ 
 
 
 
@@ -41,6 +33,7 @@ function Paciente(nombre, apellido,numeroPaciente,clave, foto){
 	this.nombreCompleto = nombre +" "+ apellido;
 	this.numeroPaciente	= numeroPaciente;
 	this.clave = clave;
+	this.cedula = "";
 	this.foto = foto || "default.jpg";
 	this.peso = [0],
 	this.altura = [0],
@@ -85,7 +78,6 @@ function Paciente(nombre, apellido,numeroPaciente,clave, foto){
 		new Paciente("Alvaro", "Mesa",21,123456),
 
 	];
-
 
 
 
@@ -174,9 +166,8 @@ function crearNuevaConsulta(){
 		
 		if(valorEspecialidad !== "empty" && valorMedico !== "empty"  ){
 
-				var paciente = usuarioIngresado;
+				var paciente = usuarioIngresado ;
 				console.log(paciente);
-
 				//buscamos el index del paciente dentro del array comparando la propiedad nombre completo 
 				var pacienteIndex = busquedaEnArrayObjetos(pacientes,"nombreCompleto",paciente.nombreCompleto);
 				console.log(pacienteIndex);
@@ -188,7 +179,7 @@ function crearNuevaConsulta(){
 				//creamos una nueva consulta con el valor del paciente, el medico y una descripcion si la tiene.
 				consultas.push(new Consulta(pacienteIndex,medicoIndex,valorDescripcion));
 				//muestra se actualizo las consultas
-				mostrarTablaTodasConsultas();
+				mostrarTablaUsuarioConsultas();
 
 				//luego de crear la consulta, vaciamos los inputs
 				$('#crear1A, #crear1B, #crear1C ').val([])
@@ -226,6 +217,42 @@ function crearTablaTodasConsultas(arrConsultas){
     return table;       
 
 }
+
+
+//function mostrar tabla con todas las consultas
+function mostrarTablaTodasConsultas(){
+var consultasGeneradas = $("#consultasGeneradas");
+// la tabla se crea en Paciente.js
+var tabla = crearTablaTodasConsultas(consultas);
+consultasGeneradas.html(tabla)
+}
+
+//function mostrar tabla con las consultas del usuario
+function mostrarTablaUsuarioConsultas(){
+var consultasGeneradas = $("#consultasGeneradas");
+
+
+var consultasUsuario = [];
+var paciente = usuarioIngresado ;
+	console.log(paciente);
+	//buscamos el index del paciente dentro del array comparando la propiedad nombre completo 
+	var pacienteIndex = busquedaEnArrayObjetos(pacientes,"nombreCompleto",paciente.nombreCompleto);
+
+	//recorrer el array de consultas,
+	for(var i = 0 ; i < consultas.length; i++){
+		if(consultas[i]["paciente"] == pacienteIndex){
+			consultasUsuario.push(consultas[i]);
+		}
+	}
+
+var tabla = crearTablaTodasConsultas(consultasUsuario);
+consultasGeneradas.html(tabla)
+}
+
+
+
+
+
 
 
 
@@ -343,6 +370,9 @@ function formCrearConsulta(arrlistado){
 function formBuscarConsulta(){
 	var listado = listadoEspecialidades(doctores);
 	//listamos las especialidades disponibles
+
+	mostrarTablaUsuarioConsultas();
+	//mostramos las consultas generadas por el usuario;
 
 	//formulario para crear consulta
 	var form 	=  '<form>'
