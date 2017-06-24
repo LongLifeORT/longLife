@@ -1,5 +1,7 @@
 $("document").ready(function(){
 
+
+
 	//creamos una tabla con todas las consultas
 	crearTablaTodasConsultas();
 	mostrarTablaTodasConsultas();
@@ -20,6 +22,8 @@ $("document").ready(function(){
 //eventos de los formularios
 	var especialidadCrear = $("#crear1A");
 	especialidadCrear.on("blur", buscarMedicos);
+	var btnCrearConsulta = $("#btnCrear");
+	btnCrearConsulta.on("click", crearNuevaConsulta);
 
 
 
@@ -64,18 +68,18 @@ function Paciente(nombre, apellido,numeroPaciente,clave, foto){
 
 };
 
-var pacientes = [
-	new Paciente("Luis", "Damiano", 11 ,123456),
-	new Paciente("Horacio", "Mercer",  12,123456),
-	new Paciente("Jorge", "Maximino",13,123456),
-	new Paciente("Hernando", "Salvador",14,123456),
-	new Paciente("Esteban", "Eustaquio",15,123456),
-	new Paciente("Rosa", "Ximenes",16,123456),
-	new Paciente("Carlos", "Vasco",17,123456),
-	new Paciente("Marcelino", "Sosa",18,123456),
-	new Paciente("Diego", "Santos",19,123456),
-	new Paciente("Leonardo", "Amor",20,123456),
-];
+	var pacientes = [
+		new Paciente("Luis", "Damiano", 11 ,123456),
+		new Paciente("Horacio", "Mercer",  12,123456),
+		new Paciente("Jorge", "Maximino",13,123456),
+		new Paciente("Hernando", "Salvador",14,123456),
+		new Paciente("Esteban", "Eustaquio",15,123456),
+		new Paciente("Rosa", "Ximenes",16,123456),
+		new Paciente("Carlos", "Vasco",17,123456),
+		new Paciente("Marcelino", "Sosa",18,123456),
+		new Paciente("Diego", "Santos",19,123456),
+		new Paciente("Leonardo", "Amor",20,123456),
+	];
 
 
 
@@ -111,28 +115,80 @@ function Consulta(pacienteIndex, medicoIndex,descripcion){
 
 };
 
-
 var consultas = [
 // indice de paciente, indice de medico, estado de la consulta, estado del pago
-	new Consulta(0,0),
+	new Consulta(0,0,"Me duele el pecho y me cuesta respirar."),
 	new Consulta(1,1),
-	new Consulta(2,2),
+	new Consulta(2,2,"Tengo mucha tos."),
 	new Consulta(3,4),
 	new Consulta(4,8),
 	new Consulta(5,5),
-	new Consulta(6,7),
-	new Consulta(7,7),
+	new Consulta(6,7,"Tome un frasco de pastillas y no puedo parar de ir al baño."),
+	new Consulta(7,7,"Fuerte dolor de estomago y vomitos."),
 	new Consulta(8,5),
-	new Consulta(9,6),
+	new Consulta(9,6,"Escucho voces."),
 	new Consulta(1,2),
 	new Consulta(2,4),
 	new Consulta(7,7),
 	new Consulta(4,3),
-	new Consulta(3,6),
+	new Consulta(3,6,"Veo gente muerta."),
 	new Consulta(1,2),
 	new Consulta(2,4)
 
 ];
+console.log(consultas);
+
+
+function crearNuevaConsulta(){
+	var valorEspecialidad = $("#crear1A").val();
+	var valorMedico = $("#crear1B").val();
+	var valorDescripcion = $("#crear1C").val();
+	var resultado =	$("#resultadoCrear");
+		var formularioCompleto = validarVacio(valorEspecialidad,valorMedico);
+		if(formularioCompleto){
+
+			var paciente = usuarioIngresado;
+			console.log(paciente);
+
+			//buscamos el index del paciente dentro del array comparando la propiedad nombre completo 
+			var pacienteIndex = busquedaEnArrayObjetos(pacientes,"nombreCompleto",paciente.nombreCompleto);
+			console.log(pacienteIndex);
+
+
+			//buscamos que medico es dentro del array de doctores  mediate la propiedad nombre completo.
+			var medicoIndex = busquedaEnArrayObjetos(doctores,"nombreCompleto",valorMedico);
+			console.log(medicoIndex);
+		
+
+			//creamos una nueva consulta con el valor del paciente, el medico y una descripcion si la tiene.
+			consultas.push(new Consulta(pacienteIndex,medicoIndex,valorDescripcion));
+			//muestra se actualizo las consultas
+			mostrarTablaTodasConsultas();
+
+
+			//luego de crear la consulta, vaciamos los inputs
+			$('#crear1A, #crear1B, #crear1C ').val([])
+			//Le damos un mensaje al usuario de que su consulta fue creada
+			$(' #btnCrear ').val("Consulta creada "+ valorMedico + " lo atendera en unos momentos, gracias por su elecion");
+
+		}else{
+			//si no se eligio especialidad ni medico, se pide al usuario complete el formulario
+			$(' #btnCrear ').val("Complete el formulario primero");
+		}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 // tabla que contiene todas las consultas generadas
@@ -192,33 +248,35 @@ function listadoEspecialidades(arrDoctores){
 }
 
 function buscarMedicos(){
-	alert("busquemos medicos");
-	//luego de que el paciente elige una especialidad
 	var especialidadSelected = $("#crear1A").val();
-	//vamos a mostrar los medicos disponibles
-	var MedicosDisponibles = $("#crear1B");
-	alert(especialidadSelected);
-	// para eso creamos un array con los medicos de esa especialidad
-	var listadoMedicos = [];
-	//que los presentaremos en opciones del input select.
-	var opciones = '<option selected="selected" value="empty">Sel. Medico</option>';
+		if(especialidadSelected !== "empty"){
+			
+			//luego de que el paciente elige una especialidad
+			var especialidadSelected = $("#crear1A").val();
+			//vamos a mostrar los medicos disponibles
+			var MedicosDisponibles = $("#crear1B");
+		
+			// para eso creamos un array con los medicos de esa especialidad
+			var listadoMedicos = [];
+			//que los presentaremos en opciones del input select.
+			var opciones = '<option selected="selected" value="empty">Sel. Medico</option>';
 
 
 
-		for(var i = 0; i < doctores.length; i++){
-			if(doctores[i]["especialidad"] == especialidadSelected){
-				listadoMedicos.push(doctores[i]["nombreCompleto"]);
-			}
+				for(var i = 0; i < doctores.length; i++){
+					if(doctores[i]["especialidad"] == especialidadSelected){
+						listadoMedicos.push(doctores[i]["nombreCompleto"]);
+					}
+				}
+
+				for(var j = 0; j < listadoMedicos.length; j++){
+					opciones += '<option value=' + '\"' + listadoMedicos[j] + '\"' + '>' + listadoMedicos[j] + '</option>';
+
+				}
+
+
+			MedicosDisponibles.html(opciones);
 		}
-
-		for(var j = 0; j < listadoMedicos.length; j++){
-			opciones += '<option value=' + '\"' + listadoMedicos[j] + '\"' + '>' + listadoMedicos[j] + '</option>';
-
-		}
-
-
-	MedicosDisponibles.html(opciones);
-
 };
 
 
@@ -256,6 +314,7 @@ function formCrearConsulta(arrlistado){
 				+	'<br >'
             	+   '<input type="button"  class="form-control" value="Ingresar" id="btnCrear">'
             	+	'</form>';
+            	+	'<div id="resultadoCrear">Resultado aqui </div>' 
 
 
 
