@@ -6,12 +6,16 @@ Login
 
 var usuarioIngresado;
 
+
 //oculto menús que no interesan
 
 function ocultarMenus(){
 	$(".menuInfo").hide();
 	$(".menuCliente").hide();
 	$(".menuDoctor").hide();
+	$(".botonera").hide();
+	$(".infos").hide();
+
 }
 
 

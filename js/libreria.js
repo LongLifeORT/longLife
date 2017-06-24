@@ -46,11 +46,6 @@ function main() {
 
 }
 //ends main
-
-
-
-
-
 //oculta todo los divs info para mostrar;
 function hideInfos(){
 	var infos = $(".infos");
@@ -67,23 +62,17 @@ function showMenu(){
 	hideInfos();
 }
 
-
-
 // muestra la interface de crear consulta
 function mostrarCrearConsulta() {
 	hideInfos();
 	hideMenues();
 	var crearConsultaInfo = $(".crearConsultaInfo");
 	crearConsultaInfo.toggle();
-
-
-
 }
 //muestra la interface de buscar consulta
 function mostrarBuscarConsulta() {
 	hideInfos();
 	hideMenues();
-
 	var buscarConsultaInfo = $(".buscarConsultaInfo");
 	buscarConsultaInfo.toggle();
 
@@ -92,7 +81,6 @@ function mostrarBuscarConsulta() {
 function mostrarModificarPerfil() {
 	hideInfos();
 	hideMenues();
-
 	var modificarPerfilInfo = $(".modificarPerfilInfo");
 	modificarPerfilInfo.toggle();
 
@@ -210,6 +198,7 @@ function ingresarUsuario(){
 		$(".menuDoctor").show();
 	}else if(loginExito && !medico){
 		$(".menuCliente").show();
+		$(".botonera").show();
 	}
 
 	if(loginExito){
@@ -218,6 +207,8 @@ function ingresarUsuario(){
 		mostrarOcultarBotonLoginLogout();
 
 	}
+
 	bienvenida(usuarioIngresado);
+	console.log(usuarioIngresado);
 }
 
