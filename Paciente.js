@@ -64,6 +64,9 @@ function Paciente(nombre, apellido,numeroPaciente,clave, foto){
 	this.modificarAlergias = function(nuevaAlergia){
 		this.alergias = nuevaAlergia;
 	};
+	this.modificarTelefono = function(nuevoTelefono){
+		this.telefono = nuevoTelefono;
+	};
 	
 
 };
@@ -79,6 +82,8 @@ function Paciente(nombre, apellido,numeroPaciente,clave, foto){
 		new Paciente("Marcelino", "Sosa",18,123456),
 		new Paciente("Diego", "Santos",19,123456),
 		new Paciente("Leonardo", "Amor",20,123456),
+		new Paciente("Alvaro", "Mesa",21,123456),
+
 	];
 
 
@@ -129,11 +134,33 @@ var consultas = [
 	new Consulta(9,6,"Escucho voces."),
 	new Consulta(1,2),
 	new Consulta(2,4),
-	new Consulta(7,7),
+	new Consulta(0,7),
 	new Consulta(4,3),
 	new Consulta(3,6,"Veo gente muerta."),
 	new Consulta(1,2),
-	new Consulta(2,4)
+	new Consulta(2,4),
+	new Consulta(10,9),
+	new Consulta(6,3),
+	new Consulta(5,2),
+	new Consulta(4,1),
+	new Consulta(4,9),
+	new Consulta(8,7),
+	new Consulta(1,6),
+	new Consulta(10,8),
+	new Consulta(3,5),
+	new Consulta(7,4),
+	new Consulta(0,4),
+	new Consulta(10,3),
+	new Consulta(0,8),
+	new Consulta(3,1),
+	new Consulta(4,2),
+	new Consulta(0,3),
+	new Consulta(6,4),
+	new Consulta(5,5),
+	new Consulta(9,6),
+	new Consulta(10,7),
+	new Consulta(1,8)
+
 
 ];
 console.log(consultas);
@@ -146,7 +173,6 @@ function crearNuevaConsulta(){
 	var resultado =	$("#resultadoCrear");
 		var formularioCompleto = validarVacio(valorEspecialidad,valorMedico);
 		if(formularioCompleto){
-
 			var paciente = usuarioIngresado;
 			console.log(paciente);
 
@@ -154,17 +180,14 @@ function crearNuevaConsulta(){
 			var pacienteIndex = busquedaEnArrayObjetos(pacientes,"nombreCompleto",paciente.nombreCompleto);
 			console.log(pacienteIndex);
 
-
 			//buscamos que medico es dentro del array de doctores  mediate la propiedad nombre completo.
 			var medicoIndex = busquedaEnArrayObjetos(doctores,"nombreCompleto",valorMedico);
 			console.log(medicoIndex);
 		
-
 			//creamos una nueva consulta con el valor del paciente, el medico y una descripcion si la tiene.
 			consultas.push(new Consulta(pacienteIndex,medicoIndex,valorDescripcion));
 			//muestra se actualizo las consultas
 			mostrarTablaTodasConsultas();
-
 
 			//luego de crear la consulta, vaciamos los inputs
 			$('#crear1A, #crear1B, #crear1C ').val([])
@@ -178,17 +201,6 @@ function crearNuevaConsulta(){
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 // tabla que contiene todas las consultas generadas
