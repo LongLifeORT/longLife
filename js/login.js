@@ -107,8 +107,8 @@ $().ready(function(){
 	agregarBotonSalida();
 	agregarFormLogin();
 	//testing
-	usuarioIngresado = doctores[0];
-	inicializarInterfazMedico();
+	/*usuarioIngresado = doctores[0];
+	inicializarInterfazMedico();*/
 	//testing
 	$("#btn-ingresar").on('click', function(){
 		//Validamos que exista usuario y relizamos el login
