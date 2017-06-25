@@ -190,11 +190,11 @@ function crearNuevaConsulta(){
 				//luego de crear la consulta, vaciamos los inputs
 				$('#crear1A, #crear1B, #crear1C ').val([])
 				//Le damos un mensaje al usuario de que su consulta fue creada
-				$(' #btnCrear ').val("Consulta creada "+ valorMedico + " lo atendera en unos momentos, gracias por su elecion");
+				$(' #resultadoCrearConsulta ').html("Consulta creada "+ valorMedico + " lo atendera en unos momentos, gracias por su elecion");
 
-		}else{
+		}else{resultadoCrearConsulta
 			//si no se eligio especialidad ni medico, se pide al usuario complete el formulario
-			$(' #btnCrear ').val("Complete el formulario primero");
+			$(' #resultadoCrearConsulta ').html("Complete el formulario primero");
 		}
 
 
@@ -338,7 +338,9 @@ function buscarMedicos(){
 function formCrearConsulta(){
 	var listado = arrListado;
 	//listamos las especialidades disponibles
-				
+	$("#resultadoCrearConsulta").html("");
+
+
 	//formulario para crear consulta
 	var form 	=  '<form>'
 				+	'<hr>'
@@ -368,6 +370,10 @@ function formCrearConsulta(){
 				+	'<br >'
             	+   '<input type="button"  class="form-control" value="Ingresar" id="btnCrear">'
             	+	'</form>';
+        form 	+=  '<div class="text-center" id="resultadosCrearConsulta">'	
+		        +    '<p class="panel panel-default resultado"  id="resultadoCrearConsulta"></p>'
+	            +	'</div>';   	
+
     var crearConsulta = $("#crearConsulta");
     crearConsulta.html(form);
 
@@ -408,6 +414,9 @@ function formBuscarConsulta(){
 				+	'<br >'
             	+   '<input type="button"  class="form-control" value="Ingresar" id="btnBuscarConsulta">'
             	+	'</form>';
+        form 	+=  '<div class="text-center" id="resultadosBuscarConsulta">'	
+		        +    '<p class="panel panel-default resultado"  id="resultadoBuscarConsulta"></p>'
+	            +	'</div>';
 
 
     var buscarConsulta = $("#buscarConsulta");
