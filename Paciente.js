@@ -33,13 +33,13 @@ function inicializarInterfazPaciente(){
 
 
 
-function Paciente(nombre, apellido,numeroPaciente,clave, peso, altura, foto){
+function Paciente(nombre, apellido,numeroPaciente,clave, peso, altura, cedula, foto){
 	this.nombre = nombre;
 	this.apellido = apellido;
 	this.nombreCompleto = nombre + " " + apellido;
 	this.numeroPaciente	= numeroPaciente;
 	this.clave = clave;
-	this.cedula = "";
+	this.cedula = cedula;
 	this.foto = foto || "default.jpg";
 	this.peso = [peso],
 	this.altura = [altura],
@@ -74,17 +74,17 @@ function Paciente(nombre, apellido,numeroPaciente,clave, peso, altura, foto){
 };
 
 	var pacientes = [
-		new Paciente("Luis", "Damiano", 11 ,123456, randomMedia(80), randomMedia(160)),
-		new Paciente("Horacio", "Mercer",  12,123456, randomMedia(80), randomMedia(160)),
-		new Paciente("Jorge", "Maximino",13,123456, randomMedia(80), randomMedia(160)),
-		new Paciente("Hernando", "Salvador",14,123456, randomMedia(80), randomMedia(160)),
-		new Paciente("Esteban", "Eustaquio",15,123456, randomMedia(80), randomMedia(160)),
-		new Paciente("Rosa", "Ximenes",16,123456, randomMedia(80), randomMedia(160)),
-		new Paciente("Carlos", "Vasco",17,123456, randomMedia(80), randomMedia(160)),
-		new Paciente("Marcelino", "Sosa",18,123456, randomMedia(80), randomMedia(160)),
-		new Paciente("Diego", "Santos",19,123456, randomMedia(80), randomMedia(160)),
-		new Paciente("Leonardo", "Amor",20,123456, randomMedia(80), randomMedia(160)),
-		new Paciente("Alvaro", "Mesa",21,123456, randomMedia(80), randomMedia(160)),
+		new Paciente("Luis", "Damiano", 11 ,123456, randomMedia(80), randomMedia(160), randomCedula()),
+		new Paciente("Horacio", "Mercer",  12,123456, randomMedia(80), randomMedia(160), randomCedula()),
+		new Paciente("Jorge", "Maximino",13,123456, randomMedia(80), randomMedia(160), randomCedula()),
+		new Paciente("Hernando", "Salvador",14,123456, randomMedia(80), randomMedia(160), randomCedula()),
+		new Paciente("Esteban", "Eustaquio",15,123456, randomMedia(80), randomMedia(160), randomCedula()),
+		new Paciente("Rosa", "Ximenes",16,123456, randomMedia(80), randomMedia(160), randomCedula()),
+		new Paciente("Carlos", "Vasco",17,123456, randomMedia(80), randomMedia(160), randomCedula()),
+		new Paciente("Marcelino", "Sosa",18,123456, randomMedia(80), randomMedia(160), randomCedula()),
+		new Paciente("Diego", "Santos",19,123456, randomMedia(80), randomMedia(160), randomCedula()),
+		new Paciente("Leonardo", "Amor",20,123456, randomMedia(80), randomMedia(160), randomCedula()),
+		new Paciente("Alvaro", "Mesa",21,123456, randomMedia(80), randomMedia(160), randomCedula()),
 
 	];
 
