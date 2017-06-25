@@ -111,8 +111,8 @@ function Consulta(pacienteIndex, medicoIndex,descripcion){
 		this.descripcion = nuevaDescripcion;
 
 	};
-	this.modificarEstado = function(nuevoEstado){
-		this.finalizada = nuevoEstado;
+	this.modificarEstado = function(){
+		this.finalizada = true;
 	};		
 	this.modificarPago = function(nuevoPago){
 		this.consultaPaga = nuevoPago;
@@ -124,6 +124,7 @@ function Consulta(pacienteIndex, medicoIndex,descripcion){
 var consultas = [
 // indice de paciente, indice de medico, estado de la consulta, estado del pago
 	new Consulta(0,0,"Me duele el pecho y me cuesta respirar."),
+	new Consulta(3,0),
 	new Consulta(1,1),
 	new Consulta(2,2,"Tengo mucha tos."),
 	new Consulta(3,4),
