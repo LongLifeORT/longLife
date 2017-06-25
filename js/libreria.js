@@ -236,6 +236,7 @@ function ingresarUsuario(){
 
 function random(_numero, _ceroIncluido){
 	var result;
+	_ceroIncluido = _ceroIncluido || false;
 	if(!_ceroIncluido){
 		result = Math.floor(Math.random() * _numero) + 1;
 	}else{
