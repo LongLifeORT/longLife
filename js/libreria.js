@@ -6,6 +6,12 @@ $(document).ready(main);
 
 
 function main() {
+
+	//listamos todas las especialidades disponibles
+	arrListado = listadoEspecialidades(doctores);
+	//ocultamos la informacion de los formularios
+	hideInfos();
+
 	var crearConsultaMenu  = $(".crearConsultaMenu");
 	var crearConsulta   = $(".menuCliente :first-child").eq(1);
 
@@ -15,8 +21,8 @@ function main() {
 	var modificarPerfilMenu  = $(".pagarConsultaMenu");
 	var ConfigurarPerfil   = $(".menuCliente :first-child").eq(3);
 	
-	//ocultamos la informacion de los formularios
-	hideInfos();
+	
+	
 	
 
 	//menues para crear consulta
@@ -40,17 +46,12 @@ function main() {
 	//
 	var volverAMenu = $(".volverAMenu");
 	volverAMenu.on("click" , showMenu);
-
+	
 
 
 
 }
 //ends main
-
-
-
-
-
 //oculta todo los divs info para mostrar;
 function hideInfos(){
 	var infos = $(".infos");
@@ -67,8 +68,6 @@ function showMenu(){
 	hideInfos();
 }
 
-
-
 // muestra la interface de crear consulta
 function mostrarCrearConsulta() {
 	hideInfos();
@@ -76,14 +75,12 @@ function mostrarCrearConsulta() {
 	var crearConsultaInfo = $(".crearConsultaInfo");
 	crearConsultaInfo.toggle();
 
-
-
+	
 }
 //muestra la interface de buscar consulta
 function mostrarBuscarConsulta() {
 	hideInfos();
 	hideMenues();
-
 	var buscarConsultaInfo = $(".buscarConsultaInfo");
 	buscarConsultaInfo.toggle();
 
@@ -92,7 +89,6 @@ function mostrarBuscarConsulta() {
 function mostrarModificarPerfil() {
 	hideInfos();
 	hideMenues();
-
 	var modificarPerfilInfo = $(".modificarPerfilInfo");
 	modificarPerfilInfo.toggle();
 
@@ -101,14 +97,6 @@ function mostrarModificarPerfil() {
 
 
 
-//function mostrar tabla
-function mostrarTablaTodasConsultas(){
-var consultasGeneradas = $("#consultasGeneradas");
-// la tabla se crea en Paciente.js
-var tabla = crearTablaTodasConsultas();
-consultasGeneradas.html(tabla)
-
-}
 
 
 
@@ -210,6 +198,7 @@ function ingresarUsuario(){
 		$(".menuDoctor").show();
 	}else if(loginExito && !medico){
 		$(".menuCliente").show();
+		$(".botonera").show();
 	}
 
 	if(loginExito){
@@ -218,6 +207,9 @@ function ingresarUsuario(){
 		mostrarOcultarBotonLoginLogout();
 
 	}
+
 	bienvenida(usuarioIngresado);
+	console.log(usuarioIngresado);
+
 }
 

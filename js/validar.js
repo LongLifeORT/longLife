@@ -6,11 +6,13 @@ Funciones para validar datos
 	function validarVacio(inputA,inputB,inputC,inputD){
 			var inputC = inputC || 1;
 			var inputD = inputD || 1;
-        	if(inputA.length == 0 ||  inputB.length ==  0 || inputC.length == 0 || inputD.length == 0 ){
-				return false;
-			}else{
-				return true;
-			}
+			
+	        	if(inputA.length == 0 ||  inputB.length ==  0 || inputC.length == 0 || inputD.length == 0 ){
+					return false;
+				}else{
+					return true;
+				}
+			
 	};
 	
 	function validarPositivo(error,resultado,btn,inputA,inputB,inputC){

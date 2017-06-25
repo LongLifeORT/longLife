@@ -6,12 +6,16 @@ Login
 
 var usuarioIngresado;
 
+
 //oculto menús que no interesan
 
 function ocultarMenus(){
 	$(".menuInfo").hide();
 	$(".menuCliente").hide();
 	$(".menuDoctor").hide();
+	$(".botonera").hide();
+	$(".infos").hide();
+
 }
 
 
@@ -113,7 +117,10 @@ $().ready(function(){
 		$("#my-login")[0].reset();
 		if(usuarioIngresado.especialidad !== undefined){
 			inicializarInterfazMedico();
+
+
 		}
+		inicializarInterfazPaciente();
 	});
 	$("#logout").on('click', salirSesion);
 })
