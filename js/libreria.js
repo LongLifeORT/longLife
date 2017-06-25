@@ -213,3 +213,24 @@ function ingresarUsuario(){
 
 }
 
+
+
+/**
+ Genera un número random entre 1 y el argumento
+
+ _número = int
+*/
+
+function random(_numero){
+	return Math.floor(Math.random() * (_numero - 1)) + 1;
+}
+
+/**
+ Genera un número random entre el argumento +-10
+
+ _media = int
+*/
+
+function randomMedia(_media){
+	return Math.floor(Math.random() * ((_media + 10) - (_media - 10))) + (_media-10);
+}

@@ -28,17 +28,15 @@ var doctores = [
 
 function inicializarInterfazMedico(){
 	dibujarSelectMedico();
-	$("#sel-consultas-medico").on('change', function(){
-		dibujarTablaDeConsulta(this.value);
-	})
 }
 
 function dibujarSelectMedico(){
 	var contenedor = $(".botonera");
-	var nuevoContenido = '<select id="sel-consultas-medico">'
+	var nuevoContenido = '<form><div class="contenedor-consultas-medico"><h3>Seleccionar Paciente</h3><p><select id="sel-consultas-medico" class="form-control">';
+	nuevoContenido += '<option value="">Seleccionar</option>';
 	for(var i = 0; i < consultas.length; i++){
 		console.log()
-		if(doctores[consultas[i].medico].nombre === usuarioIngresado.nombre){
+		if(doctores[consultas[i].medico].nombre === usuarioIngresado.nombre && consultas[i].finalizada !== true){
 			nuevoContenido += '<option value="'
 				+ i
 				+ '">'
@@ -46,8 +44,13 @@ function dibujarSelectMedico(){
 				+ '</option>';
 		}
 	}
-	nuevoContenido += '</select>';
-	contenedor.html(nuevoContenido);
+	nuevoContenido += '</select></p></div></form><div id="form-consulta"></div>';
+	$(".page-header").after(nuevoContenido);
+	contenedor.hide();
+	$("#sel-consultas-medico").on('change', function(){
+		var indiceConsulta = this.value;
+		dibujarTablaDeConsulta(this.value);
+	});
 }
 
 /**
@@ -56,40 +59,104 @@ function dibujarSelectMedico(){
 */
 
 function dibujarTablaDeConsulta(_consultaIndex){
-	var contenedor = $(".botonera");
-	var consulta = consultas[_consultaIndex];
-	var divPadre = '<div class="container text-center">';
-	var tabla = '<table id="tabla-consulta-medico">'
-		+ '<thead>'
-		+	'<tr>'
-		+		'<th>Nombre</th>'
-		+		'<th>Apellido</th>'
-		+		'<th>Peso</th>'
-		+		'<th>Altura</th>'
-		+	'</tr>'
-		+ '</thead>'
-		+ '<tbody>'
-		+	'<tr>'
-		+		'<td>' + pacientes[consulta.paciente].nombre + '</td>'
-		+		'<td>' + pacientes[consulta.paciente].apellido + '</td>'
-		+		'<td>' + pacientes[consulta.paciente].peso + '</td>'
-		+		'<td>' + pacientes[consulta.paciente].altura + '</td>'
-		+	'</tr>'
-		+ '</tbody>'
-		+	'<tr>'
-		+		'<td colspan="1">'
-		+			'<input type="button" id="btn-agregar-peso" value="Agregar nuevo peso">'
-		+		'</td>'
-		+		'<td colspan="1">'
-		+			'<input type="button" id="btn-agregar-altura" value="Agregar nueva altura">'
-		+		'</td>'
-		+		'<td colspan="2">'
-		+			'<input type="button" id="btn-finalizar-consulta" value="Finzalizar consulta">'
-		+		'</td>'
-		+	'</tr>'
-		+'</table>';
-		contenedor.html(divPadre + tabla + '</div>');
+	//console.log(consultas[_consultaIndex]);
+	console.log("me active");
+	if(_consultaIndex === ""){return}
+	var contenedor = $("#form-consulta");
+	var consultaActual = consultas[_consultaIndex];
+	var pacienteSeleccionado = pacientes[consultaActual.paciente];
+	var divPadre = '<div>';
+	var tablaConsulta = '<form class="form-horizontal">'
+		+ 	'<div class="form-group">'
+		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Nombre completo</label>'
+		+		'<div class="col-sm-8">'
+		+ 			'<input id="nuevo-peso" class="form-control" type="text" value="' + pacienteSeleccionado.foto + '" disabled>'
+		+		'</div>'
+		+	'</div>'
+		+ 	'<div class="form-group">'
+		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Nombre completo</label>'
+		+		'<div class="col-sm-8">'
+		+ 			'<input id="nuevo-peso" class="form-control" type="text" value="' + pacienteSeleccionado.nombreCompleto + '" disabled>'
+		+		'</div>'
+		+	'</div>'
+		+ 	'<div class="form-group">'
+		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Identificador</label>'
+		+		'<div class="col-sm-8">'
+		+ 			'<input id="nuevo-peso" class="form-control" type="text" value="' + pacienteSeleccionado.numeroPaciente + '" disabled>'
+		+		'</div>'
+		+	'</div>'
+		+ 	'<div class="form-group">'
+		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Contacto</label>'
+		+		'<div class="col-sm-8">'
+		+ 			'<input id="nuevo-peso" class="form-control" type="text" value="' + pacienteSeleccionado.telefono + '" disabled>'
+		+		'</div>'
+		+	'</div>'
+		+ 	'<div class="form-group">'
+		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Peso registrado</label>'
+		+		'<div class="col-sm-8">'
+		+ 			'<input id="nuevo-peso" class="form-control" type="text" value="' + pacienteSeleccionado.peso[0] + ' kg" disabled>'
+		+		'</div>'
+		+	'</div>'
+		+ 	'<div class="form-group">'
+		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Altura registrada</label>'
+		+		'<div class="col-sm-8">'
+		+ 			'<input id="nuevo-peso" class="form-control" type="text" value="' + pacienteSeleccionado.altura[0] + ' cm" disabled>'
+		+		'</div>'
+		+	'</div>'
+		+ 	'<div class="form-group">'
+		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Alergias</label>'
+		+		'<div class="col-sm-8">'
+		+ 			'<input id="nuevo-peso" class="form-control" type="text" value="' + pacienteSeleccionado.alergias.join(", ") + '" disabled>'
+		+		'</div>'
+		+	'</div>'
+		+ 	'<div class="form-group">'
+		+ 		'<label for="imc" class="col-sm-2 control-label">IMC</label>'
+		+		'<div class="col-sm-8">'
+		+ 			'<input id="imc" class="form-control" type="text" value="' + pacienteSeleccionado.imc() + '" disabled>'
+		+		'</div>'
+		+	'</div>'
+		+	'<fieldset>'
+		+		'<legend>Nuevo peso y altura</legend>'
+		+ 		'<div class="form-group">'
+		+ 			'<label for="nuevo-peso" class="col-sm-2 control-label">Nuevo peso</label>'
+		+			'<div class="col-sm-8">'
+		+ 				'<input id="nuevo-peso" class="form-control" type="text" placeholder="peso">'
+		+			'</div>'
+		+		'</div>'
+		+ 		'<div class="form-group">'
+		+ 			'<label for="nuevo-altura" class="col-sm-2 control-label">Nueva altura</label>'
+		+			'<div class="col-sm-8">'
+		+ 				'<input id="nuevo-altura" class="form-control" type="text" placeholder="altura">'
+		+			'</div>'
+		+		'</div>'
+		+ 		'<div class="form-group text-center">'
+		+			'<input id="modificar-peso-altura" class="btn btn-success" type="button" value="Actualizar" data-paciente="' + consultaActual.paciente + '">'
+		+		'</div>'
+		+	'</fieldset>'
+		+	'<fieldset>'
+		+		'<legend>Descripción</legend>'
+		+		'<div class="form-group text-center">'
+		+			'<textarea id="desc" class="form-control" rows="3"></textarea>'
+		+			'<input id="finalizar-consulta" class="btn btn-success" type="button" value="FINALIZAR CONSULTA" style="width:80%">'
+		+		'</div>'
+		+	'</fieldset>'
+		+ '</form>';
+	contenedor.html(divPadre + tablaConsulta + '</div>');
+
+	$("#modificar-peso-altura").on('click', function(){
+		var indicePaciente = $(this).attr('data-paciente');
+		modificarPesoAltura($("#nuevo-peso"), $("#nuevo-altura"), indicePaciente);
+	});
+	$("#finalizar-consulta").on('click', function(){
+		consultas[_consultaIndex].modificarEstado();
+		consultas[_consultaIndex].modificarDescripcion($("textarea#desc").val());
+		$("#form-consulta").html("");
+		$(".contenedor-consultas-medico").html("");
+		dibujarSelectMedico();
+		console.log(consultas[_consultaIndex])
+	})
 }
+
 
 
 /**
@@ -117,8 +184,8 @@ function buscarConsultas(arrConsultas, indexMedico){
  return undefined
 */
 function modificarPesoAltura(peso, altura, pacienteIndex){
-	paciente[pacienteIndex].peso.push(peso);
-	paciente[pacienteIndex].altura.push(altura);
+	pacientes[pacienteIndex].peso.push(peso);
+	pacientes[pacienteIndex].altura.push(altura);
 }
 
 /**
@@ -155,11 +222,13 @@ function consultaPaga(indexConsulta){
  return undefined
 */
 function finalizarConsulta(indexConsulta, descripcion){
-	consultasPendientes[indexConsulta].descripcion = descripcion;
-	consultasPendientes[indexConsulta].finalizada = true;
-	consultasFinalizadas
+	consultas[indexConsulta].descripcion = descripcion;
+	consultas[indexConsulta].finalizada = true;
+	console.log(consultas[indexConsulta]);
+	/*consultas
 		.push(consultasPendientes
 			.splice(indexConsulta, 1));
+	*/
 }
 
 
