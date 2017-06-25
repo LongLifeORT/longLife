@@ -124,7 +124,9 @@ function busquedaEnArrayObjetos(array, prop, valor){
 	return -1;
 }
 
-
+/**
+ Objeto contador de consultas
+*/
 
 var Counter = {
 	value: 0,
@@ -164,6 +166,13 @@ function borradoBienvenida(){
 	contenedor.html("");
 }
 
+/**
+ calculo agnostico de IMC
+*/
+
+function calcularIMC(peso, altura){
+	return peso / Math.pow(altura, 2);
+}
 
 // logica principal de login : accion de form login
 
@@ -237,4 +246,16 @@ function random(_numero){
 
 function randomMedia(_media){
 	return Math.floor(Math.random() * ((_media + 10) - (_media - 10))) + (_media-10);
+}
+
+/**
+ Genera una cedula random
+*/
+
+function randomCedula(){
+	var cedula = "";
+	for(var i = 0; i < 8; i++){
+		cedula += random(9);
+	}
+	return cedula;
 }
