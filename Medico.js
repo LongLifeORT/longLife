@@ -225,11 +225,7 @@ function dibujarTablaDeConsulta(_consultaIndex){
 	var divPadre = '<div class="form-consulta">';
 	var tablaConsulta = '<form class="form-horizontal">'
 		+ 	'<div class="form-group">'
-<<<<<<< HEAD
 		+ 		'<label for="" class="col-sm-2 control-label">Nombre completo</label>'
-=======
-		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Foto</label>'
->>>>>>> ac9d63678290e5283387d3680adfbe903fca27c0
 		+		'<div class="col-sm-8">'
 		+ 			'<input id="" class="form-control" type="text" value="' + pacienteSeleccionado.foto + '" disabled>'
 		+		'</div>'
