@@ -6,6 +6,12 @@ $(document).ready(main);
 
 
 function main() {
+
+	//listamos todas las especialidades disponibles
+	arrListado = listadoEspecialidades(doctores);
+	//ocultamos la informacion de los formularios
+	hideInfos();
+
 	var crearConsultaMenu  = $(".crearConsultaMenu");
 	var crearConsulta   = $(".menuCliente :first-child").eq(1);
 
@@ -15,8 +21,8 @@ function main() {
 	var modificarPerfilMenu  = $(".pagarConsultaMenu");
 	var ConfigurarPerfil   = $(".menuCliente :first-child").eq(3);
 	
-	//ocultamos la informacion de los formularios
-	hideInfos();
+	
+	
 	
 
 	//menues para crear consulta
@@ -68,6 +74,8 @@ function mostrarCrearConsulta() {
 	hideMenues();
 	var crearConsultaInfo = $(".crearConsultaInfo");
 	crearConsultaInfo.toggle();
+
+	
 }
 //muestra la interface de buscar consulta
 function mostrarBuscarConsulta() {

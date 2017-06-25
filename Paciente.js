@@ -1,12 +1,13 @@
+
+
 function inicializarInterfazPaciente(){
 
 	//creamos una tabla con todas las consultas
 	crearTablaTodasConsultas();
 	mostrarTablaTodasConsultas();
-	//listamos todas las especialidades disponibles
-	var listado = listadoEspecialidades(doctores);
+	
 	//creamos formulario de crear consulta
-	formCrearConsulta(listado);
+	formCrearConsulta();
 	//creamos formulario de buscar consulta
 	formBuscarConsulta();
 	//creamos formulario de modificar perfil
@@ -18,6 +19,11 @@ function inicializarInterfazPaciente(){
 	especialidadCrear.on("blur", buscarMedicos);
 	var btnCrearConsulta = $("#btnCrear");
 	btnCrearConsulta.on("click", crearNuevaConsulta);
+
+
+
+
+	
 
 
 
@@ -329,8 +335,8 @@ function buscarMedicos(){
 
 
 //function para formulario para crear consulta, como parametro toma el listado de array de especialidades
-function formCrearConsulta(arrlistado){
-	var listado = arrlistado;
+function formCrearConsulta(){
+	var listado = arrListado;
 	//listamos las especialidades disponibles
 				
 	//formulario para crear consulta
@@ -368,7 +374,7 @@ function formCrearConsulta(arrlistado){
 };
 
 function formBuscarConsulta(){
-	var listado = listadoEspecialidades(doctores);
+	var listado = arrListado;
 	//listamos las especialidades disponibles
 
 	mostrarTablaUsuarioConsultas();
