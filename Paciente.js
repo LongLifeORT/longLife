@@ -33,7 +33,7 @@ function inicializarInterfazPaciente(){
 
 
 
-function Paciente(nombre, apellido,numeroPaciente,clave, foto){
+function Paciente(nombre, apellido,numeroPaciente,clave, peso, altura, foto){
 	this.nombre = nombre;
 	this.apellido = apellido;
 	this.nombreCompleto = nombre + " " + apellido;
@@ -41,8 +41,8 @@ function Paciente(nombre, apellido,numeroPaciente,clave, foto){
 	this.clave = clave;
 	this.cedula = "";
 	this.foto = foto || "default.jpg";
-	this.peso = [0],
-	this.altura = [0],
+	this.peso = [peso],
+	this.altura = [altura],
 	this.alergias = ["ninguna"],
 	this.telefono = 911,
 	this.habilitado = true,
@@ -67,22 +67,24 @@ function Paciente(nombre, apellido,numeroPaciente,clave, foto){
 	this.modificarTelefono = function(nuevoTelefono){
 		this.telefono = nuevoTelefono;
 	};
-	
-
+	this.imc = function(){
+		//console.log(this.altura[0].split(""))
+		return (this.peso[this.peso.length - 1] / (this.altura[this.altura.length - 1]/100) ** 2).toFixed(2);
+	};
 };
 
 	var pacientes = [
-		new Paciente("Luis", "Damiano", 11 ,123456),
-		new Paciente("Horacio", "Mercer",  12,123456),
-		new Paciente("Jorge", "Maximino",13,123456),
-		new Paciente("Hernando", "Salvador",14,123456),
-		new Paciente("Esteban", "Eustaquio",15,123456),
-		new Paciente("Rosa", "Ximenes",16,123456),
-		new Paciente("Carlos", "Vasco",17,123456),
-		new Paciente("Marcelino", "Sosa",18,123456),
-		new Paciente("Diego", "Santos",19,123456),
-		new Paciente("Leonardo", "Amor",20,123456),
-		new Paciente("Alvaro", "Mesa",21,123456),
+		new Paciente("Luis", "Damiano", 11 ,123456, randomMedia(80), randomMedia(160)),
+		new Paciente("Horacio", "Mercer",  12,123456, randomMedia(80), randomMedia(160)),
+		new Paciente("Jorge", "Maximino",13,123456, randomMedia(80), randomMedia(160)),
+		new Paciente("Hernando", "Salvador",14,123456, randomMedia(80), randomMedia(160)),
+		new Paciente("Esteban", "Eustaquio",15,123456, randomMedia(80), randomMedia(160)),
+		new Paciente("Rosa", "Ximenes",16,123456, randomMedia(80), randomMedia(160)),
+		new Paciente("Carlos", "Vasco",17,123456, randomMedia(80), randomMedia(160)),
+		new Paciente("Marcelino", "Sosa",18,123456, randomMedia(80), randomMedia(160)),
+		new Paciente("Diego", "Santos",19,123456, randomMedia(80), randomMedia(160)),
+		new Paciente("Leonardo", "Amor",20,123456, randomMedia(80), randomMedia(160)),
+		new Paciente("Alvaro", "Mesa",21,123456, randomMedia(80), randomMedia(160)),
 
 	];
 
