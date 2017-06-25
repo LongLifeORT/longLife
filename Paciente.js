@@ -38,7 +38,7 @@ function inicializarInterfazPaciente(){
 
 
 
-function Paciente(nombre, apellido,numeroPaciente,clave, peso, altura,cedula alergias , foto){
+function Paciente(nombre, apellido,numeroPaciente,clave, peso, altura,cedula, alergias , foto){
 	this.nombre = nombre;
 	this.apellido = apellido;
 	this.nombreCompleto = nombre + " " + apellido;
