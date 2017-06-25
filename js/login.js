@@ -118,7 +118,7 @@ $().ready(function(){
 		if(usuarioIngresado.especialidad !== undefined){
 			inicializarInterfazMedico();
 		}else{
-			//inicializarInterfazPaciente();
+			inicializarInterfazPaciente();
 		}
 	});
 	$("#logout").on('click', salirSesion);
