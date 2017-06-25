@@ -34,7 +34,7 @@ $("document").ready(function(){
 function Paciente(nombre, apellido,numeroPaciente,clave, foto){
 	this.nombre = nombre;
 	this.apellido = apellido;
-	this.nombreCompleto = nombre +" "+ apellido;
+	this.nombreCompleto = nombre + " " + apellido;
 	this.numeroPaciente	= numeroPaciente;
 	this.clave = clave;
 	this.foto = foto || "default.jpg";
@@ -42,6 +42,7 @@ function Paciente(nombre, apellido,numeroPaciente,clave, foto){
 	this.altura = [0],
 	this.alergias = ["ninguna"],
 	this.telefono = 911,
+	this.habilitado = true,
 	this.modificarNombre = function(nuevoNombre){
 		this.nombre = nuevoNombre;
 	};

@@ -35,7 +35,8 @@ function inicializarInterfazMedico(){
 
 function dibujarSelectMedico(){
 	var contenedor = $(".botonera");
-	var nuevoContenido = '<select id="sel-consultas-medico">'
+	var nuevoContenido = '<div class="contenedor-consultas-medico"><h3>Seleccionar Paciente</h3><select id="sel-consultas-medico">';
+	nuevoContenido += '<option value="">Seleccionar</option>';
 	for(var i = 0; i < consultas.length; i++){
 		console.log()
 		if(doctores[consultas[i].medico].nombre === usuarioIngresado.nombre){
@@ -46,8 +47,9 @@ function dibujarSelectMedico(){
 				+ '</option>';
 		}
 	}
-	nuevoContenido += '</select>';
-	contenedor.html(nuevoContenido);
+	nuevoContenido += '</select></div>';
+	$(".page-header").after(nuevoContenido);
+	contenedor.hide();
 }
 
 /**
@@ -56,39 +58,20 @@ function dibujarSelectMedico(){
 */
 
 function dibujarTablaDeConsulta(_consultaIndex){
-	var contenedor = $(".botonera");
-	var consulta = consultas[_consultaIndex];
-	var divPadre = '<div class="container text-center">';
-	var tabla = '<table id="tabla-consulta-medico">'
-		+ '<thead>'
-		+	'<tr>'
-		+		'<th>Nombre</th>'
-		+		'<th>Apellido</th>'
-		+		'<th>Peso</th>'
-		+		'<th>Altura</th>'
-		+	'</tr>'
-		+ '</thead>'
-		+ '<tbody>'
-		+	'<tr>'
-		+		'<td>' + pacientes[consulta.paciente].nombre + '</td>'
-		+		'<td>' + pacientes[consulta.paciente].apellido + '</td>'
-		+		'<td>' + pacientes[consulta.paciente].peso + '</td>'
-		+		'<td>' + pacientes[consulta.paciente].altura + '</td>'
-		+	'</tr>'
-		+ '</tbody>'
-		+	'<tr>'
-		+		'<td colspan="1">'
-		+			'<input type="button" id="btn-agregar-peso" value="Agregar nuevo peso">'
-		+		'</td>'
-		+		'<td colspan="1">'
-		+			'<input type="button" id="btn-agregar-altura" value="Agregar nueva altura">'
-		+		'</td>'
-		+		'<td colspan="2">'
-		+			'<input type="button" id="btn-finalizar-consulta" value="Finzalizar consulta">'
-		+		'</td>'
-		+	'</tr>'
-		+'</table>';
-		contenedor.html(divPadre + tabla + '</div>');
+	if(_consultaIndex === ""){return}
+	var contenedor = $(".contenedor-consultas-medico");
+	var consultaActual = consultas[_consultaIndex];
+	var pacienteSeleccionado = pacientes[consultaActual.paciente];
+	var divPadre = '<form>';
+	var tablaConsulta = '<img src="' + pacienteSeleccionado.foto + '" alt="Foto de paciente">'
+		+ '<h4>Nombre completo:</h4>' + pacienteSeleccionado.nombreCompleto
+		+ '<h4>Identificador:</h4>' + pacienteSeleccionado.numeroPaciente
+		+ '<h4>Telefono de contacto:</h4>' + pacienteSeleccionado.telefono
+		+ '<h4>Peso:</h4>' + pacienteSeleccionado.peso[0]
+		+ '<h4>Altura:</h4>' + pacienteSeleccionado.altura[0]
+		+ '<h4>Alergias</h4>' + pacienteSeleccionado.alergias.join(", ")
+		+ '';
+	contenedor.append(divPadre + tablaConsulta + '</div>');
 }
 
 
