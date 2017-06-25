@@ -1,4 +1,4 @@
-/*    Libreria de funciones del programa   */
+	/*    Libreria de funciones del programa   */
 
 
 $(document).ready(main);
@@ -7,10 +7,12 @@ $(document).ready(main);
 
 function main() {
 
-	//listamos todas las especialidades disponibles
-	arrListado = listadoEspecialidades(doctores);
+	
 	//ocultamos la informacion de los formularios
 	hideInfos();
+
+	//listamos todas las especialidades disponibles
+	arrListado = listadoEspecialidades(doctores);
 
 	var crearConsultaMenu  = $(".crearConsultaMenu");
 	var crearConsulta   = $(".menuCliente :first-child").eq(1);
@@ -74,6 +76,7 @@ function mostrarCrearConsulta() {
 	hideMenues();
 	var crearConsultaInfo = $(".crearConsultaInfo");
 	crearConsultaInfo.toggle();
+	$("#resultadoCrearConsulta").html("");
 
 	
 }
@@ -83,6 +86,7 @@ function mostrarBuscarConsulta() {
 	hideMenues();
 	var buscarConsultaInfo = $(".buscarConsultaInfo");
 	buscarConsultaInfo.toggle();
+	//$("#resultadoBuscarConsulta").html("");
 
 }
 // muestra la interface de modificar perfil

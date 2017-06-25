@@ -3,9 +3,13 @@
 function inicializarInterfazPaciente(){
 
 	//creamos una tabla con todas las consultas
-	crearTablaTodasConsultas();
-	mostrarTablaTodasConsultas();
+	//crearTablaTodasConsultas();
+	//mostrarTablaTodasConsultas();
 	
+	//listamos todas las especialidades disponibles
+	arrListado = listadoEspecialidades(doctores);
+
+
 	//creamos formulario de crear consulta
 	formCrearConsulta();
 	//creamos formulario de buscar consulta
@@ -194,11 +198,11 @@ function crearNuevaConsulta(){
 				//luego de crear la consulta, vaciamos los inputs
 				$('#crear1A, #crear1B, #crear1C ').val([])
 				//Le damos un mensaje al usuario de que su consulta fue creada
-				$(' #btnCrear ').val("Consulta creada "+ valorMedico + " lo atendera en unos momentos, gracias por su elecion");
+				$(' #resultadoCrearConsulta ').html("Consulta creada "+ valorMedico + " lo atendera en unos momentos, gracias por su elecion");
 
-		}else{
+		}else{resultadoCrearConsulta
 			//si no se eligio especialidad ni medico, se pide al usuario complete el formulario
-			$(' #btnCrear ').val("Complete el formulario primero");
+			$(' #resultadoCrearConsulta ').html("Complete el formulario primero");
 		}
 
 
@@ -206,7 +210,10 @@ function crearNuevaConsulta(){
 
 
 // tabla que contiene las consultas a mostrar
-/* Voy a modificar para que muestre todas las consultas generadas por el usuario */
+/*
+arrConsultas puede ser todas las consultas
+o solo las del usuario segun mostrarTablaUsuarioConsultas
+ */
 function crearTablaTodasConsultas(arrConsultas){
 	var listadoConsultas = arrConsultas || consultas ;
 	 var table = "<div class= \"table-responsive\">"
@@ -216,8 +223,8 @@ function crearTablaTodasConsultas(arrConsultas){
      table +=    "</thead>"     
      table += " <tbody>";                             
               for(var i = 0 ; i< listadoConsultas.length; i++){
-              	table +=  "<tr>";
-              	table += "<td>" + listadoConsultas[i].identificador + "</td>" 
+              	table +=  "<tr id =" +  listadoConsultas[i].identificador + ">";
+              	table += "<td>" + listadoConsultas[i].identificador + "</td>"
               	+ "<td>" + pacientes[listadoConsultas[i].paciente].nombreCompleto  + "</td>" 
               	+ "<td>" + doctores[listadoConsultas[i].medico].nombreCompleto  + "</td>"
               	+ "<td>" + listadoConsultas[i].especialidad   + "</td>";
@@ -234,12 +241,12 @@ function mostrarTablaTodasConsultas(){
 var consultasGeneradas = $("#consultasGeneradas");
 // la tabla se crea en Paciente.js
 var tabla = crearTablaTodasConsultas(consultas);
-consultasGeneradas.html(tabla)
+	//consultasGeneradas.html(tabla)
 }
 
 //function mostrar tabla con las consultas del usuario
 function mostrarTablaUsuarioConsultas(){
-var consultasGeneradas = $("#consultasGeneradas");
+var consultasGeneradas = $("#resultadoBuscarConsulta");
 
 
 var consultasUsuario = [];
@@ -254,15 +261,9 @@ var paciente = usuarioIngresado ;
 			consultasUsuario.push(consultas[i]);
 		}
 	}
-
 var tabla = crearTablaTodasConsultas(consultasUsuario);
 consultasGeneradas.html(tabla)
 }
-
-
-
-
-
 
 
 
@@ -342,7 +343,9 @@ function buscarMedicos(){
 function formCrearConsulta(){
 	var listado = arrListado;
 	//listamos las especialidades disponibles
-				
+	
+
+
 	//formulario para crear consulta
 	var form 	=  '<form>'
 				+	'<hr>'
@@ -370,8 +373,12 @@ function formCrearConsulta(){
 		form	+=	'<label  for="crear1C" >Descripcion</label>'
 				+	'<textarea  class="form-control" id="crear1C"></textarea>'
 				+	'<br >'
-            	+   '<input type="button"  class="form-control" value="Ingresar" id="btnCrear">'
+            	+   '<input type="button"  class="form-control btn-primary" value="Ingresar" id="btnCrear">'
             	+	'</form>';
+        form 	+=  '<div class="text-center" id="resultadosCrearConsulta">'	
+		        +    '<p class="panel panel-default resultado"  id="resultadoCrearConsulta"></p>'
+	            +	'</div>';   	
+
     var crearConsulta = $("#crearConsulta");
     crearConsulta.html(form);
 
@@ -381,8 +388,7 @@ function formBuscarConsulta(){
 	var listado = arrListado;
 	//listamos las especialidades disponibles
 
-	mostrarTablaUsuarioConsultas();
-	//mostramos las consultas generadas por el usuario;
+	
 
 	//formulario para crear consulta
 	var form 	=  '<form>'
@@ -410,12 +416,18 @@ function formBuscarConsulta(){
 				+	'<label  for="in1C" >Descripcion</label>'
 				+	'<textarea  class="form-control" id="buscar1C"></textarea>'
 				+	'<br >'
-            	+   '<input type="button"  class="form-control" value="Ingresar" id="btnBuscarConsulta">'
+            	+   '<input type="button"  class="form-control btn-primary" value="Buscar" id="btnBuscarConsulta">'
             	+	'</form>';
+        form 	+=  '<div class="text-center" id="resultadosBuscarConsulta">'	
+		        +    '<p class="panel panel-default resultado"  id="resultadoBuscarConsulta"></p>'
+	            +	'</div>';
 
 
     var buscarConsulta = $("#buscarConsulta");
     buscarConsulta.html(form);
+
+    mostrarTablaUsuarioConsultas();
+	//mostramos las consultas generadas por el usuario;
 
 };
 
