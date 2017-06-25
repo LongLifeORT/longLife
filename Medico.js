@@ -35,7 +35,14 @@ function inicializarInterfazMedico(){
 
 }
 
+/**
+ Salir interfaz de médico
+*/
 
+function salirMedico(){
+	$(".contenedor-consultas-medico").html("");
+	
+}
 
 /**
  Se dibuja select para abonar

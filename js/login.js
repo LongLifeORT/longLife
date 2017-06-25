@@ -97,6 +97,7 @@ function salirSesion(){
 	ocultarMenus();
 	mostrarOcultarBotonLoginLogout();
 	borradoBienvenida();
+	salirMedico();
 }
 
 //test
