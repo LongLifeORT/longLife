@@ -37,14 +37,14 @@ function inicializarInterfazPaciente(){
 
 
 
-function Paciente(nombre, apellido,numeroPaciente,clave, peso, altura, foto){
+function Paciente(nombre, apellido,numeroPaciente,clave, peso, altura, alergias , foto){
 	this.nombre = nombre;
 	this.apellido = apellido;
 	this.nombreCompleto = nombre + " " + apellido;
 	this.numeroPaciente	= numeroPaciente;
 	this.clave = clave;
 	this.cedula = "";
-	this.foto = foto || "default.jpg";
+	this.foto = foto || "default.png";
 	this.peso = [peso],
 	this.altura = [altura],
 	this.alergias = ["ninguna"],
@@ -432,22 +432,91 @@ function formBuscarConsulta(){
 };
 
 function formModificarPerfil(){
-	var form 	= 	'<form>'
-				+	'<hr>'
-			 	+   '<label  for="in1A" >Medico</label>'
-			 	+	'<input type="text"  class="form-control" id="in1A">'
-				+	'<br >'
-				+	'<label  for="in1B" >Especialidad</label>'
-				+	'<input type="text"  class="form-control" id="in1B">'
-				+	'<br >'
-				+	'<label  for="in1C" >Descripcion</label>'
-				+	'<textarea  class="form-control" id="in1C"></textarea>'
-				+	'<br >'
-            	+   '<input type="button"  class="form-control" value="Pagar" id="btn1">'
-            	+	'</form>';
+
+	var paciente = usuarioIngresado ;
+				console.log(paciente);
+				//buscamos el index del paciente dentro del array comparando la propiedad nombre completo 
+	var pacienteIndex = busquedaEnArrayObjetos(pacientes,"nombreCompleto",paciente.nombreCompleto);
+
+	var pacienteSeleccionado = pacientes[pacienteIndex];			
+	var divPadre = '<div>';
+	var tablaConsulta = '<form class="form-horizontal">'
+		+ 	'<div class="form-group">'
+		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Foto</label>'
+		+		'<div class="col-sm-8">'
+		+ 			'<img src="./images/' + pacienteSeleccionado.foto + ' width="100" height="100" class="img-responsive" alt="Foto de perfil"> '
+		+	'</div>'
+		+ 	'<div class="form-group">'
+		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Nombre </label>'
+		+		'<div class="col-sm-8">'
+		+ 			'<input id="nuevo-peso" class="form-control" type="text" value="' + pacienteSeleccionado.nombre + '" disabled>'
+		+		'</div>'
+		+	'</div>'
+		+ 	'<div class="form-group">'
+		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Apellido</label>'
+		+		'<div class="col-sm-8">'
+		+ 			'<input id="nuevo-peso" class="form-control" type="text" value="' + pacienteSeleccionado.apellido + '" disabled>'
+		+		'</div>'
+		+	'</div>'
+		+ 	'<div class="form-group">'
+		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Numero de Paciente</label>'
+		+		'<div class="col-sm-8">'
+		+ 			'<input id="nuevo-peso" class="form-control" type="text" value="' + pacienteSeleccionado.numeroPaciente + '" disabled>'
+		+		'</div>'
+		+	'</div>'
+		+ 	'<div class="form-group">'
+		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Clave</label>'
+		+		'<div class="col-sm-8">'
+		+ 			'<input id="nuevo-peso" class="form-control" type="text" value="' + pacienteSeleccionado.clave + '" disabled>'
+		+		'</div>'
+		+	'</div>'
+		+ 	'<div class="form-group">'
+		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Cedula</label>'
+		+		'<div class="col-sm-8">'
+		+ 			'<input id="nuevo-peso" class="form-control" type="text" value="' + pacienteSeleccionado.cedula + '" disabled>'
+		+		'</div>'
+		+	'</div>'
+		+ 	'<div class="form-group">'
+		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Telefono</label>'
+		+		'<div class="col-sm-8">'
+		+ 			'<input id="nuevo-peso" class="form-control" type="text" value="' + pacienteSeleccionado.telefono + '" disabled>'
+		+		'</div>'
+		+	'</div>'
+		+ 	'<div class="form-group">'
+		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Alergias</label>'
+		+		'<div class="col-sm-8">'
+		+ 			'<input id="nuevo-peso" class="form-control" type="text" value="' + pacienteSeleccionado.alergias.join(", ") + '" disabled>'
+		+		'</div>'
+		+	'</div>'
+		+	'<fieldset>'
+		+		'<legend>Modificar Perfil</legend>'
+		+ 		'<div class="form-group">'
+		+ 			'<label for="nuevo-peso" class="col-sm-2 control-label">Nueva Clave</label>'
+		+			'<div class="col-sm-8">'
+		+ 				'<input id="nuevo-peso" class="form-control" type="text" placeholder="peso">'
+		+			'</div>'
+		+		'</div>'
+
+		+ 		'<div class="form-group">'
+		+ 			'<label for="nuevo-altura" class="col-sm-2 control-label">Nueva altura</label>'
+		+			'<div class="col-sm-8">'
+		+ 				'<input id="nuevo-altura" class="form-control" type="text" placeholder="altura">'
+		+			'</div>'
+		+		'</div>'
+		+	'</fieldset>'
+		+	'<fieldset>'
+		+		'<legend>Descripción</legend>'
+		+		'<div class="form-group text-center">'
+		+			'<input id="guardar-perfil" class="btn btn-success" type="button" value="Guardar Cambios" style="width:80%">'
+		+		'</div>'
+		+	'</fieldset>'
+		+ '</form>';
+	
+
+
 
     var formPerfil = $("#formPerfil");
-    formPerfil.html(form);
+    formPerfil.html(divPadre + tablaConsulta + '</div>');	
 
 };
 
@@ -462,3 +531,44 @@ function cambiarFoto(foto){
 
 
 }
+
+/* 
+this.nombre = nombre;
+	this.apellido = apellido;
+	this.nombreCompleto = nombre + " " + apellido;
+	this.numeroPaciente	= numeroPaciente;
+	this.clave = clave;
+	this.cedula = "";
+	this.foto = foto || "default.jpg";
+	this.peso = [peso],
+	this.altura = [altura],
+	this.alergias = ["ninguna"],
+	this.telefono = 911,
+	this.habilitado = true,
+	this.modificarNombre = function(nuevoNombre){
+		this.nombre = nuevoNombre;
+	};
+	this.modificarApellido = function(nuevoApellido){
+		this.apellido= nuevoApellido;
+	};
+	this.modificarCedula = function(nuevaCedula){
+		this.cedula= nuevaCedula;
+	};
+	this.modificarContraseña = function(nuevaContraseña){
+		this.contraseña= nuevaContraseña;
+	};
+	this.modificarFoto = function(nuevaFoto){
+		this.foto = nuevaFoto();
+	};
+	this.modificarAlergias = function(nuevaAlergia){
+		this.alergias = nuevaAlergia;
+	};
+	this.modificarTelefono = function(nuevoTelefono){
+		this.telefono = nuevoTelefono;
+	};
+	this.imc = function(){
+		//console.log(this.altura[0].split(""))
+		return (this.peso[this.peso.length - 1] / (this.altura[this.altura.length - 1]/100) ** 2).toFixed(2);
+	};
+};
+*/
