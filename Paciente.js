@@ -117,7 +117,7 @@ function Consulta(pacienteIndex, medicoIndex,descripcion){
 };
 
 var consultas = [
-// indice de paciente, indice de medico, estado de la consulta, estado del pago
+// indice de paciente, indice de medico, descripcion
 	new Consulta(0,0,"Me duele el pecho y me cuesta respirar."),
 	new Consulta(3,0, "Algo me pasa."),
 	new Consulta(1,1),
@@ -159,6 +159,8 @@ var consultas = [
 	new Consulta(1,8)
 ];
 
+
+//genera consultas aleatorias 
 function generarConsultas(_n){
 	for(var i = 0; i < _n; i++){
 		consultas.push(new Consulta(random(10, true), random(9, true)))
