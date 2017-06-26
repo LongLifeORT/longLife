@@ -18,26 +18,34 @@ function inicializarInterfazPaciente(){
 	//creamos formulario de modificar perfil
 	formModificarPerfil();
 
-
-//eventos de los formularios
+	//eventos de los formularios
 	var especialidadCrear = $("#crear1A");
 	especialidadCrear.on("blur", buscarMedicos);
 	var btnCrearConsulta = $("#btnCrear");
 	btnCrearConsulta.on("click", crearNuevaConsulta);
+}
 
+/**
+ salirPaciente esconde o destruye todo el contenido del paciente logeado
+*/
 
-
-
-	
-
-
+function salirPaciente(){
 
 }
 
- 
-
-
-
+/**
+ * Representa un paciente.
+ * @constructor
+ * @param {string} nombre - Nombre del paciente
+ * @param {string} apellido - Apellido del paciente.
+ * @param {int} numeroPaciente - Número creciente
+ * @param {int} clave - Clave de ingreso.
+ * @param {int} peso - Peso
+ * @param {float} altura - altura.
+ * @param {int} cedula - Nombre del paciente
+ * @param {string} alergias - Alergias del paciente.
+ * @param {string} foto - Foto de perfil del paciente.
+ */
 
 function Paciente(nombre, apellido,numeroPaciente,clave, peso, altura,cedula, alergias , foto){
 	this.nombre = nombre;
@@ -81,22 +89,28 @@ function Paciente(nombre, apellido,numeroPaciente,clave, peso, altura,cedula, al
 	};
 };
 
-	var pacientes = [
-		new Paciente("Luis", "Damiano", 11 ,123456, randomMedia(80), randomMedia(160), randomCedula()),
-		new Paciente("Horacio", "Mercer",  12,123456, randomMedia(80), randomMedia(160), randomCedula()),
-		new Paciente("Jorge", "Maximino",13,123456, randomMedia(80), randomMedia(160), randomCedula()),
-		new Paciente("Hernando", "Salvador",14,123456, randomMedia(80), randomMedia(160), randomCedula()),
-		new Paciente("Esteban", "Eustaquio",15,123456, randomMedia(80), randomMedia(160), randomCedula()),
-		new Paciente("Rosa", "Ximenes",16,123456, randomMedia(80), randomMedia(160), randomCedula()),
-		new Paciente("Carlos", "Vasco",17,123456, randomMedia(80), randomMedia(160), randomCedula()),
-		new Paciente("Marcelino", "Sosa",18,123456, randomMedia(80), randomMedia(160), randomCedula()),
-		new Paciente("Diego", "Santos",19,123456, randomMedia(80), randomMedia(160), randomCedula()),
-		new Paciente("Leonardo", "Amor",20,123456, randomMedia(80), randomMedia(160), randomCedula()),
-		new Paciente("Alvaro", "Mesa",21,123456, randomMedia(80), randomMedia(160), randomCedula()),
+var pacientes = [
+	new Paciente("Luis", "Damiano", 11 ,123456, randomMedia(80), randomMedia(160), randomCedula()),
+	new Paciente("Horacio", "Mercer",  12,123456, randomMedia(80), randomMedia(160), randomCedula()),
+	new Paciente("Jorge", "Maximino",13,123456, randomMedia(80), randomMedia(160), randomCedula()),
+	new Paciente("Hernando", "Salvador",14,123456, randomMedia(80), randomMedia(160), randomCedula()),
+	new Paciente("Esteban", "Eustaquio",15,123456, randomMedia(80), randomMedia(160), randomCedula()),
+	new Paciente("Rosa", "Ximenes",16,123456, randomMedia(80), randomMedia(160), randomCedula()),
+	new Paciente("Carlos", "Vasco",17,123456, randomMedia(80), randomMedia(160), randomCedula()),
+	new Paciente("Marcelino", "Sosa",18,123456, randomMedia(80), randomMedia(160), randomCedula()),
+	new Paciente("Diego", "Santos",19,123456, randomMedia(80), randomMedia(160), randomCedula()),
+	new Paciente("Leonardo", "Amor",20,123456, randomMedia(80), randomMedia(160), randomCedula()),
+	new Paciente("Alvaro", "Mesa",21,123456, randomMedia(80), randomMedia(160), randomCedula()),
 
-	];
+];
 
-
+/**
+ * Representa una consulta registrada.
+ * @constructor
+ * @param {int} pacienteIndex - Indice del paciente que pidio la consulta
+ * @param {int} medicoIndex - Indice del médico con el cual se dara la consulta.
+ * @param {string} descripcion - Descripción del pedido de consulta
+ */
 
 function Consulta(pacienteIndex, medicoIndex,descripcion){
 	var numeroIncremental = Counter.conteo();
@@ -125,8 +139,6 @@ function Consulta(pacienteIndex, medicoIndex,descripcion){
 	this.modificarPago = function(nuevoPago){
 		this.consultaPaga = nuevoPago;
 	};
-
-
 };
 
 var consultas = [
@@ -147,29 +159,6 @@ var consultas = [
 	new Consulta(0,7),
 	new Consulta(4,3),
 	new Consulta(3,6,"Veo gente muerta."),
-	new Consulta(1,2),
-	new Consulta(2,4),
-	new Consulta(10,9),
-	new Consulta(6,3),
-	new Consulta(5,2),
-	new Consulta(4,1),
-	new Consulta(4,9),
-	new Consulta(8,7),
-	new Consulta(1,6),
-	new Consulta(10,8),
-	new Consulta(3,5),
-	new Consulta(7,4),
-	new Consulta(0,4),
-	new Consulta(10,3),
-	new Consulta(0,8),
-	new Consulta(3,1),
-	new Consulta(4,2),
-	new Consulta(0,3),
-	new Consulta(6,4),
-	new Consulta(5,5),
-	new Consulta(9,6),
-	new Consulta(10,7),
-	new Consulta(1,8)
 ];
 
 function generarConsultas(_n){
@@ -178,86 +167,81 @@ function generarConsultas(_n){
 	}
 }
 
-
 function crearNuevaConsulta(){
 	var valorEspecialidad = $("#crear1A").val();
 	var valorMedico = $("#crear1B").val();
 	var valorDescripcion = $("#crear1C").val();
 	var resultado =	$("#resultadoCrear");
 		
-		if(valorEspecialidad !== "empty" && valorMedico !== "empty"  ){
+	if(valorEspecialidad !== "empty" && valorMedico !== "empty"  ){
 
-				var paciente = usuarioIngresado ;
-				console.log(paciente);
-				//buscamos el index del paciente dentro del array comparando la propiedad nombre completo 
-				var pacienteIndex = busquedaEnArrayObjetos(pacientes,"nombreCompleto",paciente.nombreCompleto);
-				console.log(pacienteIndex);
+		var paciente = usuarioIngresado ;
+		console.log(paciente);
+		//buscamos el index del paciente dentro del array comparando la propiedad nombre completo 
+		var pacienteIndex = busquedaEnArrayObjetos(pacientes,"nombreCompleto",paciente.nombreCompleto);
+		console.log(pacienteIndex);
 
-				//buscamos que medico es dentro del array de doctores  mediate la propiedad nombre completo.
-				var medicoIndex = busquedaEnArrayObjetos(doctores,"nombreCompleto",valorMedico);
-				console.log(medicoIndex);
-			
-				//creamos una nueva consulta con el valor del paciente, el medico y una descripcion si la tiene.
-				consultas.push(new Consulta(pacienteIndex,medicoIndex,valorDescripcion));
-				//muestra se actualizo las consultas
-				mostrarTablaUsuarioConsultas();
+		//buscamos que medico es dentro del array de doctores  mediate la propiedad nombre completo.
+		var medicoIndex = busquedaEnArrayObjetos(doctores,"nombreCompleto",valorMedico);
+		console.log(medicoIndex);
+	
+		//creamos una nueva consulta con el valor del paciente, el medico y una descripcion si la tiene.
+		consultas.push(new Consulta(pacienteIndex,medicoIndex,valorDescripcion));
+		//muestra se actualizo las consultas
+		mostrarTablaUsuarioConsultas();
 
-				//luego de crear la consulta, vaciamos los inputs
-				$('#crear1A, #crear1B, #crear1C ').val([])
-				//Le damos un mensaje al usuario de que su consulta fue creada
-				$(' #resultadoCrearConsulta ').html("Consulta creada "+ valorMedico + " lo atendera en unos momentos, gracias por su elecion");
+		//luego de crear la consulta, vaciamos los inputs
+		$('#crear1A, #crear1B, #crear1C ').val([])
+		//Le damos un mensaje al usuario de que su consulta fue creada
+		$(' #resultadoCrearConsulta ').html("Consulta creada "+ valorMedico + " lo atendera en unos momentos, gracias por su elecion");
 
-		}else{resultadoCrearConsulta
-			//si no se eligio especialidad ni medico, se pide al usuario complete el formulario
-			$(' #resultadoCrearConsulta ').html("Complete el formulario primero");
-		}
-
-
+	}else{resultadoCrearConsulta
+		//si no se eligio especialidad ni medico, se pide al usuario complete el formulario
+		$(' #resultadoCrearConsulta ').html("Complete el formulario primero");
+	}
 }
 
 
 // tabla que contiene las consultas a mostrar
 /*
-arrConsultas puede ser todas las consultas
-o solo las del usuario segun mostrarTablaUsuarioConsultas
+	arrConsultas puede ser todas las consultas
+	o solo las del usuario segun mostrarTablaUsuarioConsultas
  */
 function crearTablaTodasConsultas(arrConsultas){
 	var listadoConsultas = arrConsultas || consultas ;
-	 var table = "<div class= \"table-responsive\">"
-	 table +=  "<table class=\"table table-striped table-hover\">"
-	 table +=     "<thead>";
-	 table += " <tr> <th>ID</th> <th>Usuario</th>   <th>Medico</th> <th>Especialidad</th></tr> ";
-     table +=    "</thead>"     
-     table += " <tbody>";                             
-              for(var i = 0 ; i< listadoConsultas.length; i++){
-              	table +=  "<tr id =" +  listadoConsultas[i].identificador + ">";
-              	table += "<td>" + listadoConsultas[i].identificador + "</td>"
-              	+ "<td>" + pacientes[listadoConsultas[i].paciente].nombreCompleto  + "</td>" 
-              	+ "<td>" + doctores[listadoConsultas[i].medico].nombreCompleto  + "</td>"
-              	+ "<td>" + listadoConsultas[i].especialidad   + "</td>";
-              	table += "</tr>";	
-              }  
-    table +=  "</tbody></table></div>"       
+	var table = "<div class= \"table-responsive\">"
+	table += "<table class=\"table table-striped table-hover\">"
+	table += "<thead>";
+	table += "<tr><th>ID</th><th>Usuario</th><th>Medico</th><th>Especialidad</th></tr> ";
+	table += "</thead>"     
+	table += "<tbody>";                             
+	for(var i = 0 ; i< listadoConsultas.length; i++){
+		table +=  "<tr id=" + listadoConsultas[i].identificador + ">";
+		table += "<td>" + listadoConsultas[i].identificador + "</td>"
+		+ "<td>" + pacientes[listadoConsultas[i].paciente].nombreCompleto + "</td>" 
+		+ "<td>" + doctores[listadoConsultas[i].medico].nombreCompleto + "</td>"
+		+ "<td>" + listadoConsultas[i].especialidad + "</td>";
+		table += "</tr>";	
+	}  
+	table += "</tbody></table></div>"       
     return table;       
-
 }
 
 
 //function mostrar tabla con todas las consultas
 function mostrarTablaTodasConsultas(){
-var consultasGeneradas = $("#consultasGeneradas");
-// la tabla se crea en Paciente.js
-var tabla = crearTablaTodasConsultas(consultas);
+	var consultasGeneradas = $("#consultasGeneradas");
+	// la tabla se crea en Paciente.js
+	var tabla = crearTablaTodasConsultas(consultas);
 	//consultasGeneradas.html(tabla)
 }
 
 //function mostrar tabla con las consultas del usuario
 function mostrarTablaUsuarioConsultas(){
-var consultasGeneradas = $("#resultadoBuscarConsulta");
+	var consultasGeneradas = $("#resultadoBuscarConsulta");
 
-
-var consultasUsuario = [];
-var paciente = usuarioIngresado ;
+	var consultasUsuario = [];
+	var paciente = usuarioIngresado ;
 	console.log(paciente);
 	//buscamos el index del paciente dentro del array comparando la propiedad nombre completo 
 	var pacienteIndex = busquedaEnArrayObjetos(pacientes,"nombreCompleto",paciente.nombreCompleto);
@@ -268,22 +252,12 @@ var paciente = usuarioIngresado ;
 			consultasUsuario.push(consultas[i]);
 		}
 	}
-var tabla = crearTablaTodasConsultas(consultasUsuario);
-consultasGeneradas.html(tabla)
+	var tabla = crearTablaTodasConsultas(consultasUsuario);
+	consultasGeneradas.html(tabla)
 }
-
-
-
-
-
-
-
-
-
 
 //function para listar las especialidades disponibles, retorna un array de especialidades
 function listadoEspecialidades(arrDoctores){
-
 	var listado = [];
 	var noEsta = true;
 	console.log(listado);
@@ -309,7 +283,6 @@ function listadoEspecialidades(arrDoctores){
 			};
 		}
 	return listado;
-
 }
 
 function buscarMedicos(){
@@ -345,89 +318,77 @@ function buscarMedicos(){
 		}
 };
 
-
 //function para formulario para crear consulta, como parametro toma el listado de array de especialidades
 function formCrearConsulta(){
 	var listado = arrListado;
 	//listamos las especialidades disponibles
-	
-
 
 	//formulario para crear consulta
-	var form 	=  '<form>'
-				+	'<hr>'
-			 	+   '<label  for="crear1A" >Especialidad</label>';
-		form 	+= '<select class="form-control" name="selEspecialidad" id="crear1A">'
-				+ '<option selected="selected" value="empty">Sel. Especialidad</option>';
-		//ofrecemos un listado de especialidades disponibles
-				for(var i = 0 ; i < listado.length ; i++ ){
-		form		+= 	'<option value=' + '\"' + listado[i] + '\"' + '>' + listado[i] + '</option>';	
-				};	
+	var form = '<form>'
+			+ '<hr>'
+		 	+ '<label  for="crear1A" >Especialidad</label>';
+	form += '<select class="form-control" name="selEspecialidad" id="crear1A">'
+		+ '<option selected="selected" value="empty">Sel. Especialidad</option>';
+	//ofrecemos un listado de especialidades disponibles
+	for(var i = 0 ; i < listado.length ; i++ ){
+		form += '<option value=' + '\"' + listado[i] + '\"' + '>' + listado[i] + '</option>';	
+	};	
 
-		form	+=	'</select>'
-				+	'<br >';
+	form +=	'</select>'
+		+	'<br >';
 
-		form 	+='<label  for="crear1B" >Medico</label>'
-				+ '<select class="form-control" name="selEspecialidad" id="crear1B">'
-				+ '<option selected="selected" value="empty">Sel. Medico</option>';
+	form 	+='<label  for="crear1B" >Medico</label>'
+		+ '<select class="form-control" name="selEspecialidad" id="crear1B">'
+		+ '<option selected="selected" value="empty">Sel. Medico</option>';
 //una vez que el paciente elige especialidad, la funcion buscarMedicos busca los medicos de esa especialidad y las presenta en el dropdown.
 
 
-		form	+=	'</select>'
-				+	'<br >';
+	form	+=	'</select>'
+		+	'<br >';
 
-		
-		form	+=	'<label  for="crear1C" >Descripcion</label>'
-				+	'<textarea  class="form-control" id="crear1C"></textarea>'
-				+	'<br >'
-            	+   '<input type="button"  class="form-control btn-primary" value="Ingresar" id="btnCrear">'
-            	+	'</form>';
-        form 	+=  '<div class="text-center" id="resultadosCrearConsulta">'	
-		        +    '<p class="panel panel-default resultado"  id="resultadoCrearConsulta"></p>'
-	            +	'</div>';   	
+	
+	form +=	'<label  for="crear1C" >Descripcion</label>'
+		+	'<textarea  class="form-control" id="crear1C"></textarea>'
+		+	'<br >'
+    	+   '<input type="button"  class="form-control btn-primary" value="Ingresar" id="btnCrear">'
+    	+	'</form>';
+    form +=  '<div class="text-center" id="resultadosCrearConsulta">'	
+        +    '<p class="panel panel-default resultado"  id="resultadoCrearConsulta"></p>'
+        +	'</div>';   	
 
     var crearConsulta = $("#crearConsulta");
     crearConsulta.html(form);
-
 };
 
 function formBuscarConsulta(){
 	var listado = arrListado;
 	//listamos las especialidades disponibles
 
-	
-
 	//formulario para crear consulta
-	var form 	=  '<form>'
-				+	'<hr>'
-			 	+   '<label  for="crear1A" >Especialidad</label>';
+	var form =  '<form>'
+		+	'<hr>'
+	 	+   '<label  for="crear1A" >Especialidad</label>';
 
-		form 	+= '<select class="form-control" name="selConvertir" id="buscar1A">'
-				+ '<option selected="selected" value="empty">Sel. Especialidad</option>';
-		//ofrecemos un listado de especialidades disponibles
-				for(var i = 0 ; i < listado.length ; i++ ){
-		form		+= 	'<option value=' + '\"' + listado[i] + '\"' + '>' + listado[i] + '</option>';	
-					
-					
-				};	
+	form += '<select class="form-control" name="selConvertir" id="buscar1A">'
+		+ '<option selected="selected" value="empty">Sel. Especialidad</option>';
+	//ofrecemos un listado de especialidades disponibles
+	for(var i = 0 ; i < listado.length ; i++ ){
+		form+= 	'<option value=' + '\"' + listado[i] + '\"' + '>' + listado[i] + '</option>';			
+	};		
+	form +=	'</select>'
+		+	'<br >';
 
-
-
-
-		form	+=	'</select>'
-				+	'<br >';
-
-		form	+=	'<label  for="crear1B" >Medico</label>'
-				+	'<input type="text"  class="form-control" id="buscar1B">'
-				+	'<br >'
-				+	'<label  for="in1C" >Descripcion</label>'
-				+	'<textarea  class="form-control" id="buscar1C"></textarea>'
-				+	'<br >'
-            	+   '<input type="button"  class="form-control btn-primary" value="Buscar" id="btnBuscarConsulta">'
-            	+	'</form>';
-        form 	+=  '<div class="text-center" id="resultadosBuscarConsulta">'	
-		        +    '<p class="panel panel-default resultado"  id="resultadoBuscarConsulta"></p>'
-	            +	'</div>';
+	form +=	'<label  for="crear1B" >Medico</label>'
+		+	'<input type="text"  class="form-control" id="buscar1B">'
+		+	'<br >'
+		+	'<label  for="in1C" >Descripcion</label>'
+		+	'<textarea  class="form-control" id="buscar1C"></textarea>'
+		+	'<br >'
+        +   '<input type="button"  class="form-control btn-primary" value="Buscar" id="btnBuscarConsulta">'
+        +	'</form>';
+    form +=  '<div class="text-center" id="resultadosBuscarConsulta">'	
+	    +    '<p class="panel panel-default resultado"  id="resultadoBuscarConsulta"></p>'
+        +	'</div>';
 
 
     var buscarConsulta = $("#buscarConsulta");
@@ -435,14 +396,12 @@ function formBuscarConsulta(){
 
     mostrarTablaUsuarioConsultas();
 	//mostramos las consultas generadas por el usuario;
-
 };
 
 function formModificarPerfil(){
-
 	var paciente = usuarioIngresado ;
-				console.log(paciente);
-				//buscamos el index del paciente dentro del array comparando la propiedad nombre completo 
+	console.log(paciente);
+	//buscamos el index del paciente dentro del array comparando la propiedad nombre completo 
 	var pacienteIndex = busquedaEnArrayObjetos(pacientes,"nombreCompleto",paciente.nombreCompleto);
 
 	var pacienteSeleccionado = pacientes[pacienteIndex];			
@@ -528,31 +487,28 @@ function formModificarPerfil(){
 		+	'</fieldset>'
 		+ '</form>';
 	
-
-		
-
     var formPerfil = $("#formPerfil");
     formPerfil.html(divPadre + tablaConsulta + '</div>');
     $("#modificar_imagen").hide();	
 
 };
 
+/**
+
+*/
+
 function modificarPerfil(){
-
-
-
 
 }
 
+/**
+ cambairConstraseña cambia contraseña del usuario logueado desde su perfil
+*/
 
 function cambiarContraseña(){
 
-
-
-
-
-
 }
+
 
 /* 
 this.nombre = nombre;

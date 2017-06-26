@@ -41,6 +41,7 @@ function inicializarInterfazMedico(){
 
 function salirMedico(){
 	$(".contenedor-consultas-medico").html("");
+	$("#form-consultas").html("");
 
 }
 
@@ -56,7 +57,6 @@ function dibujarSelectAbonar(){
 	var nuevoContenido = '<h3>Seleccionar Paciente para abonar consultas</h3><p><select id="sel-abonar-medico" class="form-control">';
 	nuevoContenido += '<option value="">Seleccionar</option>';
 	for(var i = 0; i < pacientes.length; i++){
-		console.log()
 		nuevoContenido += '<option value="'
 			+ i
 			+ '">'
@@ -73,6 +73,7 @@ function dibujarSelectAbonar(){
 /**
  Se lista consultas no abonadas
 */
+
 function dibujarConsultasNoAbonadas(pacienteIndex){
 	var contenedor = $(".lista-consultas-no-abonadas")
 	contenedor.html("");
@@ -109,11 +110,8 @@ function dibujarConsultasNoAbonadas(pacienteIndex){
 */
 
 function abonarConsulta(){
-	console.log($(this));
 	var consulta = $(this).attr('data-consulta');
 	consultas[consulta].consultaPaga = true;
-	console.log(consulta);
-	//var tr = $('*[data-consulta="' + consulta + '"]').parent().parent();
 	var tr = $(this).parent().parent();
 	tr.fadeOut(400, function(){
         tr.remove();
@@ -199,13 +197,9 @@ function dibujarSelectConsultasMedico(){
 	var nuevoContenido = '<h3>Seleccionar Paciente</h3><p><select id="sel-consultas-medico" class="form-control">';
 	nuevoContenido += '<option value="">Seleccionar</option>';
 	for(var i = 0; i < consultas.length; i++){
-		console.log()
 		if(doctores[consultas[i].medico].nombre === usuarioIngresado.nombre && consultas[i].finalizada !== true){
-			nuevoContenido += '<option value="'
-				+ i
-				+ '">'
-				+ pacientes[consultas[i].paciente].nombre
-				+ '</option>';
+			nuevoContenido += '<option value="'	+ i	+ '">'
+				+ pacientes[consultas[i].paciente].nombre + '</option>';
 		}
 	}
 	nuevoContenido += '</select></p></div>';
@@ -318,6 +312,7 @@ function dibujarTablaDeConsulta(_consultaIndex){
 	$("#finalizar-consulta").on('click', function(){
 		consultas[_consultaIndex].modificarEstado();
 		consultas[_consultaIndex].modificarDescripcion($("textarea#desc").val());
+		usuarioIngresado.consultasFinalizadas++;
 		$("#form-consulta").html("");
 		$(".contenedor-consultas-medico").html("");
 		dibujarSelectConsultasMedico();
@@ -353,13 +348,13 @@ function alertaNuevoMaximoMinimoPeso(_indicePaciente){
 	paciente.peso.push(pesoPacienteActual);
 }
 
-
 /**
  busca consultas
  arrConsultas = array
  indexMedico = int
  return array
 */
+
 function buscarConsultas(arrConsultas, indexMedico){
 	var arrayResultado = [];
 	for(var i = 0; i < arrConsultas.length; i++){
@@ -370,7 +365,6 @@ function buscarConsultas(arrConsultas, indexMedico){
 	return arrayResultado;
 }
 
-
 /**
  @modificarPesoAltura
  peso = int
@@ -379,6 +373,7 @@ function buscarConsultas(arrConsultas, indexMedico){
 
  return undefined
 */
+
 function modificarPesoAltura(peso, altura, pacienteIndex){
 	if(peso == "" || altura == ""){return}
 	pacientes[pacienteIndex].peso.push(peso);
@@ -390,6 +385,7 @@ function modificarPesoAltura(peso, altura, pacienteIndex){
  
  returns bool
 */
+
 function variacionMayorADiezIMC(pacienteIndex){
 	var paciente = pacientes[pacienteIndex];
 	var pesoAnterior = paciente.peso[paciente.peso.length - 2];
@@ -414,7 +410,6 @@ function alertaVariacionIMC(pacienteIndex){
 	}
 }
 
-
 /**
  pacienteIndex int
 
@@ -423,21 +418,6 @@ function alertaVariacionIMC(pacienteIndex){
 function consultaPaga(indexConsulta){
 	consultas[indexConsulta].consultaPaga = true;
 }
-
-/**
- indexConsulta int
-
- return undefined
-*/
-function finalizarConsulta(indexConsulta, descripcion){
-	consultas[indexConsulta].descripcion = descripcion;
-	consultas[indexConsulta].finalizada = true;
-	/*consultas
-		.push(consultasPendientes
-			.splice(indexConsulta, 1));
-	*/
-}
-
 
 /**
  habilita o deshabilita paciente
@@ -454,7 +434,6 @@ function inhabilitarPaciente(cedula){
 		pacientes[indexPaciente].habilitado = true;
 	}
 }
-
 
 /**
  Actualizar valor en tabla
