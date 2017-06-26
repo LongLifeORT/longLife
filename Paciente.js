@@ -132,7 +132,7 @@ var consultas = [
 	new Consulta(9,6,"Escucho voces."),
 	new Consulta(1,2, "Aveces tengo mucha tos."),
 	new Consulta(2,4, " Mi hijo tiene problemas para ir al baño."),
-	new Consulta(0,7 , "Tome iunas pastillas y no puedo parar de ir al baño."),
+	new Consulta(0,7 , "Tome unas pastillas y no puedo parar de ir al baño."),
 	new Consulta(4,3, "Me cuesta respirar aveces."),
 	new Consulta(3,6,"Veo gente muerta."),
 	new Consulta(1,2, "Tengo mucha tos de mañana"),
@@ -145,19 +145,19 @@ var consultas = [
 	new Consulta(8,7,	"Me cuesta leer  en la noche."),
 	new Consulta(1,6,"Me cuesta respirar."),
 	new Consulta(10,8, " Me duele la vista de tanto escribir."),
-	new Consulta(3,5),
-	new Consulta(7,4),
-	new Consulta(0,4),
-	new Consulta(10,3),
-	new Consulta(0,8),
+	new Consulta(3,5, "Mi hijo tiene mucha fiebre."),
+	new Consulta(7,4, "Mi hijo no quiere comer."),
+	new Consulta(0,4, "Mi hijo tiene problemas de atención."),
+	new Consulta(10,3, "Aveces me cuesta respirar."),
+	new Consulta(0,8 , "Creo que necesito lentes."),
 	new Consulta(3,1, "Me puede dar pastillas para dormir?."),
 	new Consulta(4,2, "Que tos que tengo."),
-	new Consulta(0,3),
-	new Consulta(6,4),
-	new Consulta(5,5),
-	new Consulta(9,6),
-	new Consulta(10,7),
-	new Consulta(1,8)
+	new Consulta(0,3, "No puedo respirar bien."),
+	new Consulta(6,4, "Mi hija no quiere volver a la escuela."),
+	new Consulta(5,5, " Mi hija tiene problemas para dormir."),
+	new Consulta(9,6, "Me persiguen la CIA y el FBI."),
+	new Consulta(10,7, "Me tome la pastilla azul equivocada."),
+	new Consulta(1,8, " No veo nada con estos lentes.")
 ];
 
 
@@ -560,12 +560,7 @@ function presentarDescripcion(){
 };
 
 
-
-
-
-
-
-
+//busca informacion de esa consulta
 function buscarConsulta(){
 
 
