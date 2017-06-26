@@ -160,22 +160,28 @@ var consultas = [
 ];
 
 
-//genera consultas aleatorias 
+//genera consultas aleatorias automaticamente en el inicio del programa.
 function generarConsultas(_n){
 	for(var i = 0; i < _n; i++){
 		consultas.push(new Consulta(random(10, true), random(9, true)))
 	}
 }
 
+// funcion que crea una nueva consulta manual por el paciente.
 
 function crearNuevaConsulta(){
+	//toma los valores de los inputs del formulario crear consulta
 	var valorEspecialidad = $("#crear1A").val();
 	var valorMedico = $("#crear1B").val();
 	var valorDescripcion = $("#crear1C").val();
+	//almacena el campo hmtl donde se presentara el resultado de la creacion de consult
 	var resultado =	$("#resultadoCrear");
 		
+	//Si el campo descriopcion y medico no estan vacios
 	if(valorEspecialidad !== "empty" && valorMedico !== "empty"  ){
+	//comienza a procesar los valores de los inputs.
 
+	//El paciente ingresado es un objeto
 		var paciente = usuarioIngresado ;
 		console.log(paciente);
 		//buscamos el index del paciente dentro del array comparando la propiedad nombre completo 
@@ -186,14 +192,14 @@ function crearNuevaConsulta(){
 		var medicoIndex = busquedaEnArrayObjetos(doctores,"nombreCompleto",valorMedico);
 		console.log(medicoIndex);
 	
-		//creamos una nueva consulta con el valor del paciente, el medico y una descripcion si la tiene.
+		//creamos una nueva consulta con el valor del index de  pacientes, el  index medico de doctores  y una descripcion si la tiene.
 		consultas.push(new Consulta(pacienteIndex,medicoIndex,valorDescripcion));
 		//muestra se actualizo las consultas
 		mostrarTablaUsuarioConsultas();
 
 		//luego de crear la consulta, vaciamos los inputs
 		$('#crear1A, #crear1B, #crear1C ').val([])
-		//Le damos un mensaje al usuario de que su consulta fue creada
+		//Le damos un mensaje al usuario de que su consulta fue creada con exito.
 		$(' #resultadoCrearConsulta ').html("Consulta creada "+ valorMedico + " lo atendera en unos momentos, gracias por su elecion");
 
 	}else{resultadoCrearConsulta
@@ -206,10 +212,12 @@ function crearNuevaConsulta(){
 
 // tabla que contiene las consultas a mostrar
 /*
-	arrConsultas puede ser todas las consultas
-	o solo las del usuario segun mostrarTablaUsuarioConsultas
+	arrConsultas puede ser todas las consultas por si es necesario mostrar todas las consultas generadas.
+	o solo las del usuario segun mostrarTablaUsuarioConsultas.
  */
 function crearTablaTodasConsultas(arrConsultas){
+	// el listado de consultas puede ser el parametro que busquemos o todas las consultas existentes.
+
 	var listadoConsultas = arrConsultas || consultas ;
 	var table = "<div class= \"table-responsive\">"
 	table += "<table class=\"table table-striped table-hover\">"
@@ -226,6 +234,7 @@ function crearTablaTodasConsultas(arrConsultas){
 		table += "</tr>";	
 	}  
 	table += "</tbody></table></div>"       
+	//esta funcion retorna una tabla con los datos.
     return table;       
 }
 
@@ -374,7 +383,9 @@ function formCrearConsulta(){
 
     //eventos de los formularios crear Consulta
 	var especialidadCrear = $("#crear1A");
+	//una vez elegida la especialidad da los medicos de esa especialidad
 	especialidadCrear.on("blur", buscarMedicos);
+
 	var btnCrearConsulta = $("#btnCrear");
 	btnCrearConsulta.on("click", crearNuevaConsulta);
 
@@ -383,32 +394,6 @@ function formCrearConsulta(){
 
 };
 
-
-	//formulario para crear consulta
-	var form =  '<form>'
-		+	'<hr>'
-	 	+   '<label  for="crear1A" >Especialidad</label>';
-
-	form += '<select class="form-control" name="selConvertir" id="buscar1A">'
-		+ '<option selected="selected" value="empty">Sel. Especialidad</option>';
-	//ofrecemos un listado de especialidades disponibles
-	for(var i = 0 ; i < listado.length ; i++ ){
-		form+= 	'<option value=' + '\"' + listado[i] + '\"' + '>' + listado[i] + '</option>';			
-	};		
-	form +=	'</select>'
-		+	'<br >';
-
-	form +=	'<label  for="crear1B" >Medico</label>'
-		+	'<input type="text"  class="form-control" id="buscar1B">'
-		+	'<br >'
-		+	'<label  for="in1C" >Descripcion</label>'
-		+	'<textarea  class="form-control" id="buscar1C"></textarea>'
-		+	'<br >'
-        +   '<input type="button"  class="form-control btn-primary" value="Buscar" id="btnBuscarConsulta">'
-        +	'</form>';
-    form +=  '<div class="text-center" id="resultadosBuscarConsulta">'	
-	    +    '<p class="panel panel-default resultado"  id="resultadoBuscarConsulta"></p>'
-        +	'</div>';
 
 
 
@@ -494,7 +479,7 @@ function mostrarTablaUsuarioConsultas(){
 
 
 
-
+//Creamos formulario de buscar consultas
 function formBuscarConsulta(){
 	var listado = listadoIdsConsultas(consultas);
 	//listamos las ID de las consultas del usuario
@@ -503,7 +488,7 @@ function formBuscarConsulta(){
 	var form 	=  '<form>'
 				+	'<hr>'
 			 	+   '<label  for="buscar1A" >ID</label>';
-
+			 	//listamos los id de cada consulta del paciente
 		form 	+= '<select class="form-control" name="Sel.Id" id="buscar1A">'
 				+ '<option selected="selected" value="empty">Sel. ID</option>';
 		//ofrecemos un listado de IDs de las consultas
@@ -541,9 +526,6 @@ function formBuscarConsulta(){
 	identificacionBuscar.on("blur", presentarDescripcion);
 	
 
-
-
-
 };
 
 
@@ -577,17 +559,6 @@ function presentarDescripcion(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-}
 
 
 
