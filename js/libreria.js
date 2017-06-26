@@ -206,7 +206,6 @@ function ingresarUsuario(){
 		contenedorError.html("Usuario y/o contraseña incorrectos");
 	}
 
-
 	if(loginExito && medico){
 		$(".menuDoctor").show();
 	}else if(loginExito && !medico){
@@ -222,8 +221,6 @@ function ingresarUsuario(){
 	}
 
 	bienvenida(usuarioIngresado);
-	console.log(usuarioIngresado);
-
 }
 
 
@@ -309,6 +306,7 @@ function minimoEnArray(_array) {
 function dibujoTablaConsultasFinalizadas(){
 	var filas = generarListaOrdenadaPorConsultas();
 	var contenedor = $("#consultasGeneradas");
+	contenedor.html("");
 	var contenido = '<div class="table-responsive"><table class="table table-bordered">'
 		+ '<thead>'
 		+	'<tr>'
