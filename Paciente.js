@@ -178,7 +178,7 @@ function crearNuevaConsulta(){
 	//almacena el campo hmtl donde se presentara el resultado de la creacion de consult
 	var resultado =	$("#resultadoCrear");
 		
-	//Si el campo descriopcion y medico no estan vacios
+	//Si el campo especialidad y medico no estan vacios
 	if(valorEspecialidad !== "empty" && valorMedico !== "empty"  ){
 	//comienza a procesar los valores de los inputs.
 
@@ -399,6 +399,8 @@ function formCrearConsulta(){
 
 
 //funcionalidades de buscar consulta
+
+//Lista todas las IDs de las consultas del usuario
 function listadoIdsConsultas(arrConsultas){
 
 
@@ -583,17 +585,13 @@ function buscarConsulta(){
 
 function formModificarPerfil(){
 	var paciente = usuarioIngresado ;
-	console.log(paciente);
-	//buscamos el index del paciente dentro del array comparando la propiedad nombre completo 
-	var pacienteIndex = busquedaEnArrayObjetos(pacientes,"nombreCompleto",paciente.nombreCompleto);
-
-	var pacienteSeleccionado = pacientes[pacienteIndex];			
+	console.log(paciente);		
 	var divPadre = '<div>';
 	var tablaConsulta = '<form class="form-horizontal">'
 		+ 	'<div class="form-group">'
 			+	 '<div class="col-xs-12 col-sm-12 ">'
 			+ 		'<label for="mod_imagen_paciente" class="col-sm-2 control-label">'
-			+ 			'<img src="./images/' + pacienteSeleccionado.foto + '"' + 'width="100" height="100" class="img-responsive" alt="Foto de perfil"> '
+			+ 			'<img src="./images/' + paciente.foto + '"' + 'width="100" height="100" class="img-responsive" alt="Foto de perfil"> '
 			+		'</label>'
 		+	'</div>'
 		+	'</div>'
@@ -605,43 +603,43 @@ function formModificarPerfil(){
 		+ 	'<div class="form-group">'
 		+ 		'<label for="mod_nombre_paciente" class="col-sm-2 control-label">Nombre </label>'
 		+		'<div class="col-sm-8">'
-		+ 			'<input id="mod_nombre_paciente" class="form-control" type="text" value="' + pacienteSeleccionado.nombre + '" disabled>'
+		+ 			'<input id="mod_nombre_paciente" class="form-control" type="text" value="' + paciente.nombre + '" disabled>'
 		+		'</div>'
 		+	'</div>'
 		+ 	'<div class="form-group">'
 		+ 		'<label for="mod_apellido_paciente" class="col-sm-2 control-label">Apellido</label>'
 		+		'<div class="col-sm-8">'
-		+ 			'<input id="mod_apellido_paciente" class="form-control" type="text" value="' + pacienteSeleccionado.apellido + '" disabled>'
+		+ 			'<input id="mod_apellido_paciente" class="form-control" type="text" value="' + paciente.apellido + '" disabled>'
 		+		'</div>'
 		+	'</div>'
 		+ 	'<div class="form-group">'
 		+ 		'<label for="mod_numero_paciente" class="col-sm-2 control-label">Numero de Paciente</label>'
 		+		'<div class="col-sm-8">'
-		+ 			'<input id="mod_numero_paciente" class="form-control" type="text" value="' + pacienteSeleccionado.numeroPaciente + '" disabled>'
+		+ 			'<input id="mod_numero_paciente" class="form-control" type="text" value="' + paciente.numeroPaciente + '" disabled>'
 		+		'</div>'
 		+	'</div>'
 		+ 	'<div class="form-group">'
 		+ 		'<label for="mod_clave_paciente" class="col-sm-2 control-label">Clave</label>'
 		+		'<div class="col-sm-8">'
-		+ 			'<input id="mod_clave_paciente" class="form-control" type="password" value="' + pacienteSeleccionado.clave + '" disabled>'
+		+ 			'<input id="mod_clave_paciente" class="form-control" type="password" value="' + paciente.clave + '" disabled>'
 		+		'</div>'
 		+	'</div>'
 		+ 	'<div class="form-group">'
 		+ 		'<label for="mod_cedula_paciente" class="col-sm-2 control-label">Cedula</label>'
 		+		'<div class="col-sm-8">'
-		+ 			'<input id="mod_cedula_paciente" class="form-control" type="text" value="' + pacienteSeleccionado.cedula + '" disabled>'
+		+ 			'<input id="mod_cedula_paciente" class="form-control" type="text" value="' + paciente.cedula + '" disabled>'
 		+		'</div>'
 		+	'</div>'
 		+ 	'<div class="form-group">'
 		+ 		'<label for="mod_telefono_paciente" class="col-sm-2 control-label">Telefono</label>'
 		+		'<div class="col-sm-8">'
-		+ 			'<input id="mod_telefono_paciente" class="form-control" type="text" value="' + pacienteSeleccionado.telefono + '" >'
+		+ 			'<input id="mod_telefono_paciente" class="form-control" type="text" value="' + paciente.telefono + '" >'
 		+		'</div>'
 		+	'</div>'
 		+ 	'<div class="form-group">'
 		+ 		'<label for="mod_alergias_paciente" class="col-sm-2 control-label">Alergias</label>'
 		+		'<div class="col-sm-8">'
-		+ 			'<input id="mod_alergias_paciente" class="form-control" type="text" value="' + pacienteSeleccionado.alergias.join(", ") + '">'
+		+ 			'<input id="mod_alergias_paciente" class="form-control" type="text" value="' + paciente.alergias.join(", ") + '">'
 		+		'</div>'
 		+	'</div>'
 		+		'<div class="form-group text-center">'
@@ -669,9 +667,13 @@ function formModificarPerfil(){
 		+		'</div>'
 		+	'</fieldset>'
 		+ '</form>';
+		var resultado 	=  '<div class="text-center" id="resultadosModificarPerfil">'	
+		        	+    '<p class="panel panel-default resultado"  id="resultadoCambiarClave"></p>'
+	            	+	'</div>';
+
 	
     var formPerfil = $("#formPerfil");
-    formPerfil.html(divPadre + tablaConsulta + '</div>');
+    formPerfil.html(divPadre + tablaConsulta +resultado + '</div>');
     $("#mod_imagen_paciente").hide();	
 
 
@@ -679,14 +681,14 @@ function formModificarPerfil(){
     //eventos de modificar perfil
     var guardarPerfil = $("#mod_guardar_perfil");
     //al presionar en guardar cambios llamamos a la funcion modificar perfil.
-    guardarPerfil.on("click",modificarPerfil)
+    //guardarPerfil.on("click",modificarPerfil)
 
 
 
 
     //eventos de modificar clave
-    var modificarClave = $("#modificar_clave");
-
+    var guardarClave = $("#modificar_clave");
+    guardarClave.on("click",modificarClave)
 
 
 
@@ -695,25 +697,65 @@ function formModificarPerfil(){
 
 };
 
-/**
+/*
 
 */
-
+//modificarPerfil modifica los datos del perfil
 function modificarPerfil(){
 
 
 
 
+
+
+
+
+
+
+
+
 }
 
-/**
- cambairConstraseña cambia contraseña del usuario logueado desde su perfil
+/*
+ modificarClave cambia la clave del usuario logueado desde su perfil
 */
 
-function cambiarContraseña(){
+function modificarClave(){
+	var paciente = usuarioIngresado;
+	console.log(paciente.clave);
+	//toma los valores de los inputs del formulario modificar  clave
+	var valorClaveActual = $("#mod_clave_actual").val();
+	var valorClaveNueva = Number($("#mod_clave_nueva").val());
+	console.log(valorClaveActual, valorClaveNueva)
 
+	//almacena el campo hmtl donde se presentara el resultado de modificar clave
+	var resultado =	$("#resultadoCambiarClave");
+		
+	//Si el campo clave actual y nueva clave  no estan vacios
+	var verificarVacio = validarVacio(valorClaveActual,valorClaveNueva);
+	//comienza a procesar los valores de los inputs.
+		if(verificarVacio){
+			//Si la clave actual fue colocada correctamente
+			if(valorClaveActual == paciente.clave ){
+				//El paciente ingresado es un objeto
+				console.log(paciente);
+				//buscamos el index del paciente dentro del array comparando la propiedad nombre completo 
+				var pacienteIndex = busquedaEnArrayObjetos(pacientes,"nombreCompleto",paciente.nombreCompleto);	
+				//modificamos la clave actual por la nueva clave
+				pacientes[pacienteIndex]["clave"] = valorClaveNueva;
+				console.log(pacientes[pacienteIndex]["clave"]);
+				resultado.html("Nueva Clave Ingresada con exito.");
 
-}
+			}else{
+				//si la clave actual no es correcta.
+				resultado.html("Ingrese la clave actual correcta");
+
+			}
+		}else{
+			//Si los campos estan vacios.
+			resultado.html("Ingrese valores en los campos de claves");
+		}
+};//ends modificarClave
 
 
 /* 
