@@ -449,16 +449,15 @@ function formModificarPerfil(){
 	var divPadre = '<div>';
 	var tablaConsulta = '<form class="form-horizontal">'
 		+ 	'<div class="form-group">'
-		+ 		'<label for="nueva-imagen" class="col-sm-2 control-label"></label>'
-		+		'<div class="row">'
-		+			'<div class="col-sm-4">'
-		+ 			'<img src="./images/' + pacienteSeleccionado.foto + '"' + 'width="100" height="100" class="img-responsive" alt="Foto de perfil"> '
-		+		'</div>'
+			+	 '<div class="col-xs-12 col-sm-12 ">'
+			+ 		'<label for="modificar_imagen" class="col-sm-2 control-label">'
+			+ 			'<img src="./images/' + pacienteSeleccionado.foto + '"' + 'width="100" height="100" class="img-responsive" alt="Foto de perfil"> '
+			+		'</label>'
+		+	'</div>'
 		+	'</div>'
 		+ 	'<div class="form-group">'
-		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Nombre </label>'
 		+		'<div class="col-sm-8">'
-		+ 			'<input id="nueva-imagen" class="form-control" type="file" >'
+		+ 			'<input id="modificar_imagen" class="form-control" type="file" >'
 		+		'</div>'
 		+	'</div>'
 		+ 	'<div class="form-group">'
@@ -482,7 +481,7 @@ function formModificarPerfil(){
 		+ 	'<div class="form-group">'
 		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Clave</label>'
 		+		'<div class="col-sm-8">'
-		+ 			'<input id="nuevo-peso" class="form-control" type="text" value="' + pacienteSeleccionado.clave + '" disabled>'
+		+ 			'<input id="nuevo-peso" class="form-control" type="password" value="' + pacienteSeleccionado.clave + '" disabled>'
 		+		'</div>'
 		+	'</div>'
 		+ 	'<div class="form-group">'
@@ -530,19 +529,25 @@ function formModificarPerfil(){
 		+ '</form>';
 	
 
-
+		
 
     var formPerfil = $("#formPerfil");
-    formPerfil.html(divPadre + tablaConsulta + '</div>');	
+    formPerfil.html(divPadre + tablaConsulta + '</div>');
+    $("#modificar_imagen").hide();	
 
 };
 
+function modificarPerfil(){
 
 
 
-function cambiarFoto(foto){
 
-	//this usuario cambiar foto
+}
+
+
+function cambiarContraseña(){
+
+
 
 
 
