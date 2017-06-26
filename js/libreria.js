@@ -301,3 +301,48 @@ function maximoEnArray(_array) {
 function minimoEnArray(_array) {
   return Math.min.apply(null, _array);
 }
+
+/**
+ Dibujamos tabla de consultas realizadas por cada médico en el sistema
+*/
+
+function dibujoTablaConsultasFinalizadas(){
+	var filas = generarListaOrdenadaPorConsultas();
+	var contenedor = $("#consultasGeneradas");
+	var contenido = '<div class="table-responsive"><table class="table table-bordered">'
+		+ '<thead>'
+		+	'<tr>'
+		+		'<th>Especialidad</th>'
+		+		'<th>Nombre</th>'
+		+		'<th>Cantidad de consultas</th>'
+		+	'</tr>'
+		+ '</thead>';
+	filas.reverse();
+	filas.forEach(function(fila){
+		contenido += fila;
+	})
+	contenedor.html(contenido + '</div>');
+}
+
+/**
+ generarListaOrdenadaPorConsultas devuelve una lista de objetos ordenados
+
+ _array = array
+*/
+
+function generarListaOrdenadaPorConsultas(){
+	var lista = [];
+	var fila;
+	for(var i = 0; i < doctores.length; i++){
+		fila = '<tr>'
+			+ '<td>' + doctores[i].especialidad + '</td>'
+			+ '<td>' + doctores[i].nombreCompleto + '</td>'
+			+ '<td>' + doctores[i].consultasFinalizadas + '</td>';
+		if(lista[doctores[i].consultasFinalizadas] === undefined){
+			lista[doctores[i].consultasFinalizadas] = fila;
+		}else{
+			lista.splice(doctores[i].consultasFinalizadas, 0, fila);
+		}
+	}
+	return lista;
+}

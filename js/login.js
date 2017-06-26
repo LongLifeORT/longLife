@@ -98,6 +98,7 @@ function salirSesion(){
 	mostrarOcultarBotonLoginLogout();
 	borradoBienvenida();
 	salirMedico();
+	//salirPaciente();
 }
 
 //test
@@ -108,6 +109,7 @@ $().ready(function(){
 	agregarBotonSalida();
 	agregarFormLogin();
 	generarConsultas(40);
+	dibujoTablaConsultasFinalizadas();
 	//testing
 	/*usuarioIngresado = doctores[0];
 	inicializarInterfazMedico();*/
