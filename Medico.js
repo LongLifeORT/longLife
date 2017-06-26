@@ -1,24 +1,24 @@
-function Medico(nombre, apellido, especialidad, numeroProfesional,clave){
+function Medico(nombre, apellido, especialidad, numeroProfesional,clave, consultasFinalizadas){
 	this.nombre = nombre;
 	this.apellido = apellido;
 	this.nombreCompleto = nombre + " " + apellido;
 	this.especialidad = especialidad;
 	this.numeroProfesional = numeroProfesional;
 	this.clave = clave;
-		
+	this.consultasFinalizadas = consultasFinalizadas;
 }
 
 var doctores = [
-	new Medico("Gerardo", "Torres", "Cardiologo", 123,123456),
-	new Medico("Gabino", "Baldomero", "Geriatra",124 ,123456),
-	new Medico("Modesto", "Abel", "Neumología",   125, 123456),
-	new Medico("Ignacio", "Cogoyo", "Neumología", 126,123456),
-	new Medico("Silvio", "Bautista", "Pediatría", 127,123456),
-	new Medico("Ramiro", "Nicola", "Pediatría", 128,123456),
-	new Medico("Adalberto", "Glauco", "Psiquiatría", 129,123456),
-	new Medico(	"Amado", "Cipriano", "Toxicología", 130,123456),
-	new Medico("Adolfo", "Wilfredo", "Oftalmología", 131,123456),
-	new Medico("Rosario", "Reyes", "Cardiologo", 132,123456),			
+	new Medico("Gerardo", "Torres", "Cardiologo", 123,123456, random(40)),
+	new Medico("Gabino", "Baldomero", "Geriatra",124 ,123456, random(40)),
+	new Medico("Modesto", "Abel", "Neumología",   125, 123456, random(40)),
+	new Medico("Ignacio", "Cogoyo", "Neumología", 126,123456, random(40)),
+	new Medico("Silvio", "Bautista", "Pediatría", 127,123456, random(40)),
+	new Medico("Ramiro", "Nicola", "Pediatría", 128,123456, random(40)),
+	new Medico("Adalberto", "Glauco", "Psiquiatría", 129,123456, random(40)),
+	new Medico(	"Amado", "Cipriano", "Toxicología", 130,123456, random(40)),
+	new Medico("Adolfo", "Wilfredo", "Oftalmología", 131,123456, random(40)),
+	new Medico("Rosario", "Reyes", "Cardiologo", 132,123456, random(40)),			
 ];
 
 
@@ -27,7 +27,7 @@ var doctores = [
  */
 
 function inicializarInterfazMedico(){
-	$(".page-header").after('<form><div class="contenedor-consultas-medico"></div></form>');
+	$(".page-header").after('<form><div class="contenedor-consultas-medico"></div></form><div id="form-consultas"></div>');
 	$("#menu-consultas").on('click', dibujarSelectConsultasMedico);
 	$("#menu-inhabilitar").on('click', dibujarSelectInhabilitar);
 	$("#menu-abonado").on('click', dibujarSelectAbonar);
@@ -51,6 +51,7 @@ function salirMedico(){
 function dibujarSelectAbonar(){
 	$(".botonera").hide();
 	$(".contenedor-consultas-medico").html("");
+	$("#form-consultas").html("");
 	var contenedor = $('.contenedor-consultas-medico');
 	var nuevoContenido = '<h3>Seleccionar Paciente para abonar consultas</h3><p><select id="sel-abonar-medico" class="form-control">';
 	nuevoContenido += '<option value="">Seleccionar</option>';
@@ -126,6 +127,7 @@ function abonarConsulta(){
 function dibujarSelectInhabilitar(){
 	$(".botonera").hide();
 	$(".contenedor-consultas-medico").html("");
+	$("#form-consultas").html("");
 	var contenedor = $('.contenedor-consultas-medico');
 	var nuevoContenido = '<h3>Seleccionar Paciente para inhabilitar</h3><p><select id="sel-habilitar-medico" class="form-control">';
 	nuevoContenido += '<option value="">Seleccionar</option>';
@@ -221,12 +223,13 @@ function dibujarSelectConsultasMedico(){
 
 function dibujarTablaDeConsulta(_consultaIndex){
 	// limpiamos el elemento cada vez que hay una selección
-	$(".form-consulta").html("");
+	$("#form-consulta").html("");
 	// si se selecciona "seleccionar" se vacía el div
 	if(_consultaIndex === ""){
 		return
 	}
-	var contenedor = $(".contenedor-consultas-medico");
+	//var contenedor = $(".contenedor-consultas-medico");
+	var contenedor = $("#form-consultas");
 	var consultaActual = consultas[_consultaIndex];
 	var pacienteSeleccionado = pacientes[consultaActual.paciente];
 	var divPadre = '<div class="form-consulta">';
@@ -302,7 +305,7 @@ function dibujarTablaDeConsulta(_consultaIndex){
 		+		'</div>'
 		+	'</fieldset>'
 		+ '</form>';
-	contenedor.append(divPadre + tablaConsulta + '</div>');
+	contenedor.html(divPadre + tablaConsulta + '</div>');
 
 	$("#modificar-peso-altura").on('click', function(){
 		var indicePaciente = $(this).attr('data-paciente');
