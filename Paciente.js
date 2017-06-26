@@ -2,7 +2,7 @@
 
 function inicializarInterfazPaciente(){
 	//Generar consultas aleatorias
-	
+
 	//creamos una tabla con todas las consultas
 	//crearTablaTodasConsultas();
 	//mostrarTablaTodasConsultas();
@@ -47,7 +47,7 @@ function Paciente(nombre, apellido,numeroPaciente,clave, peso, altura,cedula, al
 	this.clave = clave;
 
 	this.cedula = cedula;
-	this.foto = foto || "default.png";
+	this.foto = selectorRandomFotoPerfil();
 
 	this.peso = [peso],
 	this.altura = [altura],
