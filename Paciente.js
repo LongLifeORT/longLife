@@ -510,8 +510,9 @@ function formBuscarConsulta(){
             	+   '<input type="button"  class="form-control btn-primary" value="Buscar" id="btnBuscarConsulta">'
             	+	'</form>';
         form 	+=  '<div class="text-center" id="resultadosBuscarConsulta">'	
+         		+    '<p class="panel panel-default resultado"  id="resultadoBuscarConsulta"></p>'
 		        +    '<p class="panel panel-default resultado"  id="presentarConsultasUsuario"></p>'
-		        +    '<p class="panel panel-default resultado"  id="resultadoBuscarConsulta"></p>'
+		       
 	            +	'</div>';
 
 
@@ -527,6 +528,8 @@ function formBuscarConsulta(){
 	//eventos de los formularios buscar Consulta
 	var identificacionBuscar = $("#buscar1A");
 	identificacionBuscar.on("change", presentarDescripcion);
+	var btnBuscarConsulta = $("#btnBuscarConsulta");
+	btnBuscarConsulta.on("click", estadoConsulta);
 	
 
 };
@@ -563,9 +566,39 @@ function presentarDescripcion(){
 
 
 //busca informacion de esa consulta
-function buscarConsulta(){
+function estadoConsulta(){
+	//Variable donde vamos a presentar los resultados de la busqueda.
+	var resultado = $("#resultadoBuscarConsulta");
+	//variable del id de la consulta elegida.
+	var idSelected = $("#buscar1A").val();
+	//verificar se selecciono un ID
+	if(idSelected != "empty"){
+		//Buscar el index de el array consultas utilizando el identificador.
+		var consultaIndex = busquedaEnArrayObjetos(consultas, "identificador", idSelected);
+		var consultaPaga = consultas[consultaIndex]["consultaPaga"];
+		var consultaFinalizada =  consultas[consultaIndex]["finalizada"];
+		var aPagar = "";
+		var estaFinalizada = "";
+			if(!consultaPaga){
+				aPagar = "No olvide pagar la consulta."
+			}else if(consultaPaga){
+				aPagar = "La consulta ya fue paga."
+			}
+			if(!consultaFinalizada){
+				estaFinalizada = "Su consulta se encuentra abierta."
+			}else if(consultaFinalizada){
+				estaFinalizada = "La consulta ya fue  cerrada."
+			}
 
 
+
+
+		resultado.html(aPagar + " " + estaFinalizada + "")
+	}else{
+		resultado.html("Selecione una consulta por favor.")
+
+
+	}
 
 
 
