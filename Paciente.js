@@ -602,49 +602,49 @@ function formModificarPerfil(){
 		+	'</div>'
 		+ 	'<div class="form-group">'
 		+		'<div class="col-sm-8">'
-		+ 			'<input id="modificar_imagen" class="form-control" type="file" >'
+		+ 			'<input id="mod_imagen_paciente" class="form-control" type="file" >'
 		+		'</div>'
 		+	'</div>'
 		+ 	'<div class="form-group">'
-		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Nombre </label>'
+		+ 		'<label for="mod_nombre_paciente" class="col-sm-2 control-label">Nombre </label>'
 		+		'<div class="col-sm-8">'
-		+ 			'<input id="nuevo-peso" class="form-control" type="text" value="' + pacienteSeleccionado.nombre + '" disabled>'
+		+ 			'<input id="mod_nombre_paciente" class="form-control" type="text" value="' + pacienteSeleccionado.nombre + '" disabled>'
 		+		'</div>'
 		+	'</div>'
 		+ 	'<div class="form-group">'
-		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Apellido</label>'
+		+ 		'<label for="mod_apellido_paciente" class="col-sm-2 control-label">Apellido</label>'
 		+		'<div class="col-sm-8">'
-		+ 			'<input id="nuevo-peso" class="form-control" type="text" value="' + pacienteSeleccionado.apellido + '" disabled>'
+		+ 			'<input id="mod_apellido_paciente" class="form-control" type="text" value="' + pacienteSeleccionado.apellido + '" disabled>'
 		+		'</div>'
 		+	'</div>'
 		+ 	'<div class="form-group">'
-		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Numero de Paciente</label>'
+		+ 		'<label for="mod_numero_paciente" class="col-sm-2 control-label">Numero de Paciente</label>'
 		+		'<div class="col-sm-8">'
-		+ 			'<input id="nuevo-peso" class="form-control" type="text" value="' + pacienteSeleccionado.numeroPaciente + '" disabled>'
+		+ 			'<input id="mod_numero_paciente" class="form-control" type="text" value="' + pacienteSeleccionado.numeroPaciente + '" disabled>'
 		+		'</div>'
 		+	'</div>'
 		+ 	'<div class="form-group">'
-		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Clave</label>'
+		+ 		'<label for="mod_clave_paciente" class="col-sm-2 control-label">Clave</label>'
 		+		'<div class="col-sm-8">'
-		+ 			'<input id="nuevo-peso" class="form-control" type="password" value="' + pacienteSeleccionado.clave + '" disabled>'
+		+ 			'<input id="mod_clave_paciente" class="form-control" type="password" value="' + pacienteSeleccionado.clave + '" disabled>'
 		+		'</div>'
 		+	'</div>'
 		+ 	'<div class="form-group">'
-		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Cedula</label>'
+		+ 		'<label for="mod_cedula_paciente" class="col-sm-2 control-label">Cedula</label>'
 		+		'<div class="col-sm-8">'
-		+ 			'<input id="nuevo-peso" class="form-control" type="text" value="' + pacienteSeleccionado.cedula + '" disabled>'
+		+ 			'<input id="mod_cedula_paciente" class="form-control" type="text" value="' + pacienteSeleccionado.cedula + '" disabled>'
 		+		'</div>'
 		+	'</div>'
 		+ 	'<div class="form-group">'
-		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Telefono</label>'
+		+ 		'<label for="mod_telefono_paciente" class="col-sm-2 control-label">Telefono</label>'
 		+		'<div class="col-sm-8">'
-		+ 			'<input id="nuevo-peso" class="form-control" type="text" value="' + pacienteSeleccionado.telefono + '" >'
+		+ 			'<input id="mod_telefono_paciente" class="form-control" type="text" value="' + pacienteSeleccionado.telefono + '" >'
 		+		'</div>'
 		+	'</div>'
 		+ 	'<div class="form-group">'
-		+ 		'<label for="nuevo-peso" class="col-sm-2 control-label">Alergias</label>'
+		+ 		'<label for="mod_alergias_paciente" class="col-sm-2 control-label">Alergias</label>'
 		+		'<div class="col-sm-8">'
-		+ 			'<input id="nuevo-peso" class="form-control" type="text" value="' + pacienteSeleccionado.alergias.join(", ") + '">'
+		+ 			'<input id="mod_alergias_paciente" class="form-control" type="text" value="' + pacienteSeleccionado.alergias.join(", ") + '">'
 		+		'</div>'
 		+	'</div>'
 		+		'<div class="form-group text-center">'
@@ -668,7 +668,7 @@ function formModificarPerfil(){
 		+	'</fieldset>'
 		+	'<fieldset>'
 		+		'<div class="form-group text-center">'
-		+			'<input id="guardar-perfil" class="btn btn-primary" type="button" value="Modificar Clave" style="width:80%">'
+		+			'<input id="guardar_perfil" class="btn btn-primary" type="button" value="Modificar Clave" style="width:80%">'
 		+		'</div>'
 		+	'</fieldset>'
 		+ '</form>';
@@ -676,6 +676,16 @@ function formModificarPerfil(){
     var formPerfil = $("#formPerfil");
     formPerfil.html(divPadre + tablaConsulta + '</div>');
     $("#modificar_imagen").hide();	
+
+
+
+    //eventos de modificar perfil
+
+
+
+
+
+
 
 };
 
@@ -695,6 +705,10 @@ function modificarPerfil(){
 */
 
 function cambiarContraseña(){
+
+
+
+
 
 }
 

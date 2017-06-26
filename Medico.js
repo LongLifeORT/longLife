@@ -20,6 +20,7 @@ var doctores = [
 	new Medico("Adolfo", "Wilfredo", "Oftalmología", 131,123456, random(40)),
 	new Medico("Rosario", "Reyes", "Cardiologo", 132,123456, random(40)),			
 ];
+console.table(doctores);
 
 
 /**
