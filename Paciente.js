@@ -30,7 +30,7 @@ function Paciente(nombre, apellido,numeroPaciente,clave, peso, altura,cedula, al
 	this.clave = clave;
 
 	this.cedula = cedula;
-	this.foto = selectorRandomFotoPerfil();
+	this.foto = foto  || selectorRandomFotoPerfil();
 
 	this.peso = [peso],
 	this.altura = [altura],
@@ -186,7 +186,7 @@ function crearNuevaConsulta(){
 		var paciente = usuarioIngresado ;
 		console.log(paciente);
 		//buscamos el index del paciente dentro del array comparando la propiedad nombre completo 
-		var pacienteIndex = busquedaEnArrayObjetos(pacientes,"nombreCompleto",paciente.nombreCompleto);
+		var pacienteIndex = buscarPacienteEnArray();
 		console.log(pacienteIndex);
 
 		//buscamos que medico es dentro del array de doctores  mediate la propiedad nombre completo.
@@ -256,7 +256,7 @@ function mostrarTablaUsuarioConsultas(){
 	var paciente = usuarioIngresado ;
 	console.log(paciente);
 	//buscamos el index del paciente dentro del array comparando la propiedad nombre completo 
-	var pacienteIndex = busquedaEnArrayObjetos(pacientes,"nombreCompleto",paciente.nombreCompleto);
+	var pacienteIndex = buscarPacienteEnArray();
 
 	//recorrer el array de consultas,
 	for(var i = 0 ; i < consultas.length; i++){
@@ -409,7 +409,7 @@ function listadoIdsConsultas(arrConsultas){
 	var paciente = usuarioIngresado ;
 				console.log(paciente);
 				//buscamos el index del paciente dentro del array comparando la propiedad nombre completo 
-				var pacienteIndex = busquedaEnArrayObjetos(pacientes,"nombreCompleto",paciente.nombreCompleto);
+				var pacienteIndex = buscarPacienteEnArray();
 	
 	console.log(listado);
 	
@@ -465,7 +465,7 @@ function mostrarTablaUsuarioConsultas(){
 		var paciente = usuarioIngresado ;
 			console.log(paciente);
 			//buscamos el index del paciente dentro del array comparando la propiedad nombre completo 
-			var pacienteIndex = busquedaEnArrayObjetos(pacientes,"nombreCompleto",paciente.nombreCompleto);
+			var pacienteIndex = buscarPacienteEnArray();
 
 				//recorrer el array de consultas,
 				for(var i = 0 ; i < consultas.length; i++){
@@ -569,6 +569,8 @@ function buscarConsulta(){
 
 
 
+
+
 }
 
 
@@ -591,19 +593,19 @@ function formModificarPerfil(){
 		+ 	'<div class="form-group">'
 			+	 '<div class="col-xs-12 col-sm-12 ">'
 			+ 		'<label for="mod_imagen_paciente" class="col-sm-2 control-label">'
-			+ 			'<img src="./images/' + paciente.foto + '"' + 'width="100" height="100" class="img-responsive" alt="Foto de perfil"> '
+			+ 			'<img src="./images/' + paciente.foto + '" ' + 'width="100" height="100" id="muestraImagenActual" class="img-responsive" alt="Foto de perfil"> '
 			+		'</label>'
 		+	'</div>'
 		+	'</div>'
 		+ 	'<div class="form-group">'
 		+		'<div class="col-sm-8">'
-		+ 			'<input id="mod_imagen_paciente" class="form-control" type="file" >'
+		+ 			'<input id="mod_imagen_paciente" class="form-control" type="file" value="' + paciente.foto + '">'
 		+		'</div>'
 		+	'</div>'
 		+ 	'<div class="form-group">'
 		+ 		'<label for="mod_nombre_paciente" class="col-sm-2 control-label">Nombre </label>'
 		+		'<div class="col-sm-8">'
-		+ 			'<input id="mod_nombre_paciente" class="form-control" type="text" value="' + paciente.nombre + '" disabled>'
+		+ 			'<input id="mod_nombre_paciente" class="form-control" type="text" value=" ' + paciente.nombre +  '" disabled>'
 		+		'</div>'
 		+	'</div>'
 		+ 	'<div class="form-group">'
@@ -645,6 +647,9 @@ function formModificarPerfil(){
 		+		'<div class="form-group text-center">'
 		+			'<input id="mod_guardar_perfil" class="btn btn-primary" type="button" value="Guardar Cambios" style="width:80%">'
 		+		'</div>'
+			+  '<div class="text-center" id="resultadosModificarPerfil">'	
+		+    '<p class="panel panel-default resultado"  id="resultadoModificarPerfil"></p>'
+	    +	'</div>'
 		+	'<fieldset>'
 		+		'<legend>Modificar Clave</legend>'
 		+ 		'<div class="form-group">'
@@ -681,11 +686,7 @@ function formModificarPerfil(){
     //eventos de modificar perfil
     var guardarPerfil = $("#mod_guardar_perfil");
     //al presionar en guardar cambios llamamos a la funcion modificar perfil.
-    //guardarPerfil.on("click",modificarPerfil)
-
-
-
-
+    guardarPerfil.on("click",modificarPerfil)
     //eventos de modificar clave
     var guardarClave = $("#modificar_clave");
     guardarClave.on("click",modificarClave)
@@ -702,19 +703,28 @@ function formModificarPerfil(){
 */
 //modificarPerfil modifica los datos del perfil
 function modificarPerfil(){
+	var paciente = usuarioIngresado;
+	console.log(paciente.foto);
+	//toma los valores de los inputs del formulario modificar  clave
+	var nuevaFoto = $("#mod_imagen_paciente").val().split("\\").pop ();
+	console.log(nuevaFoto);
+	var nuevoTelefono = $("#mod_telefono_paciente").val();
+	var nuevaAlergias = $("#mod_alergias_paciente").val();
+	var resultado = $("#resultadoModificarPerfil");
 
+	//buscamos el paciente a modificar del array.
+	var pacienteIndex = buscarPacienteEnArray();
+	pacientes[pacienteIndex]["telefono"] = nuevoTelefono;
+	pacientes[pacienteIndex]["alergias"] = nuevaAlergias.split(",");
 
-
-
-
-
-
-
-
-
-
-
-
+	//si el usuario modifico la foto
+	if(nuevaFoto.length != 0){
+		//modificamos la foto del paciente.
+		pacientes[pacienteIndex]["foto"] = nuevaFoto;
+		//cambia la imagen actual por la nueva imagen.
+		$("#muestraImagenActual").attr("src", "./images/" +  paciente.foto);
+	}
+	resultado.html("Se ha modificado el Perfil.");
 
 }
 
@@ -742,7 +752,7 @@ function modificarClave(){
 				//El paciente ingresado es un objeto
 				console.log(paciente);
 				//buscamos el index del paciente dentro del array comparando la propiedad nombre completo 
-				var pacienteIndex = busquedaEnArrayObjetos(pacientes,"nombreCompleto",paciente.nombreCompleto);	
+				var pacienteIndex = buscarPacienteEnArray();	
 				//modificamos la clave actual por la nueva clave
 				pacientes[pacienteIndex]["clave"] = valorClaveNueva;
 				console.log(pacientes[pacienteIndex]["clave"]);
@@ -759,44 +769,3 @@ function modificarClave(){
 		}
 };//ends modificarClave
 
-
-/* 
-this.nombre = nombre;
-	this.apellido = apellido;
-	this.nombreCompleto = nombre + " " + apellido;
-	this.numeroPaciente	= numeroPaciente;
-	this.clave = clave;
-	this.cedula = "";
-	this.foto = foto || "default.jpg";
-	this.peso = [peso],
-	this.altura = [altura],
-	this.alergias = ["ninguna"],
-	this.telefono = 911,
-	this.habilitado = true,
-	this.modificarNombre = function(nuevoNombre){
-		this.nombre = nuevoNombre;
-	};
-	this.modificarApellido = function(nuevoApellido){
-		this.apellido= nuevoApellido;
-	};
-	this.modificarCedula = function(nuevaCedula){
-		this.cedula= nuevaCedula;
-	};
-	this.modificarContraseña = function(nuevaContraseña){
-		this.contraseña= nuevaContraseña;
-	};
-	this.modificarFoto = function(nuevaFoto){
-		this.foto = nuevaFoto();
-	};
-	this.modificarAlergias = function(nuevaAlergia){
-		this.alergias = nuevaAlergia;
-	};
-	this.modificarTelefono = function(nuevoTelefono){
-		this.telefono = nuevoTelefono;
-	};
-	this.imc = function(){
-		//console.log(this.altura[0].split(""))
-		return (this.peso[this.peso.length - 1] / (this.altura[this.altura.length - 1]/100) ** 2).toFixed(2);
-	};
-};
-*/

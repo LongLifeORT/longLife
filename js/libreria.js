@@ -117,6 +117,18 @@ function busquedaEnArrayObjetos(array, prop, valor){
 	}
 	return -1;
 }
+//Permite buscar al paciente en el array.
+function buscarPacienteEnArray(){
+//El paciente ingresado es un objeto
+	var paciente = usuarioIngresado;
+	//buscamos el index del paciente dentro del array comparando la propiedad nombre completo 
+	var pacienteIndex = busquedaEnArrayObjetos(pacientes,"nombreCompleto",paciente.nombreCompleto);
+
+	//retorna el index del paciente
+	return pacienteIndex;	
+
+};
+
 
 /**
  Objeto contador de consultas
@@ -261,7 +273,7 @@ function randomCedula(){
 
 
 /*
-Da una descripcion al azar a las consultas creadas automaticasmente
+Da una descripcion al azar a las consultas creadas automaticamente.
 */
 function randomDescription(){
 	var descripciones = [
@@ -277,7 +289,8 @@ function randomDescription(){
 		"Vengo a ver cuanto mido.",
 		"Me siento mal.",
 		"Quiero ver a un medico.",
-		"No se."
+		"No se.",
+		"Que es esto?."
 
 	];
 
