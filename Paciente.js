@@ -21,11 +21,17 @@ function inicializarInterfazPaciente(){
 	formModificarPerfil();
 
 
-//eventos de los formularios
+//eventos de los formularios crear Consulta
 	var especialidadCrear = $("#crear1A");
 	especialidadCrear.on("blur", buscarMedicos);
 	var btnCrearConsulta = $("#btnCrear");
 	btnCrearConsulta.on("click", crearNuevaConsulta);
+
+	//eventos de los formularios crear Consulta
+	var presentarDescripcion = $("#buscar1A");
+	presentarDescripcion.on("blur", presentarDescripcion);
+	var btnBuscarConsulta = $("#btnBuscar");
+	btnBuscarConsulta.on("click", buscarConsulta);
 
 
 
@@ -134,7 +140,7 @@ function Consulta(pacienteIndex, medicoIndex,descripcion){
 var consultas = [
 // indice de paciente, indice de medico, estado de la consulta, estado del pago
 	new Consulta(0,0,"Me duele el pecho y me cuesta respirar."),
-	new Consulta(3,0),
+	new Consulta(3,0, "Algo me pasa."),
 	new Consulta(1,1),
 	new Consulta(2,2,"Tengo mucha tos."),
 	new Consulta(3,4),
@@ -144,12 +150,12 @@ var consultas = [
 	new Consulta(7,7,"Fuerte dolor de estomago y vomitos."),
 	new Consulta(8,5),
 	new Consulta(9,6,"Escucho voces."),
-	new Consulta(1,2),
+	new Consulta(1,2 , "Aveces tengo mucha tos."),
 	new Consulta(2,4),
 	new Consulta(0,7),
 	new Consulta(4,3),
 	new Consulta(3,6,"Veo gente muerta."),
-	new Consulta(1,2),
+	new Consulta(1,2, "Tengo mucha tos de mañana"),
 	new Consulta(2,4),
 	new Consulta(10,9),
 	new Consulta(6,3),
@@ -157,7 +163,7 @@ var consultas = [
 	new Consulta(4,1),
 	new Consulta(4,9),
 	new Consulta(8,7),
-	new Consulta(1,6),
+	new Consulta(1,6,"Me cuesta respirarar."),
 	new Consulta(10,8),
 	new Consulta(3,5),
 	new Consulta(7,4),
@@ -165,7 +171,7 @@ var consultas = [
 	new Consulta(10,3),
 	new Consulta(0,8),
 	new Consulta(3,1),
-	new Consulta(4,2),
+	new Consulta(4,2, "Que tos que tengo."),
 	new Consulta(0,3),
 	new Consulta(6,4),
 	new Consulta(5,5),
@@ -409,7 +415,7 @@ function mostrarTablaTodasConsultas(){
 
 //function mostrar tabla con las consultas del usuario
 function mostrarTablaUsuarioConsultas(){
-		var consultasGeneradas = $("#resultadoBuscarConsulta");
+		var consultasGeneradas = $("#presentarConsultasUsuario");
 
 
 		var consultasUsuario = [];
@@ -436,18 +442,16 @@ function mostrarTablaUsuarioConsultas(){
 
 function formBuscarConsulta(){
 	var listado = arrIdsConsultas;
-	//listamos las especialidades disponibles
+	//listamos las ID de las consultas del usuario
 
-	
-
-	//formulario para crear consulta
+	//formulario para buscar consulta
 	var form 	=  '<form>'
 				+	'<hr>'
-			 	+   '<label  for="crear1A" >ID</label>';
+			 	+   '<label  for="buscar1A" >ID</label>';
 
 		form 	+= '<select class="form-control" name="Sel.Id" id="buscar1A">'
 				+ '<option selected="selected" value="empty">Sel. ID</option>';
-		//ofrecemos un listado de especialidades disponibles
+		//ofrecemos un listado de IDs de las consultas
 				for(var i = 0 ; i < listado.length ; i++ ){
 		form		+= 	'<option value=' + '\"' + listado[i] + '\"' + '>' + listado[i] + '</option>';	
 					
@@ -457,15 +461,13 @@ function formBuscarConsulta(){
 		form	+=	'</select>'
 				+	'<br >';
 
-		form	+=	'<label  for="crear1B" >Medico</label>'
-				+	'<input type="text"  class="form-control" id="buscar1B">'
-				+	'<br >'
-				+	'<label  for="in1C" >Descripcion</label>'
+		form    +=	'<label  for="in1C" >Descripcion</label>'
 				+	'<textarea  class="form-control" id="buscar1C"></textarea>'
 				+	'<br >'
             	+   '<input type="button"  class="form-control btn-primary" value="Buscar" id="btnBuscarConsulta">'
             	+	'</form>';
         form 	+=  '<div class="text-center" id="resultadosBuscarConsulta">'	
+		        +    '<p class="panel panel-default resultado"  id="presentarConsultasUsuario"></p>'
 		        +    '<p class="panel panel-default resultado"  id="resultadoBuscarConsulta"></p>'
 	            +	'</div>';
 
@@ -477,6 +479,37 @@ function formBuscarConsulta(){
 	//mostramos las consultas generadas por el usuario;
 
 };
+
+
+
+function presentarDescripcion(){
+	//cuando el paciente elige una ID de la consulta, puede ver la descripcion de la consulta.
+
+}
+
+
+
+
+
+function buscarConsulta(){
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 function formModificarPerfil(){
 
