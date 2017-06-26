@@ -108,7 +108,7 @@ $().ready(function(){
 	agregarBotonLogin(),
 	agregarBotonSalida();
 	agregarFormLogin();
-	generarConsultas(40);
+	generarConsultas(150);
 	dibujoTablaConsultasFinalizadas();
 	//testing
 	/*usuarioIngresado = doctores[0];
@@ -117,7 +117,7 @@ $().ready(function(){
 	$("#btn-ingresar").on('click', function(){
 		//Validamos que exista usuario y relizamos el login
 		ingresarUsuario();
-		//Limpiamos los inputs
+		//Limpiamos los inputs del login
 		$("#my-login")[0].reset();
 		if(usuarioIngresado.especialidad !== undefined){
 			inicializarInterfazMedico();
