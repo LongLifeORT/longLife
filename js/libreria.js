@@ -276,9 +276,8 @@ function selectorRandomFotoPerfil(){
 	var arr = [];
 	// Array con número de foto
 	for(var i = 0; i < 12; i++){
-		arr.push(i + 11);
+		arr.push(i + 12);
 	}
 	var fotoSeleccionada = arr[random(11, true)]
-	return fotoSeleccionada + ".jpg";
+	return fotoSeleccionada + ".png";
 }
-console.log(selectorRandomFotoPerfil())
