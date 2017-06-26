@@ -108,7 +108,7 @@ $().ready(function(){
 	agregarBotonLogin(),
 	agregarBotonSalida();
 	agregarFormLogin();
-	generarConsultas(150);
+	generarConsultas(25);
 	dibujoTablaConsultasFinalizadas();
 	//testing
 	/*usuarioIngresado = doctores[0];

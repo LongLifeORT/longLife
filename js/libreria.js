@@ -259,6 +259,36 @@ function randomCedula(){
 }
 
 
+
+/*
+Da una descripcion al azar a las consultas creadas automaticasmente
+*/
+function randomDescription(){
+	var descripciones = [
+		"Tengo una Emergencia!.",
+		"Tengo algo raro me pasa.",
+		"Me duele la cabeza.",
+		"No se lo que me pasa.",
+		"Atiendame rapido!.",
+		"No quiero ir a trabajar!.",
+		"Quiero tomar pastillas gratis.",
+		"Vengo a ver cuanto peso.",
+		"Me puede certificar?.",
+		"Vengo a ver cuanto mido.",
+		"Me siento mal.",
+		"Quiero ver a un medico.",
+		"No se."
+
+	];
+
+	var index = Math.floor(Math.random() * descripciones.length);
+	console.log(descripciones[index]);
+	return descripciones[index];
+
+}
+
+
+
 /**
  random entre 11 y 22 para fotos de perfil
 */

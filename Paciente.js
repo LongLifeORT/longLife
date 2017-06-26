@@ -78,7 +78,7 @@ var pacientes = [
 	new Paciente("Alvaro", "Mesa",21,123456, randomMedia(80), randomMedia(160), randomCedula()),
 
 ];
-console.table(pacientes);
+
 
 /**
  * Representa una consulta registrada.
@@ -99,7 +99,7 @@ function Consulta(pacienteIndex, medicoIndex,descripcion){
 		+ numeroIncremental;
 
 	this.consultaPaga = false;
-	this.descripcion =  descripcion  || "";
+	this.descripcion =  descripcion  || randomDescription();
 	this.finalizada = false;
 	this.paciente = pacienteIndex;
 	this.medico = medicoIndex;
@@ -714,10 +714,12 @@ function modificarPerfil(){
 
 
 
+
+
 }
 
 /*
- modificarClave cambia la clave del usuario logueado desde su perfil
+ modificarClave cambia la clave del paciente logueado desde su perfil
 */
 
 function modificarClave(){
