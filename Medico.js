@@ -310,6 +310,7 @@ function dibujarTablaDeConsulta(_consultaIndex){
 		actualizarPesoAlturaIMC(indicePaciente);
 		//mostrar alerta de variación
 		alertaVariacionIMC(indicePaciente);
+		alertaNuevoMaximoMinimoPeso(indicePaciente);
 	});
 	$("#finalizar-consulta").on('click', function(){
 		consultas[_consultaIndex].modificarEstado();
@@ -320,6 +321,25 @@ function dibujarTablaDeConsulta(_consultaIndex){
 	})
 }
 
+/**
+ alertaNuevoMaximoPeso
+ 
+ indicePaciente = int
+*/
+
+function alertaNuevoMaximoMinimoPeso(_indicePaciente){
+	var paciente = pacientes[_indicePaciente];
+	var pesoPacienteActual = paciente.peso.splice(paciente.peso.length - 1, 1);
+	console.log(pesoPacienteActual)
+	console.log(paciente.peso)
+	console.log(maximoEnArray(paciente.peso))
+	if(maximoEnArray(paciente.peso) < pesoPacienteActual){
+		$("#viejo-peso").after('<span class="bg-danger text-uppercase"><strong>Nuevo peso máximo historico!</strong></span>');
+	}else if(minimoEnArray(paciente.peso) > pesoPacienteActual){
+		$("#viejo-peso").after('<span class="bg-danger text-uppercase"><strong>Nuevo peso minimo historico</strong></span>');
+	}
+	paciente.peso.push(pesoPacienteActual);
+}
 
 
 /**
@@ -338,8 +358,9 @@ function buscarConsultas(arrConsultas, indexMedico){
 	return arrayResultado;
 }
 
+
 /**
- modificarPesoAltura
+ @modificarPesoAltura
  peso = int
  altura = float
  pacienteIndex = int

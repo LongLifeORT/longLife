@@ -281,3 +281,23 @@ function selectorRandomFotoPerfil(){
 	var fotoSeleccionada = arr[random(11, true)]
 	return fotoSeleccionada + ".png";
 }
+
+/**
+ busca el int más grande en un array
+
+ _arr = array
+*/
+
+function maximoEnArray(_array) {
+  return Math.max.apply(null, _array);
+}
+
+/**
+ busca el int más pequeño en un array
+
+ _arr = array
+*/
+
+function minimoEnArray(_array) {
+  return Math.min.apply(null, _array);
+}
