@@ -314,8 +314,18 @@ function dibujarTablaDeConsulta(_consultaIndex){
 	contenedor.html(divPadre + tablaConsulta + '</div>');
 
 	$("#modificar-peso-altura").on('click', function(){
+		var peso = $("#nuevo-peso");
+		var altura = $("#nuevo-altura");
+		if(validacionTotal(peso.val(), altura.val())){
+			console.log("entre");
+			peso.val("");
+			altura.val("");
+			peso.attr('placeholder', 'Ingrese solo números');
+			altura.attr('placeholder', 'Ingrese solo números');
+			return;
+		}
 		var indicePaciente = $(this).attr('data-paciente');
-		modificarPesoAltura(Number($("#nuevo-peso").val()), Number($("#nuevo-altura").val()), indicePaciente);
+		modificarPesoAltura(peso.val(), altura.val(), indicePaciente);
 		actualizarPesoAlturaIMC(indicePaciente);
 		//mostrar alerta de variación
 		alertaVariacionIMC(indicePaciente);
@@ -342,9 +352,7 @@ function alertaNuevoMaximoMinimoPeso(_indicePaciente){
 	var paciente = pacientes[_indicePaciente];
 	var pesoPacienteActual = paciente.peso.splice(paciente.peso.length - 1, 1);
 	if(maximoEnArray(paciente.peso) < pesoPacienteActual){
-		console.log($("input#viejo-peso").next().is($("#alerta-peso")))
 		if($("input#viejo-peso").next().is($("#alerta-peso"))){
-			console.log("CTM");
 			$("#alerta-peso").html('<strong>Nuevo peso máximo historico</strong>');
 		}else{
 			$("#viejo-peso").after('<span id="alerta-peso" class="bg-danger text-uppercase"><strong>Nuevo peso máximo historico</strong></span>');
@@ -388,7 +396,6 @@ function buscarConsultas(arrConsultas, indexMedico){
 */
 
 function modificarPesoAltura(peso, altura, pacienteIndex){
-	if(peso == "" || altura == ""){return}
 	pacientes[pacienteIndex].peso.push(peso);
 	pacientes[pacienteIndex].altura.push(altura);
 }
@@ -419,7 +426,9 @@ function variacionMayorADiezIMC(pacienteIndex){
 
 function alertaVariacionIMC(pacienteIndex){
 	if(variacionMayorADiezIMC(pacienteIndex)){
-		$("#imc").after('<span class="bg-danger text-uppercase"><strong>Variación mayor al 10% en el IMC!</strong></span>')
+		$("#imc").after('<span id="alerta-imc" class="bg-danger text-uppercase"><strong>Variación mayor al 10% en el IMC!</strong></span>')
+	}else{
+		$("#alerta-imc").html("");
 	}
 }
 
