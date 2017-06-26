@@ -230,12 +230,19 @@ function ingresarUsuario(){
 
 /**
  Genera un número random entre 1 y el argumento
-
+ _ceroIncluido = bool
  _número = int
 */
 
-function random(_numero){
-	return Math.floor(Math.random() * (_numero - 1)) + 1;
+function random(_numero, _ceroIncluido){
+	var result;
+	_ceroIncluido = _ceroIncluido || false;
+	if(!_ceroIncluido){
+		result = Math.floor(Math.random() * _numero) + 1;
+	}else{
+		result = Math.floor(Math.random() * _numero);
+	}
+	return result
 }
 
 /**
