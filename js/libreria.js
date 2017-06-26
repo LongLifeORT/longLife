@@ -10,22 +10,19 @@ function main() {
 	
 	//ocultamos la informacion de los formularios
 	hideInfos();
-
+	//variables de los botones del menu y botones del cliente.
 	var crearConsultaMenu  = $(".crearConsultaMenu");
 	var crearConsulta   = $(".menuCliente :first-child").eq(1);
-
 	var buscarConsultaMenu = $(".buscarConsultaMenu");
 	var misConsultas       = $(".menuCliente :first-child").eq(2);
-
-	var modificarPerfilMenu  = $(".pagarConsultaMenu");
+	var modificarPerfilMenu  = $(".modificarPerfilMenu");
 	var ConfigurarPerfil   = $(".menuCliente :first-child").eq(3);
 	
 	
-
+	//menues del paciente.
 	//menues para crear consulta
 	crearConsultaMenu.on("click" , mostrarCrearConsulta);
 	crearConsulta.on("click" , mostrarCrearConsulta);
-
 
 	//menues para buscar consulta 
 	misConsultas.on("click" , mostrarBuscarConsulta);
@@ -37,18 +34,14 @@ function main() {
 	modificarPerfilMenu.on("click" , mostrarModificarPerfil);
 	//botonera en tablero para modificar perfil
 
-
-	//mostrar tabla de consultas
-	var configurarPerfil = $("#configurarPerfil");
-	//
+	//boton para volver atras y salir de interface
 	var volverAMenu = $(".volverAMenu");
 	volverAMenu.on("click" , showMenu);
 
 }
 
-
-
 //ends main
+
 //oculta todo los divs info para mostrar;
 function hideInfos(){
 	var infos = $(".infos");
@@ -59,6 +52,7 @@ function hideMenues(){
 	var menues = $(".menues");
 	menues.fadeOut("200");
 }
+//muestra los divs del menu.
 function showMenu(){
 	var menues = $(".menues");
 	menues.fadeIn("200");

@@ -150,7 +150,7 @@ var consultas = [
 	new Consulta(0,4),
 	new Consulta(10,3),
 	new Consulta(0,8),
-	new Consulta(3,1),
+	new Consulta(3,1, "Me puede dar pastillas para dormir?."),
 	new Consulta(4,2, "Que tos que tengo."),
 	new Consulta(0,3),
 	new Consulta(6,4),
@@ -385,7 +385,7 @@ function formCrearConsulta(){
     //eventos de los formularios crear Consulta
 	var especialidadCrear = $("#crear1A");
 	//una vez elegida la especialidad da los medicos de esa especialidad
-	especialidadCrear.on("blur", buscarMedicos);
+	especialidadCrear.on("change", buscarMedicos);
 
 	var btnCrearConsulta = $("#btnCrear");
 	btnCrearConsulta.on("click", crearNuevaConsulta);
@@ -524,7 +524,7 @@ function formBuscarConsulta(){
 
 	//eventos de los formularios buscar Consulta
 	var identificacionBuscar = $("#buscar1A");
-	identificacionBuscar.on("blur", presentarDescripcion);
+	identificacionBuscar.on("change", presentarDescripcion);
 	
 
 };
@@ -597,7 +597,7 @@ function formModificarPerfil(){
 	var tablaConsulta = '<form class="form-horizontal">'
 		+ 	'<div class="form-group">'
 			+	 '<div class="col-xs-12 col-sm-12 ">'
-			+ 		'<label for="modificar_imagen" class="col-sm-2 control-label">'
+			+ 		'<label for="mod_imagen_paciente" class="col-sm-2 control-label">'
 			+ 			'<img src="./images/' + pacienteSeleccionado.foto + '"' + 'width="100" height="100" class="img-responsive" alt="Foto de perfil"> '
 			+		'</label>'
 		+	'</div>'
@@ -650,38 +650,47 @@ function formModificarPerfil(){
 		+		'</div>'
 		+	'</div>'
 		+		'<div class="form-group text-center">'
-		+			'<input id="guardar-perfil" class="btn btn-primary" type="button" value="Guardar Cambios" style="width:80%">'
+		+			'<input id="mod_guardar_perfil" class="btn btn-primary" type="button" value="Guardar Cambios" style="width:80%">'
 		+		'</div>'
 		+	'<fieldset>'
 		+		'<legend>Modificar Clave</legend>'
 		+ 		'<div class="form-group">'
-		+ 			'<label for="nuevo-peso" class="col-sm-2 control-label">Clave Actual</label>'
+		+ 			'<label for="mod_clave_actual" class="col-sm-2 control-label">Clave Actual</label>'
 		+			'<div class="col-sm-8">'
-		+ 				'<input id="nuevo-peso" class="form-control" type="password" placeholder="Clave Actual">'
+		+ 				'<input id="mod_clave_actual" class="form-control" type="password" placeholder="Clave Actual">'
 		+			'</div>'
 		+		'</div>'
 
 		+ 		'<div class="form-group">'
-		+ 			'<label for="nuevo-altura" class="col-sm-2 control-label">Nueva Clave</label>'
+		+ 			'<label for="mod_clave_nueva" class="col-sm-2 control-label">Nueva Clave</label>'
 		+			'<div class="col-sm-8">'
-		+ 				'<input id="nuevo-altura" class="form-control" type="password" placeholder="Nueva Clave">'
+		+ 				'<input id="mod_clave_nueva" class="form-control" type="password" placeholder="Nueva Clave">'
 		+			'</div>'
 		+		'</div>'
 		+	'</fieldset>'
 		+	'<fieldset>'
 		+		'<div class="form-group text-center">'
-		+			'<input id="guardar_perfil" class="btn btn-primary" type="button" value="Modificar Clave" style="width:80%">'
+		+			'<input id="modificar_clave" class="btn btn-primary" type="button" value="Modificar clave" style="width:80%">'
 		+		'</div>'
 		+	'</fieldset>'
 		+ '</form>';
 	
     var formPerfil = $("#formPerfil");
     formPerfil.html(divPadre + tablaConsulta + '</div>');
-    $("#modificar_imagen").hide();	
+    $("#mod_imagen_paciente").hide();	
 
 
 
     //eventos de modificar perfil
+    var guardarPerfil = $("#mod_guardar_perfil");
+    //al presionar en guardar cambios llamamos a la funcion modificar perfil.
+    guardarPerfil.on("click",modificarPerfil)
+
+
+
+
+    //eventos de modificar clave
+    var modificarClave = $("#modificar_clave");
 
 
 
