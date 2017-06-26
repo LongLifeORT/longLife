@@ -333,13 +333,22 @@ function dibujarTablaDeConsulta(_consultaIndex){
 function alertaNuevoMaximoMinimoPeso(_indicePaciente){
 	var paciente = pacientes[_indicePaciente];
 	var pesoPacienteActual = paciente.peso.splice(paciente.peso.length - 1, 1);
-	console.log(pesoPacienteActual)
-	console.log(paciente.peso)
-	console.log(maximoEnArray(paciente.peso))
 	if(maximoEnArray(paciente.peso) < pesoPacienteActual){
-		$("#viejo-peso").after('<span class="bg-danger text-uppercase"><strong>Nuevo peso máximo historico!</strong></span>');
+		console.log($("input#viejo-peso").next().is($("#alerta-peso")))
+		if($("input#viejo-peso").next().is($("#alerta-peso"))){
+			console.log("CTM");
+			$("#alerta-peso").html('<strong>Nuevo peso máximo historico</strong>');
+		}else{
+			$("#viejo-peso").after('<span id="alerta-peso" class="bg-danger text-uppercase"><strong>Nuevo peso máximo historico</strong></span>');
+		}
 	}else if(minimoEnArray(paciente.peso) > pesoPacienteActual){
-		$("#viejo-peso").after('<span class="bg-danger text-uppercase"><strong>Nuevo peso minimo historico</strong></span>');
+		if($("input#viejo-peso").next().is($("#alerta-peso"))){
+			$("#alerta-peso").html('<strong>Nuevo peso mínimo historico</strong>');
+		}else{
+			$("#viejo-peso").after('<span id="alerta-peso" class="bg-danger text-uppercase"><strong>Nuevo peso mínimo historico</strong></span>');
+		}
+	}else{
+		$("#alerta-peso").html("");
 	}
 	paciente.peso.push(pesoPacienteActual);
 }
