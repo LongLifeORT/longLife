@@ -1,7 +1,8 @@
 
 
 function inicializarInterfazPaciente(){
-
+	//Generar consultas aleatorias
+	
 	//creamos una tabla con todas las consultas
 	//crearTablaTodasConsultas();
 	//mostrarTablaTodasConsultas();
@@ -169,10 +170,13 @@ var consultas = [
 	new Consulta(9,6),
 	new Consulta(10,7),
 	new Consulta(1,8)
-
-
 ];
-console.log(consultas);
+
+function generarConsultas(_n){
+	for(var i = 0; i < _n; i++){
+		consultas.push(new Consulta(random(10), random(9)))
+	}
+}
 
 
 function crearNuevaConsulta(){

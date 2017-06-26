@@ -107,6 +107,7 @@ $().ready(function(){
 	agregarBotonLogin(),
 	agregarBotonSalida();
 	agregarFormLogin();
+	generarConsultas(40);
 	//testing
 	/*usuarioIngresado = doctores[0];
 	inicializarInterfazMedico();*/
