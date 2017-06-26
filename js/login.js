@@ -120,7 +120,7 @@ $().ready(function(){
 		if(usuarioIngresado.especialidad !== undefined){
 			inicializarInterfazMedico();
 		}else{
-			inicializarInterfazPaciente();
+		
 		}
 	});
 	$("#logout").on('click', salirSesion);

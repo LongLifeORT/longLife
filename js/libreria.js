@@ -11,9 +11,6 @@ function main() {
 	//ocultamos la informacion de los formularios
 	hideInfos();
 
-	//listamos todas las especialidades disponibles
-	arrListado = listadoEspecialidades(doctores);
-
 	var crearConsultaMenu  = $(".crearConsultaMenu");
 	var crearConsulta   = $(".menuCliente :first-child").eq(1);
 
@@ -22,8 +19,6 @@ function main() {
 
 	var modificarPerfilMenu  = $(".pagarConsultaMenu");
 	var ConfigurarPerfil   = $(".menuCliente :first-child").eq(3);
-	
-	
 	
 	
 
@@ -48,11 +43,11 @@ function main() {
 	//
 	var volverAMenu = $(".volverAMenu");
 	volverAMenu.on("click" , showMenu);
-	
-
-
 
 }
+
+
+
 //ends main
 //oculta todo los divs info para mostrar;
 function hideInfos(){
@@ -76,7 +71,8 @@ function mostrarCrearConsulta() {
 	hideMenues();
 	var crearConsultaInfo = $(".crearConsultaInfo");
 	crearConsultaInfo.toggle();
-	$("#resultadoCrearConsulta").html("");
+
+	formCrearConsulta();
 
 	
 }
@@ -86,7 +82,8 @@ function mostrarBuscarConsulta() {
 	hideMenues();
 	var buscarConsultaInfo = $(".buscarConsultaInfo");
 	buscarConsultaInfo.toggle();
-	//$("#resultadoBuscarConsulta").html("");
+	//generamos la interfaz de buscar consulta
+	formBuscarConsulta();
 
 }
 // muestra la interface de modificar perfil
@@ -95,6 +92,9 @@ function mostrarModificarPerfil() {
 	hideMenues();
 	var modificarPerfilInfo = $(".modificarPerfilInfo");
 	modificarPerfilInfo.toggle();
+
+	//interfaz de modificar consulta	
+	formModificarPerfil();
 
 }
 

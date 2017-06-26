@@ -1,52 +1,4 @@
 
-
-function inicializarInterfazPaciente(){
-	//Generar consultas aleatorias
-
-	//creamos una tabla con todas las consultas
-	//crearTablaTodasConsultas();
-	//mostrarTablaTodasConsultas();
-	
-	//listamos todas las especialidades disponibles
-	arrListado = listadoEspecialidades(doctores);
-	//listamos las consultas del paciente
-	arrIdsConsultas = listadoIdsConsultas(consultas);
-
-
-	//creamos formulario de crear consulta
-	formCrearConsulta();
-	//creamos formulario de buscar consulta
-	formBuscarConsulta();
-	//creamos formulario de modificar perfil
-	formModificarPerfil();
-
-
-//eventos de los formularios crear Consulta
-	var especialidadCrear = $("#crear1A");
-	especialidadCrear.on("blur", buscarMedicos);
-	var btnCrearConsulta = $("#btnCrear");
-	btnCrearConsulta.on("click", crearNuevaConsulta);
-
-	//eventos de los formularios crear Consulta
-	var identificacionBuscar = $("#buscar1A");
-	identificacionBuscar.on("blur", presentarDescripcion);
-	//var btnBuscarConsulta = $("#btnBuscar");
-	//btnBuscarConsulta.on("click", buscarConsulta);
-
-
-
-
-	
-
-
-
-}
-
- 
-
-
-
-
 function Paciente(nombre, apellido,numeroPaciente,clave, peso, altura,cedula, alergias , foto){
 	this.nombre = nombre;
 	this.apellido = apellido;
@@ -303,7 +255,7 @@ function buscarMedicos(){
 
 //function para formulario para crear consulta, como parametro toma el listado de array de especialidades
 function formCrearConsulta(){
-	var listado = arrListado;
+	var listado = listadoEspecialidades(doctores);
 	//listamos las especialidades disponibles
 	
 
@@ -343,6 +295,15 @@ function formCrearConsulta(){
 
     var crearConsulta = $("#crearConsulta");
     crearConsulta.html(form);
+
+    //eventos de los formularios crear Consulta
+	var especialidadCrear = $("#crear1A");
+	especialidadCrear.on("blur", buscarMedicos);
+	var btnCrearConsulta = $("#btnCrear");
+	btnCrearConsulta.on("click", crearNuevaConsulta);
+
+
+
 
 };
 
@@ -405,14 +366,6 @@ function crearTablaTodasConsultas(arrConsultas){
 }
 
 
-//function mostrar tabla con todas las consultas
-function mostrarTablaTodasConsultas(){
-	var consultasGeneradas = $("#consultasGeneradas");
-	// la tabla se crea en Paciente.js
-	var tabla = crearTablaTodasConsultas(consultas);
-		//consultasGeneradas.html(tabla)
-}
-
 //function mostrar tabla con las consultas del usuario
 function mostrarTablaUsuarioConsultas(){
 		var consultasGeneradas = $("#presentarConsultasUsuario");
@@ -441,7 +394,7 @@ function mostrarTablaUsuarioConsultas(){
 
 
 function formBuscarConsulta(){
-	var listado = arrIdsConsultas;
+	var listado = listadoIdsConsultas(consultas);
 	//listamos las ID de las consultas del usuario
 
 	//formulario para buscar consulta
@@ -462,7 +415,7 @@ function formBuscarConsulta(){
 				+	'<br >';
 
 		form    +=	'<label  for="in1C" >Descripcion</label>'
-				+	'<textarea  class="form-control" id="buscar1B" disabled></textarea>'
+				+	'<textarea  class="form-control" id="buscar1B"  disabled ></textarea>'
 				+	'<br >'
             	+   '<input type="button"  class="form-control btn-primary" value="Buscar" id="btnBuscarConsulta">'
             	+	'</form>';
@@ -477,6 +430,14 @@ function formBuscarConsulta(){
 
     mostrarTablaUsuarioConsultas();
 	//mostramos las consultas generadas por el usuario;
+
+
+	//eventos de los formularios buscar Consulta
+	var identificacionBuscar = $("#buscar1A");
+	identificacionBuscar.on("blur", presentarDescripcion);
+	
+
+
 
 };
 
