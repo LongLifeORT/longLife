@@ -78,6 +78,7 @@ var pacientes = [
 	new Paciente("Alvaro", "Mesa",21,123456, randomMedia(80), randomMedia(160), randomCedula()),
 
 ];
+console.table(pacientes);
 
 /**
  * Representa una consulta registrada.
@@ -120,30 +121,30 @@ var consultas = [
 // indice de paciente, indice de medico, descripcion
 	new Consulta(0,0,"Me duele el pecho y me cuesta respirar."),
 	new Consulta(3,0, "Algo me pasa."),
-	new Consulta(1,1),
+	new Consulta(1,1, "Necesito pastillas para dormir."),
 	new Consulta(2,2,"Tengo mucha tos."),
-	new Consulta(3,4),
-	new Consulta(4,8),
-	new Consulta(5,5),
+	new Consulta(3,4, "Mi niño tiene problemas para comer."),
+	new Consulta(4,8, "Me cuesta leer."),
+	new Consulta(5,5, "Mi hijo mucha tos."),
 	new Consulta(6,7,"Tome un frasco de pastillas y no puedo parar de ir al baño."),
 	new Consulta(7,7,"Fuerte dolor de estomago y vomitos."),
-	new Consulta(8,5),
+	new Consulta(8,5, "Mi hijo esta con vomitos."),
 	new Consulta(9,6,"Escucho voces."),
-	new Consulta(1,2 , "Aveces tengo mucha tos."),
-	new Consulta(2,4),
-	new Consulta(0,7),
-	new Consulta(4,3),
+	new Consulta(1,2, "Aveces tengo mucha tos."),
+	new Consulta(2,4, " Mi hijo tiene problemas para ir al baño."),
+	new Consulta(0,7 , "Tome iunas pastillas y no puedo parar de ir al baño."),
+	new Consulta(4,3, "Me cuesta respirar aveces."),
 	new Consulta(3,6,"Veo gente muerta."),
 	new Consulta(1,2, "Tengo mucha tos de mañana"),
-	new Consulta(2,4),
-	new Consulta(10,9),
-	new Consulta(6,3),
-	new Consulta(5,2),
-	new Consulta(4,1),
-	new Consulta(4,9),
-	new Consulta(8,7),
-	new Consulta(1,6,"Me cuesta respirarar."),
-	new Consulta(10,8),
+	new Consulta(2,4, " Mi hijo no para de ir al baño ahora."),
+	new Consulta(10,9, "Me duele el corazon luego de comer mucho asado."),
+	new Consulta(6,3, " Me cuesta respirar cuando fuman cerca."),
+	new Consulta(5,2, "Me duele el pecho."),
+	new Consulta(4,1, "Me duele la espalda."),
+	new Consulta(4,9,	"Me duele el corazon!."),
+	new Consulta(8,7,	"Me cuesta leer  en la noche."),
+	new Consulta(1,6,"Me cuesta respirar."),
+	new Consulta(10,8, " Me duele la vista de tanto escribir."),
 	new Consulta(3,5),
 	new Consulta(7,4),
 	new Consulta(0,4),
@@ -556,6 +557,7 @@ function presentarDescripcion(){
 				campoDescripcion.val(descripcionConsulta);
 		}
 
+};
 
 
 
@@ -705,9 +707,6 @@ function modificarPerfil(){
 */
 
 function cambiarContraseña(){
-
-
-
 
 
 }
