@@ -266,3 +266,19 @@ function randomCedula(){
 	}
 	return cedula;
 }
+
+
+/**
+ random entre 11 y 22 para fotos de perfil
+*/
+
+function selectorRandomFotoPerfil(){
+	var arr = [];
+	// Array con número de foto
+	for(var i = 0; i < 12; i++){
+		arr.push(i + 11);
+	}
+	var fotoSeleccionada = arr[random(11, true)]
+	return fotoSeleccionada + ".jpg";
+}
+console.log(selectorRandomFotoPerfil())
