@@ -41,7 +41,7 @@ function inicializarInterfazMedico(){
 
 function salirMedico(){
 	$(".contenedor-consultas-medico").html("");
-	
+
 }
 
 /**
@@ -231,11 +231,8 @@ function dibujarTablaDeConsulta(_consultaIndex){
 	var pacienteSeleccionado = pacientes[consultaActual.paciente];
 	var divPadre = '<div class="form-consulta">';
 	var tablaConsulta = '<form class="form-horizontal">'
-		+ 	'<div class="form-group">'
-		+ 		'<label for="" class="col-sm-2 control-label">Nombre completo</label>'
-		+		'<div class="col-sm-8">'
-		+ 			'<input id="" class="form-control" type="text" value="' + pacienteSeleccionado.foto + '" disabled>'
-		+		'</div>'
+		+   '<div class="">'
+		+ 		'<img src="./images/' + pacienteSeleccionado.foto + '" width="200px" class="img-responsive center-block">'
 		+	'</div>'
 		+ 	'<div class="form-group">'
 		+ 		'<label for="" class="col-sm-2 control-label">Nombre completo</label>'
@@ -301,7 +298,7 @@ function dibujarTablaDeConsulta(_consultaIndex){
 		+		'<legend>Descripción</legend>'
 		+		'<div class="form-group text-center">'
 		+			'<textarea id="desc" class="form-control" rows="3"></textarea>'
-		+			'<input id="finalizar-consulta" class="btn btn-success" type="button" value="FINALIZAR CONSULTA" style="width:80%">'
+		+			'<input id="finalizar-consulta" class="btn-lg btn-success" type="button" value="FINALIZAR CONSULTA" style="width:80%">'
 		+		'</div>'
 		+	'</fieldset>'
 		+ '</form>';
