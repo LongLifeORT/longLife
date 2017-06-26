@@ -28,10 +28,10 @@ function inicializarInterfazPaciente(){
 	btnCrearConsulta.on("click", crearNuevaConsulta);
 
 	//eventos de los formularios crear Consulta
-	var presentarDescripcion = $("#buscar1A");
-	presentarDescripcion.on("blur", presentarDescripcion);
-	var btnBuscarConsulta = $("#btnBuscar");
-	btnBuscarConsulta.on("click", buscarConsulta);
+	var identificacionBuscar = $("#buscar1A");
+	identificacionBuscar.on("blur", presentarDescripcion);
+	//var btnBuscarConsulta = $("#btnBuscar");
+	//btnBuscarConsulta.on("click", buscarConsulta);
 
 
 
@@ -462,7 +462,7 @@ function formBuscarConsulta(){
 				+	'<br >';
 
 		form    +=	'<label  for="in1C" >Descripcion</label>'
-				+	'<textarea  class="form-control" id="buscar1C"></textarea>'
+				+	'<textarea  class="form-control" id="buscar1B" disabled></textarea>'
 				+	'<br >'
             	+   '<input type="button"  class="form-control btn-primary" value="Buscar" id="btnBuscarConsulta">'
             	+	'</form>';
@@ -484,6 +484,42 @@ function formBuscarConsulta(){
 
 function presentarDescripcion(){
 	//cuando el paciente elige una ID de la consulta, puede ver la descripcion de la consulta.
+
+	var idSelected = $("#buscar1A").val();
+		if(idSelected !== "empty"){
+			
+			//luego de que el paciente elige un Identificador de consulta
+
+			//vamos a mostrar la descripcion de la consulta.
+			var descripcionConsulta = "";
+
+			//que los presentaremos en el input presentacion.
+			var campoDescripcion = $("#buscar1B");
+
+
+				//recorremos las consultas por identificador 
+				for(var i = 0; i < consultas.length; i++){
+					//si la consulta tiene el identificador seleccionado, se toma la descripcion de la consulta
+					if(consultas[i]["identificador"] == idSelected){
+						descripcionConsulta = consultas[i]["descripcion"];
+					}
+				}
+				// se presentan la descripcion de la consulta
+				campoDescripcion.val(descripcionConsulta);
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
 
