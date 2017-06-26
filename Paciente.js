@@ -163,7 +163,7 @@ var consultas = [
 
 function generarConsultas(_n){
 	for(var i = 0; i < _n; i++){
-		consultas.push(new Consulta(random(10), random(9)))
+		consultas.push(new Consulta(random(10, true), random(9, true)))
 	}
 }
 
