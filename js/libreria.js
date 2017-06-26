@@ -279,6 +279,6 @@ function selectorRandomFotoPerfil(){
 		arr.push(i + 11);
 	}
 	var fotoSeleccionada = arr[random(11, true)]
-	return fotoSeleccionada + ".jpg";
+	return fotoSeleccionada + ".png";
 }
 console.log(selectorRandomFotoPerfil())
