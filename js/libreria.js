@@ -39,8 +39,6 @@ function main() {
 
 }
 
-//ends main
-
 //oculta todo los divs info para mostrar;
 function hideInfos(){
 	var infos = $(".infos");

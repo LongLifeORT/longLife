@@ -28,9 +28,9 @@ var doctores = [
  */
 
 function inicializarInterfazMedico(){
-	if(!$(".page-header").next().is('form')){
+	//if(!$(".page-header").next().is('form')){
 		$(".page-header").after('<form><div class="contenedor-consultas-medico"></div></form><div id="form-consultas"></div>');	
-	}
+	//}
 	$("#menu-consultas").on('click', dibujarSelectConsultasMedico);
 	$("#menu-inhabilitar").on('click', dibujarSelectInhabilitar);
 	$("#menu-abonado").on('click', dibujarSelectAbonar);
@@ -40,12 +40,11 @@ function inicializarInterfazMedico(){
 
 /**
  Salir interfaz de médico
+ elimina contenedor de elementos del médico
 */
 
 function salirMedico(){
-	$(".contenedor-consultas-medico").html("");
-	$("#form-consultas").html("");
-
+	$(".page-header").next().remove();
 }
 
 /**
