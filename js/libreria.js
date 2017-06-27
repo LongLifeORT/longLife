@@ -223,10 +223,8 @@ function ingresarUsuario(){
 		usuarioIngresado = userLog;
 		$("#login-form").modal('hide');
 		mostrarOcultarBotonLoginLogout();
-
+		bienvenida(usuarioIngresado);
 	}
-
-	bienvenida(usuarioIngresado);
 }
 
 
@@ -295,9 +293,7 @@ function randomDescription(){
 	];
 
 	var index = Math.floor(Math.random() * descripciones.length);
-	console.log(descripciones[index]);
 	return descripciones[index];
-
 }
 
 

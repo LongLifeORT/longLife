@@ -134,7 +134,7 @@ function dibujarSelectInhabilitar(){
 	$("#form-consultas").html("");
 	var contenedor = $('.contenedor-consultas-medico');
 	var nuevoContenido = '<h3>Inhabilitar pacientes</h3><p><select id="sel-habilitar-medico" class="form-control">';
-	nuevoContenido += '<option value="">Seleccionar</option>';
+	nuevoContenido += '<option value="seleccionar">Seleccionar</option>';
 	for(var i = 0; i < pacientes.length; i++){
 		console.log()
 		if(pacientes[i].habilitado){
@@ -154,7 +154,7 @@ function dibujarSelectInhabilitar(){
 	nuevoContenido += '</select></p><div class="botones"></div></div>';
 	contenedor.append(nuevoContenido);
 	$("#sel-habilitar-medico").on('change', function(){
-		dibujarBotonesHabilitar(estaHabilitado(this.value));
+		dibujarBotonesHabilitar(estaHabilitado(this.value), this.value);
 		var cedula = this.value.split("-")[0];
 		$(".habilitar-paciente").on('click', function(){
 			inhabilitarPaciente(cedula);
@@ -171,7 +171,7 @@ function estaHabilitado(_optionValue){
 	var arrOpt = _optionValue.split("-");
 	if(arrOpt[1] === "habilitado"){
 		return true;
-	}else if(arrOpt[1] === "deshabilitado"){
+	}else if(arrOpt[1] === "inhabilitado"){
 		return false;
 	}else{
 		return;
@@ -182,16 +182,17 @@ function estaHabilitado(_optionValue){
  dibujamos botones para inhabilitar o habilitar paciente
 */
 
-function dibujarBotonesHabilitar(bool){
-	bool = bool || "";
+function dibujarBotonesHabilitar(bool, seleccionar){
+	if(seleccionar === "seleccionar"){
+		bool = "seleccionar";
+	}
 	console.log(bool);
 	var contenedor = $(".botones");
 	contenedor.html("");
 	var contenido = "";
-	if(bool == ""){
-		return;
-	}
-	if(bool){
+	if(bool === "seleccionar"){
+		contenido = "";
+	}else if(bool){
 		contenido += '<input type="button" class="btn btn-danger habilitar-paciente" value="Inhabilitar">'
 	}else if(!bool){
 		contenido += '<input type="button" class="btn btn-success habilitar-paciente" value="Habilitar">'

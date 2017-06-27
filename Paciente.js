@@ -407,11 +407,8 @@ function listadoIdsConsultas(arrConsultas){
 	//presentara todas las id de las consultas del usuario para generar el drop down
 	var listado = [];
 	var paciente = usuarioIngresado ;
-				console.log(paciente);
-				//buscamos el index del paciente dentro del array comparando la propiedad nombre completo 
-				var pacienteIndex = buscarPacienteEnArray();
-	
-	console.log(listado);
+	//buscamos el index del paciente dentro del array comparando la propiedad nombre completo 
+	var pacienteIndex = buscarPacienteEnArray();
 	
 	//recorremos el array consultas
 		for(var i = 0; i < arrConsultas.length; i++){
@@ -589,34 +586,11 @@ function estadoConsulta(){
 			}else if(consultaFinalizada){
 				estaFinalizada = "La consulta ya fue  cerrada."
 			}
-
-
-
-
 		resultado.html(aPagar + " " + estaFinalizada + "")
 	}else{
 		resultado.html("Selecione una consulta por favor.")
-
-
 	}
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 function formModificarPerfil(){
 	var paciente = usuarioIngresado ;
@@ -714,8 +688,6 @@ function formModificarPerfil(){
     formPerfil.html(divPadre + tablaConsulta +resultado + '</div>');
     $("#mod_imagen_paciente").hide();	
 
-
-
     //eventos de modificar perfil
     var guardarPerfil = $("#mod_guardar_perfil");
     //al presionar en guardar cambios llamamos a la funcion modificar perfil.
@@ -723,12 +695,6 @@ function formModificarPerfil(){
     //eventos de modificar clave
     var guardarClave = $("#modificar_clave");
     guardarClave.on("click",modificarClave)
-
-
-
-
-
-
 };
 
 /*
@@ -758,7 +724,6 @@ function modificarPerfil(){
 		$("#muestraImagenActual").attr("src", "./images/" +  paciente.foto);
 	}
 	resultado.html("Se ha modificado el Perfil.");
-
 }
 
 /*
