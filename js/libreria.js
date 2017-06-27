@@ -7,7 +7,6 @@ $(document).ready(main);
 
 function main() {
 
-	
 	//ocultamos la informacion de los formularios
 	hideInfos();
 	//variables de los botones del menu y botones del cliente.
@@ -67,8 +66,6 @@ function mostrarCrearConsulta() {
 	crearConsultaInfo.toggle();
 
 	formCrearConsulta();
-
-	
 }
 //muestra la interface de buscar consulta
 function mostrarBuscarConsulta() {
@@ -89,16 +86,7 @@ function mostrarModificarPerfil() {
 
 	//interfaz de modificar consulta	
 	formModificarPerfil();
-
 }
-
-
-
-
-
-
-
-
 
 /**
  retorna indice donde esta el objeto en array indexado
@@ -348,7 +336,7 @@ function dibujoTablaConsultasFinalizadas(){
 		+		'<th>Cantidad de consultas</th>'
 		+	'</tr>'
 		+ '</thead>';
-	filas.reverse();
+	//filas.reverse();
 	filas.forEach(function(fila){
 		contenido += fila;
 	})
@@ -356,7 +344,7 @@ function dibujoTablaConsultasFinalizadas(){
 }
 
 /**
- generarListaOrdenadaPorConsultas devuelve una lista de objetos ordenados
+ generarListaOrdenadaPorConsultas devuelve una lista de cadenas tipo fila
 
  _array = array
 */
@@ -364,16 +352,30 @@ function dibujoTablaConsultasFinalizadas(){
 function generarListaOrdenadaPorConsultas(){
 	var lista = [];
 	var fila;
-	for(var i = 0; i < doctores.length; i++){
+	var filas = doctores.sort(ordenarArrayPorEspecialidad);
+	console.log(filas)
+	for(var i = 0; i < filas.length; i++){
 		fila = '<tr>'
-			+ '<td>' + doctores[i].especialidad + '</td>'
-			+ '<td>' + doctores[i].nombreCompleto + '</td>'
-			+ '<td>' + doctores[i].consultasFinalizadas + '</td>';
-		if(lista[doctores[i].consultasFinalizadas] === undefined){
-			lista[doctores[i].consultasFinalizadas] = fila;
-		}else{
-			lista.splice(doctores[i].consultasFinalizadas, 0, fila);
-		}
+			+ '<td>' + filas[i].especialidad + '</td>'
+			+ '<td>' + filas[i].nombreCompleto + '</td>'
+			+ '<td>' + filas[i].consultasFinalizadas + '</td></tr>';
+		lista.push(fila)
 	}
 	return lista;
+}
+
+
+/**
+ Retorna un array ordenado por especialidad
+*/
+
+function ordenarArrayPorEspecialidad(a, b){
+	if(a.especialidad < b.especialidad){
+		return -1;
+	}else if(a.especialidad > b.especialidad){
+		return 1;
+	}else{
+		console.log("lala")
+		return b.consultasFinalizadas - a.consultasFinalizadas;
+	}
 }
