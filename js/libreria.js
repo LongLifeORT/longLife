@@ -15,7 +15,7 @@ function main() {
 	var buscarConsultaMenu = $(".buscarConsultaMenu");
 	var misConsultas       = $(".menuCliente :first-child").eq(2);
 	var modificarPerfilMenu  = $(".modificarPerfilMenu");
-	var ConfigurarPerfil   = $(".menuCliente :first-child").eq(3);
+	var configurarPerfil   = $(".menuCliente :first-child").eq(3);
 	
 	
 	//menues del paciente.
@@ -28,7 +28,7 @@ function main() {
 	buscarConsultaMenu.on("click" , mostrarBuscarConsulta);
 
 	//menues para modificar el perfil
-	ConfigurarPerfil.on("click" , mostrarModificarPerfil);
+	configurarPerfil.on("click" , mostrarModificarPerfil);
 	//sidebar para modificar perfil
 	modificarPerfilMenu.on("click" , mostrarModificarPerfil);
 	//botonera en tablero para modificar perfil
@@ -82,8 +82,10 @@ function mostrarModificarPerfil() {
 	var modificarPerfilInfo = $(".modificarPerfilInfo");
 	modificarPerfilInfo.toggle();
 
+
 	//interfaz de modificar consulta	
 	formModificarPerfil();
+	$("#mod_imagen_paciente").on('change', cambioFoto);
 }
 
 /**
@@ -249,7 +251,11 @@ function randomMedia(_media){
 function randomCedula(){
 	var cedula = "";
 	for(var i = 0; i < 8; i++){
-		cedula += random(9);
+		if(i < 2){
+			cedula += random(5);
+		}else{
+			cedula += random(9);
+		}
 	}
 	return cedula;
 }

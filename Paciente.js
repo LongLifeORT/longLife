@@ -705,7 +705,7 @@ function modificarPerfil(){
 	var paciente = usuarioIngresado;
 	console.log(paciente.foto);
 	//toma los valores de los inputs del formulario modificar  clave
-	var nuevaFoto = $("#mod_imagen_paciente").val().split("\\").pop ();
+	var nuevaFoto = $("#mod_imagen_paciente").val().split("\\").pop();
 	console.log(nuevaFoto);
 	var nuevoTelefono = $("#mod_telefono_paciente").val();
 	var nuevaAlergias = $("#mod_alergias_paciente").val();
@@ -725,6 +725,17 @@ function modificarPerfil(){
 	}
 	resultado.html("Se ha modificado el Perfil.");
 }
+
+/*
+ Cambia y muestra foto del perfil previo al guardado
+*/
+
+function cambioFoto(){
+	var nuevaFoto = $("#mod_imagen_paciente").val().split("\\").pop();
+	console.log(nuevaFoto);
+	$("#muestraImagenActual").attr("src", "./images/" +  nuevaFoto);
+}
+
 
 /*
  modificarClave cambia la clave del paciente logueado desde su perfil
