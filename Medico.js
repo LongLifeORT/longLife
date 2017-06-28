@@ -35,9 +35,7 @@ function salirMedico(){
 */
 
 function dibujarSelectAbonar(){
-	$("#form-consultas").html("");
-	$(".contenedor-consultas-medico").html("");
-	var contenedor = $('.contenedor-consultas-medico');
+	var contenedor = eliminarElementosMedico();
 	var nuevoContenido = '<h3>Abonado de consultas de pacientes</h3><p><select id="sel-abonar-medico" class="form-control">';
 	nuevoContenido += '<option value="seleccionar">Seleccionar</option>';
 	for(var i = 0; i < pacientes.length; i++){
@@ -104,9 +102,7 @@ function abonarConsulta(){
 */
 
 function dibujarSelectInhabilitar(){
-	$("#form-consultas").html("");
-	var contenedor = $('.contenedor-consultas-medico');
-	contenedor.html("");
+	var contenedor = eliminarElementosMedico();
 	var nuevoContenido = '<h3>Inhabilitar pacientes</h3><p><select id="sel-habilitar-medico" class="form-control">';
 	nuevoContenido += '<option value="seleccionar">Seleccionar</option>';
 	for(var i = 0; i < pacientes.length; i++){
@@ -177,8 +173,7 @@ function dibujarBotonesHabilitar(bool, seleccionar){
 */
 
 function dibujarSelectConsultasMedico(){
-	var contenedor = $('.contenedor-consultas-medico');
-	contenedor.html("");
+	var contenedor = eliminarElementosMedico();
 	var nuevoContenido = '<h3>Consultas pendientes</h3><p><select id="sel-consultas-medico" class="form-control">';
 	nuevoContenido += '<option value="">Seleccionar</option>';
 	for(var i = 0; i < consultas.length; i++){
@@ -298,7 +293,7 @@ function dibujarTablaDeConsulta(_consultaIndex){
 		var indicePaciente = $(this).attr('data-paciente');
 		modificarPesoAltura(peso.val(), altura.val(), indicePaciente);
 		actualizarPesoAlturaIMC(indicePaciente);
-		//mostrar alerta de variación
+		//mostrar alerta de variación de IMC y nuevos historicos
 		alertaVariacionIMC(indicePaciente);
 		alertaNuevoMaximoMinimoPeso(indicePaciente);
 	});
@@ -436,4 +431,15 @@ function inhabilitarPaciente(cedula){
  	$("#viejo-peso").val(paciente.peso[paciente.peso.length - 1] + " kg");
  	$("#viejo-altura").val(paciente.altura[paciente.altura.length - 1] + " cm");
  	$("#imc").val(paciente.imc());
+ }
+
+ /**
+  Función accesoria que elimina elementos del médico cuando es necesario.
+ */
+
+ function eliminarElementosMedico(){
+ 	var contenedor = $(".contenedor-consultas-medico");
+ 	contenedor.html("");
+ 	$("#form-consultas").html("");
+ 	return contenedor;
  }
