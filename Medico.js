@@ -1,25 +1,3 @@
-function Medico(nombre, apellido, especialidad, numeroProfesional,clave, consultasFinalizadas){
-	this.nombre = nombre;
-	this.apellido = apellido;
-	this.nombreCompleto = nombre + " " + apellido;
-	this.especialidad = especialidad;
-	this.numeroProfesional = numeroProfesional;
-	this.clave = clave;
-	this.consultasFinalizadas = consultasFinalizadas;
-}
-
-var doctores = [
-	new Medico("Gerardo", "Torres", "Cardiologo", 123,123456, random(40)),
-	new Medico("Gabino", "Baldomero", "Geriatra",124 ,123456, random(40)),
-	new Medico("Modesto", "Abel", "Neumología",   125, 123456, random(40)),
-	new Medico("Ignacio", "Cogoyo", "Neumología", 126,123456, random(40)),
-	new Medico("Silvio", "Bautista", "Pediatría", 127,123456, random(40)),
-	new Medico("Ramiro", "Nicola", "Pediatría", 128,123456, random(40)),
-	new Medico("Adalberto", "Glauco", "Psiquiatría", 129,123456, random(40)),
-	new Medico(	"Amado", "Cipriano", "Toxicología", 130,123456, random(40)),
-	new Medico("Adolfo", "Wilfredo", "Oftalmología", 131,123456, random(40)),
-	new Medico("Rosario", "Reyes", "Cardiologo", 132,123456, random(40)),			
-];
 
 
 
