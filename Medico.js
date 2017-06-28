@@ -34,16 +34,12 @@ function salirMedico(){
 */
 
 function dibujarSelectAbonar(){
-	
 	$(".contenedor-consultas-medico").html("");
-	$("#form-consultas").html("");
 	var contenedor = $('.contenedor-consultas-medico');
 	var nuevoContenido = '<h3>Abonado de consultas de pacientes</h3><p><select id="sel-abonar-medico" class="form-control">';
 	nuevoContenido += '<option value="seleccionar">Seleccionar</option>';
 	for(var i = 0; i < pacientes.length; i++){
-		nuevoContenido += '<option value="'
-			+ i
-			+ '">'
+		nuevoContenido += '<option value="' + i	+ '">'
 			+ pacientes[consultas[i].paciente].nombre
 			+ '</option>';
 	}
@@ -55,15 +51,11 @@ function dibujarSelectAbonar(){
 }
 
 /**
- Se lista consultas no abonadas
+ Se lista consultas no abonadas seleccionadas por el select de pacientes
 */
 
 function dibujarConsultasNoAbonadas(pacienteIndex){
 	var contenedor = $(".lista-consultas-no-abonadas")
-	contenedor.html("");
-	if(pacienteIndex === "seleccionar"){
-		return;
-	}
 	var contenedorTabla = '<table class="table">'
 		+ '<thead>'
 		+	'<tr>'
@@ -110,14 +102,11 @@ function abonarConsulta(){
 */
 
 function dibujarSelectInhabilitar(){
-	
-	$(".contenedor-consultas-medico").html("");
-	$("#form-consultas").html("");
 	var contenedor = $('.contenedor-consultas-medico');
+	contenedor.html("");
 	var nuevoContenido = '<h3>Inhabilitar pacientes</h3><p><select id="sel-habilitar-medico" class="form-control">';
 	nuevoContenido += '<option value="seleccionar">Seleccionar</option>';
 	for(var i = 0; i < pacientes.length; i++){
-		console.log()
 		if(pacientes[i].habilitado){
 			nuevoContenido += '<option class="bg-success" value="'
 				+ pacientes[i].cedula
@@ -167,7 +156,6 @@ function dibujarBotonesHabilitar(bool, seleccionar){
 	if(seleccionar === "seleccionar"){
 		bool = "seleccionar";
 	}
-	console.log(bool);
 	var contenedor = $(".botones");
 	contenedor.html("");
 	var contenido = "";
@@ -186,9 +174,8 @@ function dibujarBotonesHabilitar(bool, seleccionar){
 */
 
 function dibujarSelectConsultasMedico(){
-	
-	$(".contenedor-consultas-medico").html("");
 	var contenedor = $('.contenedor-consultas-medico');
+	contenedor.html("");
 	var nuevoContenido = '<h3>Consultas pendientes</h3><p><select id="sel-consultas-medico" class="form-control">';
 	nuevoContenido += '<option value="">Seleccionar</option>';
 	for(var i = 0; i < consultas.length; i++){
@@ -211,13 +198,12 @@ function dibujarSelectConsultasMedico(){
 */
 
 function dibujarTablaDeConsulta(_consultaIndex){
-	// limpiamos el elemento cada vez que hay una selección
+	// limpiamos el contenedor de la consulta cada vez que hay una selección
 	$("#form-consulta").html("");
-	// si se selecciona "seleccionar" se vacía el div
+	// si se selecciona "seleccionar" se termina la función
 	if(_consultaIndex === ""){
 		return
 	}
-	//var contenedor = $(".contenedor-consultas-medico");
 	var contenedor = $("#form-consultas");
 	var consultaActual = consultas[_consultaIndex];
 	var pacienteSeleccionado = pacientes[consultaActual.paciente];
@@ -300,7 +286,6 @@ function dibujarTablaDeConsulta(_consultaIndex){
 		var peso = $("#nuevo-peso");
 		var altura = $("#nuevo-altura");
 		if(validacionTotal(peso.val(), altura.val())){
-			console.log("entre");
 			peso.val("");
 			altura.val("");
 			peso.attr('placeholder', 'Ingrese solo números');
@@ -432,7 +417,6 @@ function consultaPaga(indexConsulta){
 */
 function inhabilitarPaciente(cedula){
 	var indexPaciente = busquedaEnArrayObjetos(pacientes, "cedula", cedula);
-	console.log(indexPaciente)
 	if(pacientes[indexPaciente].habilitado){
 		pacientes[indexPaciente].habilitado = false;
 	}else{
