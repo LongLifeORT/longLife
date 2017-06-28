@@ -1,3 +1,21 @@
+/*
+Este Archivo contiene los datos de los objetos Pacientes, Medicos y Consultas.
+
+Constructor Medico 
+Array Medico
+
+Constructor Paciente
+Array Paciente
+
+
+
+
+
+
+
+*/
+
+
 
 /*
 Constructor del objeto Medico con sus parametros, nombre, apellido y especialidad lo identifica,  numero profesional y clave son necesarias para loguearse y consultas finalizadas son
@@ -60,14 +78,11 @@ function Paciente(nombre, apellido,numeroPaciente,clave, peso, altura,cedula, al
 	this.telefono = 911,
 	this.habilitado = true,
 	//metodos del paciente.
-	this.modificarCedula = function(nuevaCedula){
-		this.cedula= nuevaCedula;
-	};
-	this.modificarContraseña = function(nuevaContraseña){
-		this.contraseña= nuevaContraseña;
+	this.modificarClave = function(nuevaClave){
+		this.clave = nuevaClave;
 	};
 	this.modificarFoto = function(nuevaFoto){
-		this.foto = nuevaFoto();
+		this.foto = nuevaFoto;
 	};
 	this.modificarAlergias = function(nuevaAlergia){
 		this.alergias = nuevaAlergia;

@@ -669,18 +669,19 @@ function modificarPerfil(){
 	var nuevaFoto = $("#mod_imagen_paciente").val().split("\\").pop();
 	console.log(nuevaFoto);
 	var nuevoTelefono = $("#mod_telefono_paciente").val();
-	var nuevaAlergias = $("#mod_alergias_paciente").val();
+	var valorAlergias = $("#mod_alergias_paciente").val();
+	var nuevaAlergias = valorAlergias.split(",");
 	var resultado = $("#resultadoModificarPerfil");
 
 	//buscamos el paciente a modificar del array.
 	var pacienteIndex = buscarPacienteEnArray();
-	pacientes[pacienteIndex]["telefono"] = nuevoTelefono;
-	pacientes[pacienteIndex]["alergias"] = nuevaAlergias.split(",");
+	pacientes[pacienteIndex].modificarTelefono(nuevoTelefono);
+	pacientes[pacienteIndex].modificarAlergias(nuevaAlergias);
 
 	//si el usuario modifico la foto
 	if(nuevaFoto.length != 0){
 		//modificamos la foto del paciente.
-		pacientes[pacienteIndex]["foto"] = nuevaFoto;
+		pacientes[pacienteIndex].modificarFoto(nuevaFoto);
 		//cambia la imagen actual por la nueva imagen.
 		$("#muestraImagenActual").attr("src", "./images/" +  paciente.foto);
 	}
@@ -724,7 +725,7 @@ function modificarClave(){
 				//buscamos el index del paciente dentro del array comparando la propiedad nombre completo 
 				var pacienteIndex = buscarPacienteEnArray();	
 				//modificamos la clave actual por la nueva clave
-				pacientes[pacienteIndex]["clave"] = valorClaveNueva;
+				pacientes[pacienteIndex].modificarClave(valorClaveNueva);
 				console.log(pacientes[pacienteIndex]["clave"]);
 				resultado.html("Nueva Clave Ingresada con exito.");
 
