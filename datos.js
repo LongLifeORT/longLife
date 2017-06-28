@@ -7,10 +7,10 @@ Array Medico
 Constructor Paciente
 Array Paciente
 
+Constructor Consulta
+Array Consultas
 
-
-
-
+funcion generarConsultas automaticas es llamada desde login.js
 
 
 */
@@ -32,18 +32,18 @@ function Medico(nombre, apellido, especialidad, numeroProfesional,clave, consult
 	this.clave = clave;
 	this.consultasFinalizadas = consultasFinalizadas;
 }
-
+//Array que contiene los datos de los medicos precargados manualmente, nombre, apellido, especialidad,  usuario , clave y una cantidad de consultas al azar ya finalizadas.
 var doctores = [
 	new Medico("Gerardo", "Torres", "Cardiologo", 123,123456, random(40)),
 	new Medico("Gabino", "Baldomero", "Geriatra",124 ,123456, random(40)),
-	new Medico("Modesto", "Abel", "Neumología",   125, 123456, random(40)),
+	new Medico("Blanca", "Nieves", "Neumología",   125, 123456, random(40)),
 	new Medico("Ignacio", "Cogoyo", "Neumología", 126,123456, random(40)),
 	new Medico("Silvio", "Bautista", "Pediatría", 127,123456, random(40)),
-	new Medico("Ramiro", "Nicola", "Pediatría", 128,123456, random(40)),
+	new Medico("Yola", "Prieto", "Pediatría", 128,123456, random(40)),
 	new Medico("Adalberto", "Glauco", "Psiquiatría", 129,123456, random(40)),
 	new Medico(	"Amado", "Cipriano", "Toxicología", 130,123456, random(40)),
 	new Medico("Adolfo", "Wilfredo", "Oftalmología", 131,123456, random(40)),
-	new Medico("Rosario", "Reyes", "Cardiologo", 132,123456, random(40)),			
+	new Medico("Rosario", "Reyes", "Cardiologo", 132,123456, random(40))			
 ];
 
 
@@ -60,7 +60,7 @@ var doctores = [
  * @param {int} peso - Peso
  * @param {float} altura - altura.
  * @param {int} cedula - Nombre del paciente
- * @param {string} alergias - Alergias del paciente.
+ * @param {string} alergias - Alergias del paciente. ej: 16.png
  * @param {string} foto - Foto de perfil del paciente.
  */
 
@@ -71,6 +71,7 @@ function Paciente(nombre, apellido,numeroPaciente,clave, peso, altura,cedula, al
 	this.numeroPaciente	= numeroPaciente;
 	this.clave = clave;
 	this.cedula = cedula;
+	//se le puede dar una foto, pero por defecto toma una foto al azar al comienzo del programa.
 	this.foto = foto  || selectorRandomFotoPerfil();
 	this.peso = [peso],
 	this.altura = [altura],
@@ -96,7 +97,7 @@ function Paciente(nombre, apellido,numeroPaciente,clave, peso, altura,cedula, al
 	};
 };
 
-//Array que contiene los datos de los pacientes precargados manualmente
+//Array que contiene los datos de los pacientes precargados manualmente, nombre, apellido, usuario , clave, un peso al azar, una altura al azar y una cedula al azar.
 var pacientes = [
 	new Paciente("Luis", "Damiano", 11 ,123456, randomMedia(80), randomMedia(160), randomCedula()),
 	new Paciente("Horacio", "Mercer",  12,123456, randomMedia(80), randomMedia(160), randomCedula()),
@@ -106,9 +107,10 @@ var pacientes = [
 	new Paciente("Rosa", "Ximenes",16,123456, randomMedia(80), randomMedia(160), randomCedula()),
 	new Paciente("Carlos", "Vasco",17,123456, randomMedia(80), randomMedia(160), randomCedula()),
 	new Paciente("Marcelino", "Sosa",18,123456, randomMedia(80), randomMedia(160), randomCedula()),
-	new Paciente("Diego", "Santos",19,123456, randomMedia(80), randomMedia(160), randomCedula()),
-	new Paciente("Leonardo", "Amor",20,123456, randomMedia(80), randomMedia(160), randomCedula()),
-	new Paciente("Alvaro", "Mesa",21,123456, randomMedia(80), randomMedia(160), randomCedula()),
+	new Paciente("Armando", "Casas",19,123456, randomMedia(80), randomMedia(160), randomCedula()),
+	new Paciente("Debora  ", "Melo",20,123456, randomMedia(80), randomMedia(160), randomCedula()),
+	new Paciente("Alvaro", "Mesa",21,123456, randomMedia(80), randomMedia(160), randomCedula())
+
 
 ];
 
@@ -129,17 +131,15 @@ function Consulta(pacienteIndex, medicoIndex,descripcion){
 	this.identificador = letraNombreIdentificador 
 		+ letrasApellidoIdentificador 
 		+ numeroIncremental;
-
 	this.consultaPaga = false;
 	this.descripcion =  descripcion  || randomDescription();
 	this.finalizada = false;
 	this.paciente = pacienteIndex;
 	this.medico = medicoIndex;
 	this.especialidad = doctores[medicoIndex].especialidad;
-
+	//metodos de cada consulta
 	this.modificarDescripcion = function(nuevaDescripcion){
 		this.descripcion = nuevaDescripcion;
-
 	};
 	this.modificarEstado = function(){
 		this.finalizada = true;
@@ -148,7 +148,7 @@ function Consulta(pacienteIndex, medicoIndex,descripcion){
 		this.consultaPaga = nuevoPago;
 	};
 };
-//Array que contiene las consultas pre cargadas manualmente.
+//Array que contiene las consultas pre cargadas manualmente, contiene el indice pacientes que realizo la consulta , el indice de medicos que la toma  y una descripcion pre cargada.
 var consultas = [
 // indice de paciente, indice de medico, descripcion
 	new Consulta(0,0,"Me duele el pecho y me cuesta respirar."),
@@ -161,7 +161,7 @@ var consultas = [
 	new Consulta(6,7,"Tome un frasco de pastillas y no puedo parar de ir al baño."),
 	new Consulta(7,7,"Fuerte dolor de estomago y vomitos."),
 	new Consulta(8,5, "Mi hijo esta con vomitos."),
-	new Consulta(9,6,"Escucho voces."),
+	new Consulta(9,6,"Escucho voces en mi cabeza."),
 	new Consulta(1,2, "Aveces tengo mucha tos."),
 	new Consulta(2,4, " Mi hijo tiene problemas para ir al baño."),
 	new Consulta(0,7 , "Tome unas pastillas y no puedo parar de ir al baño."),
@@ -183,7 +183,7 @@ var consultas = [
 	new Consulta(10,3, "Aveces me cuesta respirar."),
 	new Consulta(0,8 , "Creo que necesito lentes."),
 	new Consulta(3,1, "Me puede dar pastillas para dormir?."),
-	new Consulta(4,2, "Que tos que tengo."),
+	new Consulta(4,2, "Que tos que tengo por dios."),
 	new Consulta(0,3, "No puedo respirar bien."),
 	new Consulta(6,4, "Mi hija no quiere volver a la escuela."),
 	new Consulta(5,5, " Mi hija tiene problemas para dormir."),

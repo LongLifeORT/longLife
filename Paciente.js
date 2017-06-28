@@ -434,7 +434,7 @@ function formBuscarConsulta(){
 	//formulario para buscar consulta
 	var form 	=  '<form>'
 				+	'<hr>'
-			 	+   '<label  for="buscar1A" >ID</label>';
+			 	+   '<label  for="buscar1A" >Consultas</label>';
 			 	//listamos los id de cada consulta del paciente
 		form 	+= '<select class="form-control" name="Sel.Id" id="buscar1A">'
 				+ '<option selected="selected" value="Todas">Todas Las consultas</option>'
@@ -446,7 +446,6 @@ function formBuscarConsulta(){
 		form    +=	'<label  for="in1C" >Descripcion</label>'
 				+	'<textarea  class="form-control" id="buscar1B"  disabled ></textarea>'
 				+	'<br >'
-            	+   '<input type="button"  class="form-control btn-primary" value="Buscar" id="btnBuscarConsulta">'
             	+	'</form>';
         form 	+=  '<div class="text-center" id="resultadosBuscarConsulta">'	
          		+    '<p class="panel panel-default resultado"  id="resultadoBuscarConsulta"></p>'
@@ -460,15 +459,14 @@ function formBuscarConsulta(){
     buscarConsulta.html(form);
 	//mostramos las consultas generadas por el usuario;
     mostrarTablaUsuarioConsultas();
-	//el usuario puede elegir una consulta por su ID.
-	$("#btnBuscarConsulta").on("click",busquedaDeConsultas);
+	//el usuario puede elegir que consultas quiere ver, todas, abiertas y finalizadas.
+	$("#buscar1A").on("change",busquedaDeConsultas);
 
 	   
 };
 	//funcion switch dependiendo que consultas quiera ver el usuario
 function  busquedaDeConsultas(){
 	var tipoConsultas =  $("#buscar1A").val();
-	console.log(tipoConsultas);
 	//permite elegir una consulta por su id.
 		switch(tipoConsultas){
 			case "Todas":mostrarTablaUsuarioConsultas("Todas");
