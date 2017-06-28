@@ -1,5 +1,5 @@
 /**
-Login
+Funciones correspondientes a el login del usuario
 */
 
 // variable global que contiene el usuario objeto a maniputar

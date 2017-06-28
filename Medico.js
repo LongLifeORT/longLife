@@ -1,3 +1,9 @@
+/*
+
+
+Funciones correspondientes  a la interface del medico.
+
+*/
 
 
 

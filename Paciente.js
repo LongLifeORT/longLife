@@ -1,4 +1,9 @@
+/*
 
+
+Funciones correspondientes  a la interface del paciente.
+
+*/
 
 
 

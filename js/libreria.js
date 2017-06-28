@@ -168,6 +168,47 @@ function calcularIMC(peso, altura){
 	return peso / Math.pow(altura, 2);
 }
 
+/* 
+Funciones para validar datos
+ */
+//******************************************************
+
+
+//valida que los inputs no esten vacios
+function validarVacio(inputA,inputB,inputC,inputD){
+	var inputC = inputC || 1;
+	var inputD = inputD || 1;
+	if(inputA.length === 0 ||  inputB.length ===  0 || inputC.length === 0 || inputD.length === 0 ){
+		return false;
+	}else{
+		return true;
+	}
+};
+//valida que el valor sea un numero entero
+function validarInt(inputA,inputB){
+	if(isNaN(inputA) || isNaN(inputB)){
+		return false;
+	}else{
+		return true;
+	}
+}
+
+//valida que no est vacio, que sea numero.
+function validacionTotal(a, b){
+	if(a.length < 1 || b.length < 1){
+		return true;
+	}
+	if(isNaN(a) || isNaN(b)){
+		return true
+	}
+	return false;
+}
+
+
+
+
+
+
 // logica principal de login : accion de form login
 
 function ingresarUsuario(){
