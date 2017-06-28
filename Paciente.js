@@ -118,7 +118,7 @@ function mostrarModificarPerfil() {
 
 
 
-// tabla que contiene las consultas a mostrar
+// Esta funcion retorna una tabla que contiene las consultas a mostrar
 /*
 arrConsultas puede ser todas las consultas
 o solo las del usuario segun mostrarTablaUsuarioConsultas
@@ -128,20 +128,35 @@ function crearTablaTodasConsultas(arrConsultas){
 	 var table = "<div class= \"table-responsive\">"
 	 table +=  "<table class=\"table table-striped table-hover\">"
 	 table +=     "<thead>";
-	 table += " <tr> <th>ID</th> <th>Usuario</th>   <th>Medico</th> <th>Especialidad</th></tr> ";
+	 table += " <tr><th>Ver Consulta</th> <th>ID</th>   <th>Medico</th> <th>Especialidad</th> <th>Abonar</th> <th>Finalizada</th></tr> ";
      table +=    "</thead>"     
      table += ' <tbody>';                             
               for(var i = 0 ; i< listadoConsultas.length; i++){
               	table +=  '<tr class="listado_de_consultas" id ="'  +  listadoConsultas[i].identificador +  '">'; 
-              	table += "<td> <a href='#'> "  + listadoConsultas[i].identificador + "</a></td>" 
-              	+ "<td>" + pacientes[listadoConsultas[i].paciente].nombreCompleto  + "</td>" 
+              	table += "<td>  <i class='fa fa-search fa-search-blue' aria-hidden='true'></i> </td>";
+              	table += "<td>  "  + listadoConsultas[i].identificador + " </td>" 
               	+ "<td>" + doctores[listadoConsultas[i].medico].nombreCompleto  + "</td>"
               	+ "<td>" + listadoConsultas[i].especialidad   + "  </td>"
-              	+ "<td>  <i class='fa fa-search' aria-hidden='true'></i> </td>"
-              	+ "<td>  <i class='fa fa-money' aria-hidden='true'></i> </td>"
-              	table += "</tr>";	
-              }  
-    table +=  "</tbody></table></div>"       
+      //si la consulta no esta paga salga un icono que le avise debe pagar.
+              		if(!listadoConsultas[i]["consultaPaga"]){
+    table +=  "<td>  <i class='fa fa-money fa-money-green' aria-hidden='true'></i> </td>";
+              		}else{
+    table +=  "<td>  <i class='fa fa-money fa-money-white' aria-hidden='true'></i> </td>";
+              		}
+              	//ultima fila
+            
+//si la consulta esta finalizada salga un icono que le avise ya esta cerrada.
+              		if(listadoConsultas[i]["finalizada"]){
+    table +=  "<td>  <i class='fa fa-times-circle fa-circle-red' aria-hidden='true'></i> </td>";
+              		}else{
+    table +=  "<td>  <i class='fa fa-times-circle fa-circle-white' aria-hidden='true'></i> </td>";
+              		}
+     
+    table += "</tr>";	
+              }
+              //cerramos la tabla
+    table +=  "</tbody></table></div>"    
+    //esta funcion retorna una tabla   
     return table;       
 
 
@@ -153,7 +168,7 @@ function mostrarTablaTodasConsultas(){
 	var consultasGeneradas = $("#resultadoBuscarConsulta");
 	// la tabla se crea en Paciente.js
 	var tabla = crearTablaTodasConsultas(consultas);
-	//consultasGeneradas.html(tabla)
+	consultasGeneradas.html(tabla)
 }
 
 //function mostrar tabla con las consultas del usuario

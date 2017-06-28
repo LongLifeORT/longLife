@@ -103,3 +103,21 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+/*iconos de buscar consulta*/
+.fa-search-blue{
+  color:blue;
+}
+
+.fa-circle-red{
+  color:red;
+}
+.fa-circle-white{
+  color:white;
+}
+.fa-money-green{
+  color:green;
+}
+.fa-money-white{
+  color:white;
+}
