@@ -27,6 +27,7 @@ function inicializarInterfazMedico(){
 
 function salirMedico(){
 	$(".page-header").next().remove();
+	$("#form-consultas").remove();
 }
 
 /**
