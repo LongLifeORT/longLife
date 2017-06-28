@@ -12,9 +12,7 @@ Funciones correspondientes  a la interface del medico.
  */
 
 function inicializarInterfazMedico(){
-	//if(!$(".page-header").next().is('form')){
-		$(".page-header").after('<form><div class="contenedor-consultas-medico"></div></form><div id="form-consultas"></div>');	
-	//}
+	$(".page-header").after('<form><div class="contenedor-consultas-medico"></div></form><div id="form-consultas"></div>');	
 	$("#menu-consultas").on('click', dibujarSelectConsultasMedico);
 	$("#menu-inhabilitar").on('click', dibujarSelectInhabilitar);
 	$("#menu-abonado").on('click', dibujarSelectAbonar);
@@ -36,7 +34,7 @@ function salirMedico(){
 */
 
 function dibujarSelectAbonar(){
-	$(".botonera").hide();
+	
 	$(".contenedor-consultas-medico").html("");
 	$("#form-consultas").html("");
 	var contenedor = $('.contenedor-consultas-medico');
@@ -112,7 +110,7 @@ function abonarConsulta(){
 */
 
 function dibujarSelectInhabilitar(){
-	$(".botonera").hide();
+	
 	$(".contenedor-consultas-medico").html("");
 	$("#form-consultas").html("");
 	var contenedor = $('.contenedor-consultas-medico');
@@ -188,7 +186,7 @@ function dibujarBotonesHabilitar(bool, seleccionar){
 */
 
 function dibujarSelectConsultasMedico(){
-	$(".botonera").hide();
+	
 	$(".contenedor-consultas-medico").html("");
 	var contenedor = $('.contenedor-consultas-medico');
 	var nuevoContenido = '<h3>Consultas pendientes</h3><p><select id="sel-consultas-medico" class="form-control">';

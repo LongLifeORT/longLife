@@ -1,14 +1,14 @@
 	/*    Libreria de funciones del programa   */
 
 
-$(document).ready(main);
+//$(document).ready(main);
 
 
 
-function main() {
+function inicializarInterfazPaciente() {
 
 	//ocultamos la informacion de los formularios
-	hideInfos();
+	//hideInfos();
 	//variables de los botones del menu y botones del cliente.
 	var crearConsultaMenu  = $(".crearConsultaMenu");
 	var crearConsulta   = $(".menuCliente :first-child").eq(1);
@@ -17,15 +17,28 @@ function main() {
 	var modificarPerfilMenu  = $(".modificarPerfilMenu");
 	var configurarPerfil   = $(".menuCliente :first-child").eq(3);
 	
-	
-	//menues del paciente.
-	//menues para crear consulta
-	crearConsultaMenu.on("click" , mostrarCrearConsulta);
-	crearConsulta.on("click" , mostrarCrearConsulta);
+	if(!usuarioIngresado.habilitado){
+		//crearConsultaMenu.after('<p>Usuario no habilitado!</p>')
+		$(".crearConsultaMenu a img").attr("src", "./images/deshabilitado.png");
+		$(".crearConsultaMenu span").append("<p class=\"inhabilitado\">Inhabilitado</p>");
+		$(".buscarConsultaMenu a img").attr("src", "./images/deshabilitado.png");
+		$(".buscarConsultaMenu span").append("<p class=\"inhabilitado\">Inhabilitado</p>");
+		crearConsulta.hide();
+		misConsultas.hide();
 
-	//menues para buscar consulta 
-	misConsultas.on("click" , mostrarBuscarConsulta);
-	buscarConsultaMenu.on("click" , mostrarBuscarConsulta);
+	}else{
+		crearConsulta.show();
+		misConsultas.show();
+		//menues del paciente.
+		//menues para crear consulta
+		crearConsultaMenu.on("click" , mostrarCrearConsulta);
+		crearConsulta.on("click" , mostrarCrearConsulta);
+
+		//menues para buscar consulta 
+		misConsultas.on("click" , mostrarBuscarConsulta);
+		buscarConsultaMenu.on("click" , mostrarBuscarConsulta);
+	}
+	
 
 	//menues para modificar el perfil
 	configurarPerfil.on("click" , mostrarModificarPerfil);
@@ -167,47 +180,6 @@ function borradoBienvenida(){
 function calcularIMC(peso, altura){
 	return peso / Math.pow(altura, 2);
 }
-
-/* 
-Funciones para validar datos
- */
-//******************************************************
-
-
-//valida que los inputs no esten vacios
-function validarVacio(inputA,inputB,inputC,inputD){
-	var inputC = inputC || 1;
-	var inputD = inputD || 1;
-	if(inputA.length === 0 ||  inputB.length ===  0 || inputC.length === 0 || inputD.length === 0 ){
-		return false;
-	}else{
-		return true;
-	}
-};
-//valida que el valor sea un numero entero
-function validarInt(inputA,inputB){
-	if(isNaN(inputA) || isNaN(inputB)){
-		return false;
-	}else{
-		return true;
-	}
-}
-
-//valida que no est vacio, que sea numero.
-function validacionTotal(a, b){
-	if(a.length < 1 || b.length < 1){
-		return true;
-	}
-	if(isNaN(a) || isNaN(b)){
-		return true
-	}
-	return false;
-}
-
-
-
-
-
 
 // logica principal de login : accion de form login
 
