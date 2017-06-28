@@ -93,11 +93,14 @@ function salirSesion(){
 	// hacer un reload de la página
 	//window.location.reload(false); 
 	// o limpiar los datos
-	usuarioIngresado = null;
 	ocultarMenus();
 	mostrarOcultarBotonLoginLogout();
 	borradoBienvenida();
-	salirMedico();
+	if(usuarioIngresado.hasOwnProperty('especialidad')){
+		salirMedico();
+	}
+	usuarioIngresado = null;
+
 	//salirPaciente();
 }
 
@@ -122,7 +125,7 @@ $().ready(function(){
 		if(usuarioIngresado.especialidad !== undefined){
 			inicializarInterfazMedico();
 		}else{
-		
+			inicializarInterfazPaciente();
 		}
 	});
 	$("#logout").on('click', salirSesion);

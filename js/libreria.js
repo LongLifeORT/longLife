@@ -27,6 +27,11 @@ function inicializarInterfazPaciente() {
 		misConsultas.hide();
 
 	}else{
+		//Nos aseguramos que los menues estén bien
+		$('.inhabilitado').remove();
+		$(".crearConsultaMenu a img").attr("src", "./svg/003ambulance.svg");
+		$(".buscarConsultaMenu a img").attr("src", "./svg/004search.svg");
+		
 		crearConsulta.show();
 		misConsultas.show();
 		//menues del paciente.
@@ -179,6 +184,36 @@ function borradoBienvenida(){
 
 function calcularIMC(peso, altura){
 	return peso / Math.pow(altura, 2);
+}
+
+// VALIDACIONES
+
+function validarVacio(inputA,inputB,inputC,inputD){
+	var inputC = inputC || 1;
+	var inputD = inputD || 1;
+	if(inputA.length === 0 ||  inputB.length ===  0 || inputC.length === 0 || inputD.length === 0 ){
+		return false;
+	}else{
+		return true;
+	}
+};
+
+function validarInt(inputA,inputB){
+	if(isNaN(inputA) || isNaN(inputB)){
+		return false;
+	}else{
+		return true;
+	}
+}
+
+function validacionTotal(a, b){
+	if(a.length < 1 || b.length < 1){
+		return true;
+	}
+	if(isNaN(a) || isNaN(b)){
+		return true
+	}
+	return false;
 }
 
 // logica principal de login : accion de form login
