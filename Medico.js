@@ -12,7 +12,7 @@ Funciones correspondientes  a la interface del medico.
  */
 
 function inicializarInterfazMedico(){
-	$(".page-header").after('<form><div class="contenedor-consultas-medico"></div></form><div id="form-consultas"></div>');	
+	$(".page-header").after('<div class="contenedor-consultas-medico"></div></form><div id="form-consultas"></div>');	
 	$("#menu-consultas").on('click', dibujarSelectConsultasMedico);
 	$("#menu-inhabilitar").on('click', dibujarSelectInhabilitar);
 	$("#menu-abonado").on('click', dibujarSelectAbonar);
@@ -35,6 +35,7 @@ function salirMedico(){
 */
 
 function dibujarSelectAbonar(){
+	$("#form-consultas").html("");
 	$(".contenedor-consultas-medico").html("");
 	var contenedor = $('.contenedor-consultas-medico');
 	var nuevoContenido = '<h3>Abonado de consultas de pacientes</h3><p><select id="sel-abonar-medico" class="form-control">';
@@ -103,6 +104,7 @@ function abonarConsulta(){
 */
 
 function dibujarSelectInhabilitar(){
+	$("#form-consultas").html("");
 	var contenedor = $('.contenedor-consultas-medico');
 	contenedor.html("");
 	var nuevoContenido = '<h3>Inhabilitar pacientes</h3><p><select id="sel-habilitar-medico" class="form-control">';
