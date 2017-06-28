@@ -17,6 +17,8 @@ function inicializarInterfazPaciente() {
 	var modificarPerfilMenu  = $(".modificarPerfilMenu");
 	var configurarPerfil   = $(".menuCliente :first-child").eq(3);
 	
+
+	//si el usuario no esta habilitado, no podra modificar ni buscar consultas.
 	if(!usuarioIngresado.habilitado){
 		//crearConsultaMenu.after('<p>Usuario no habilitado!</p>')
 		$(".crearConsultaMenu a img").attr("src", "./images/deshabilitado.png");
@@ -27,6 +29,7 @@ function inicializarInterfazPaciente() {
 		misConsultas.hide();
 
 	}else{
+		//si el usuario esta habilitado puede crear y buscar consultas
 		//Nos aseguramos que los menues estén bien
 		$('.inhabilitado').remove();
 		$(".crearConsultaMenu a img").attr("src", "./svg/003ambulance.svg");
