@@ -58,6 +58,9 @@ function inicializarInterfazPaciente() {
 	var volverAMenu = $(".volverAMenu");
 	volverAMenu.on("click" , showMenu);
 
+
+
+
 }
 
 //oculta todo los divs info para mostrar;
@@ -95,6 +98,11 @@ function mostrarBuscarConsulta() {
 	//generamos la interfaz de buscar consulta
 	formBuscarConsulta();
 
+	//permite elegir una consulta por su id.
+	$(".listado_de_consultas").on("click", presentarDescripcion);
+
+
+
 }
 // muestra la interface de modificar perfil
 function mostrarModificarPerfil() {
@@ -113,8 +121,7 @@ function mostrarModificarPerfil() {
 
 
 
-// funcion que crea una nueva consulta manual por el paciente.
-
+// Crea una nueva consulta manual por el paciente.Esta funcion es llamada por el evento click de crear consulta dentro de formCrearConsulta
 function crearNuevaConsulta(){
 	//toma los valores de los inputs del formulario crear consulta
 	var valorEspecialidad = $("#crear1A").val();
@@ -158,36 +165,36 @@ function crearNuevaConsulta(){
 
 // tabla que contiene las consultas a mostrar
 /*
-	arrConsultas puede ser todas las consultas por si es necesario mostrar todas las consultas generadas.
-	o solo las del usuario segun mostrarTablaUsuarioConsultas.
+arrConsultas puede ser todas las consultas
+o solo las del usuario segun mostrarTablaUsuarioConsultas
  */
 function crearTablaTodasConsultas(arrConsultas){
-	// el listado de consultas puede ser el parametro que busquemos o todas las consultas existentes.
-
 	var listadoConsultas = arrConsultas || consultas ;
-	var table = "<div class= \"table-responsive\">"
-	table += "<table class=\"table table-striped table-hover\">"
-	table += "<thead>";
-	table += "<tr><th>ID</th><th>Usuario</th><th>Medico</th><th>Especialidad</th></tr> ";
-	table += "</thead>"     
-	table += "<tbody>";                             
-	for(var i = 0 ; i< listadoConsultas.length; i++){
-		table +=  "<tr id=" + listadoConsultas[i].identificador + ">";
-		table += "<td>" + listadoConsultas[i].identificador + "</td>"
-		+ "<td>" + pacientes[listadoConsultas[i].paciente].nombreCompleto + "</td>" 
-		+ "<td>" + doctores[listadoConsultas[i].medico].nombreCompleto + "</td>"
-		+ "<td>" + listadoConsultas[i].especialidad + "</td>";
-		table += "</tr>";	
-	}  
-	table += "</tbody></table></div>"       
-	//esta funcion retorna una tabla con los datos.
+	 var table = "<div class= \"table-responsive\">"
+	 table +=  "<table class=\"table table-striped table-hover\">"
+	 table +=     "<thead>";
+	 table += " <tr> <th>ID</th> <th>Usuario</th>   <th>Medico</th> <th>Especialidad</th></tr> ";
+     table +=    "</thead>"     
+     table += ' <tbody>';                             
+              for(var i = 0 ; i< listadoConsultas.length; i++){
+              	table +=  '<tr class="listado_de_consultas" id ="'  +  listadoConsultas[i].identificador +  '">'; 
+              	table += "<td> <a href='#'> "  + listadoConsultas[i].identificador + "</a></td>" 
+              	+ "<td>" + pacientes[listadoConsultas[i].paciente].nombreCompleto  + "</td>" 
+              	+ "<td>" + doctores[listadoConsultas[i].medico].nombreCompleto  + "</td>"
+              	+ "<td>" + listadoConsultas[i].especialidad   + " <i class='fa fa-search' aria-hidden='true'></i> </td>";
+
+              	table += "</tr>";	
+              }  
+    table +=  "</tbody></table></div>"       
     return table;       
+
+
+
 }
 
-
-//function mostrar tabla con todas las consultas
+//function mostrar tabla con todas las consultas existentes si fuera necesario
 function mostrarTablaTodasConsultas(){
-	var consultasGeneradas = $("#consultasGeneradas");
+	var consultasGeneradas = $("#resultadoBuscarConsulta");
 	// la tabla se crea en Paciente.js
 	var tabla = crearTablaTodasConsultas(consultas);
 	//consultasGeneradas.html(tabla)
@@ -196,7 +203,6 @@ function mostrarTablaTodasConsultas(){
 //function mostrar tabla con las consultas del usuario
 function mostrarTablaUsuarioConsultas(){
 	var consultasGeneradas = $("#resultadoBuscarConsulta");
-
 	var consultasUsuario = [];
 	var paciente = usuarioIngresado ;
 	console.log(paciente);
@@ -212,12 +218,6 @@ function mostrarTablaUsuarioConsultas(){
 	var tabla = crearTablaTodasConsultas(consultasUsuario);
 	consultasGeneradas.html(tabla)
 }
-
-
-
-
-
-
 
 
 
@@ -371,53 +371,8 @@ function listadoIdsConsultas(arrConsultas){
 
 
 
-// tabla que contiene las consultas a mostrar
-/*
-arrConsultas puede ser todas las consultas
-o solo las del usuario segun mostrarTablaUsuarioConsultas
- */
-function crearTablaTodasConsultas(arrConsultas){
-	var listadoConsultas = arrConsultas || consultas ;
-	 var table = "<div class= \"table-responsive\">"
-	 table +=  "<table class=\"table table-striped table-hover\">"
-	 table +=     "<thead>";
-	 table += " <tr> <th>ID</th> <th>Usuario</th>   <th>Medico</th> <th>Especialidad</th></tr> ";
-     table +=    "</thead>"     
-     table += " <tbody>";                             
-              for(var i = 0 ; i< listadoConsultas.length; i++){
-              	table +=  "<tr id =" +  listadoConsultas[i].identificador + ">";
-              	table += "<td>" + listadoConsultas[i].identificador + "</td>"
-              	+ "<td>" + pacientes[listadoConsultas[i].paciente].nombreCompleto  + "</td>" 
-              	+ "<td>" + doctores[listadoConsultas[i].medico].nombreCompleto  + "</td>"
-              	+ "<td>" + listadoConsultas[i].especialidad   + "</td>";
-              	table += "</tr>";	
-              }  
-    table +=  "</tbody></table></div>"       
-    return table;       
-
-}
 
 
-//function mostrar tabla con las consultas del usuario
-function mostrarTablaUsuarioConsultas(){
-		var consultasGeneradas = $("#presentarConsultasUsuario");
-
-
-		var consultasUsuario = [];
-		var paciente = usuarioIngresado ;
-			console.log(paciente);
-			//buscamos el index del paciente dentro del array comparando la propiedad nombre completo 
-			var pacienteIndex = buscarPacienteEnArray();
-
-				//recorrer el array de consultas,
-				for(var i = 0 ; i < consultas.length; i++){
-					if(consultas[i]["paciente"] == pacienteIndex){
-						consultasUsuario.push(consultas[i]);
-					}
-				}
-		var tabla = crearTablaTodasConsultas(consultasUsuario);
-		consultasGeneradas.html(tabla)
-}
 
 
 
@@ -435,14 +390,9 @@ function formBuscarConsulta(){
 			 	+   '<label  for="buscar1A" >ID</label>';
 			 	//listamos los id de cada consulta del paciente
 		form 	+= '<select class="form-control" name="Sel.Id" id="buscar1A">'
-				+ '<option selected="selected" value="empty">Sel. ID</option>';
-		//ofrecemos un listado de IDs de las consultas
-				for(var i = 0 ; i < listado.length ; i++ ){
-		form		+= 	'<option value=' + '\"' + listado[i] + '\"' + '>' + listado[i] + '</option>';	
-					
-					
-				};	
-
+				+ '<option selected="selected" value="Todas">Todas Las consultas</option>'
+				+ '<option  value="Abiertas">Abiertas</option>'
+				+ '<option  value="Finalizadas">Finalizadas</option>';
 		form	+=	'</select>'
 				+	'<br >';
 
@@ -461,29 +411,30 @@ function formBuscarConsulta(){
 
     var buscarConsulta = $("#buscarConsulta");
     buscarConsulta.html(form);
-
-    mostrarTablaUsuarioConsultas();
 	//mostramos las consultas generadas por el usuario;
-
-
-
-	//eventos de los formularios buscar Consulta
-	var identificacionBuscar = $("#buscar1A");
-	identificacionBuscar.on("change", presentarDescripcion);
-	var btnBuscarConsulta = $("#btnBuscarConsulta");
-	btnBuscarConsulta.on("click", estadoConsulta);
-	
-
+    mostrarTablaUsuarioConsultas();
+	//el usuario puede elegir una consulta por su ID.
+	//$("#btnBuscarConsulta").on("click",busquedaDeConsultas)
+	   
 };
+
+function  busquedaDeConsultas(){
+	var tipoConsultas =  $("#buscar1A").val();
+
+
+
+
+
+
+}
 
 
 
 function presentarDescripcion(){
 	//cuando el paciente elige una ID de la consulta, puede ver la descripcion de la consulta.
 
-	var idSelected = $("#buscar1A").val();
-		if(idSelected !== "empty"){
-			
+ 		var idSelected  = $(this).attr('id');
+
 			//luego de que el paciente elige un Identificador de consulta
 
 			//vamos a mostrar la descripcion de la consulta.
@@ -496,28 +447,33 @@ function presentarDescripcion(){
 				//recorremos las consultas por identificador 
 				for(var i = 0; i < consultas.length; i++){
 					//si la consulta tiene el identificador seleccionado, se toma la descripcion de la consulta
+					
 					if(consultas[i]["identificador"] == idSelected){
+						console.log()
 						descripcionConsulta = consultas[i]["descripcion"];
 					}
 				}
 				// se presentan la descripcion de la consulta
 				campoDescripcion.val(descripcionConsulta);
-		}
+				//busca el estado de la consulta
+				estadoConsulta(idSelected);
+
+				
 
 };
 
 
 //busca informacion de esa consulta
-function estadoConsulta(){
+function estadoConsulta(_id){
 	//Variable donde vamos a presentar los resultados de la busqueda.
 	var resultado = $("#resultadoBuscarConsulta");
 	//variable del id de la consulta elegida.
-	var idSelected = $("#buscar1A").val();
+	var idSelected = _id;
 	//verificar se selecciono un ID
-	if(idSelected != "empty"){
 		//Buscar el index de el array consultas utilizando el identificador.
 		var consultaIndex = busquedaEnArrayObjetos(consultas, "identificador", idSelected);
 		var consultaPaga = consultas[consultaIndex]["consultaPaga"];
+		console.log(consultaPaga);
 		var consultaFinalizada =  consultas[consultaIndex]["finalizada"];
 		var aPagar = "";
 		var estaFinalizada = "";
@@ -531,10 +487,9 @@ function estadoConsulta(){
 			}else if(consultaFinalizada){
 				estaFinalizada = "La consulta ya fue  cerrada."
 			}
-		resultado.html(aPagar + " " + estaFinalizada + "")
-	}else{
-		resultado.html("Selecione una consulta por favor.")
-	}
+		resultado.html(aPagar + " " + estaFinalizada + " ");
+		
+
 }
 
 function formModificarPerfil(){
